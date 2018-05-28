@@ -1,0 +1,24 @@
+[legacy/profiles:]
+list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9', '82fc5637-121b-49c6-837a-c0c6eea44326', '669b4c4d-8cda-4313-bfdc-1040240eec54']
+default='82fc5637-121b-49c6-837a-c0c6eea44326'
+
+[legacy/profiles:/:82fc5637-121b-49c6-837a-c0c6eea44326]
+background-color='rgb(0,30,38)'
+use-theme-colors=false
+palette=['rgb(7,54,66)', 'rgb(220,50,47)', 'rgb(133,153,0)', 'rgb(181,137,0)', 'rgb(13,81,129)', 'rgb(211,54,130)', 'rgb(2,75,69)', 'rgb(238,232,213)', 'rgb(0,43,54)', 'rgb(220,50,47)', 'rgb(133,153,0)', 'rgb(181,137,0)', 'rgb(31,72,100)', 'rgb(211,54,130)', 'rgb(14,105,99)', 'rgb(253,246,227)']
+use-theme-transparency=false
+foreground-color='rgb(170,170,170)'
+use-system-font=false
+visible-name='Spitia'
+
+[legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='rgb(0,23,29)'
+use-theme-colors=false
+palette=['rgb(7,54,66)', 'rgb(220,50,47)', 'rgb(133,153,0)', 'rgb(181,137,0)', 'rgb(38,139,210)', 'rgb(211,54,130)', 'rgb(42,161,152)', 'rgb(238,232,213)', 'rgb(0,43,54)', 'rgb(203,75,22)', 'rgb(133,153,0)', 'rgb(101,123,131)', 'rgb(38,139,210)', 'rgb(108,113,196)', 'rgb(147,161,161)', 'rgb(253,246,227)']
+use-theme-transparency=false
+foreground-color='rgb(131,148,150)'
+use-system-font=false
+visible-name='Spitia2'
+
+[legacy]
+schema-version=uint32 3
