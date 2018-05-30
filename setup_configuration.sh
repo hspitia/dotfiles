@@ -3,6 +3,7 @@
 CONFIG_DIR=$HOME/.dotfiles;
 FILES_DIR=$CONFIG_DIR/files;
 SETTINGS_DIR=$CONFIG_DIR/settings;
+UTILS_DIR=$CONFIG_DIR/utils;
 
 #git clone git@github.com:hspitia/dotfiles.git $CONFIG_DIR
 
@@ -49,5 +50,6 @@ for f in $(ls "${FILES_DIR}"); do
 done
 
 # gnome terminal configuraton
-#dconf reset -f /org/gnome/terminal/
-#dconf load /org/gnome/terminal/ < ${SETTINGS_DIR}/gnome_terminal.settings.txt
+dconf reset -f /org/gnome/terminal/
+dconf load /org/gnome/terminal/ < ${SETTINGS_DIR}/gnome_terminal.settings.txt
+dconf write /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top true

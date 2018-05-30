@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+# ========================================================================
+${1:rule_name}: ${2:filename}.o
+	\$(CXX) \$(LDFLAGS) -o ${2:filename} ${2:filename}.o
+
+${2:filename}.o: \$(SRC)/${2:filename}.cpp
+	\$(CXX) \$(CXXFLAGS) -c -o ${2:filename}.o \$(SRC)/${2:filename}.cpp
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>rl</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.makefile</scope>
+</snippet>

@@ -1,0 +1,18 @@
+<snippet>
+    <content><![CDATA[
+<div class="item">
+  <a data-toggle="collapse" data-parent="#faqs" href="#faqs${1}" aria-expanded="false" aria-controls="faqs${1}">
+    <h4>${2}</h4>
+  </a>
+  <div id="faqs${1}" class="collapse" role="tabpanel">
+    <p class="mb-3">
+      ${3}
+    </p>
+  </div>
+</div>
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>acc</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>text.html, source.html</scope>
+</snippet>

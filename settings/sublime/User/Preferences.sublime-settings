@@ -1,0 +1,44 @@
+{
+	"auto_complete_delay": 20,
+	"auto_complete_selector": true,
+	"bold_folder_labels": true,
+	"caret_extra_bottom": 2,
+	"caret_extra_top": 2,
+	"caret_extra_width": 3,
+	"caret_style": "phase",
+	"color_scheme": "Packages/Theme - Cobalt2/cobalt2.tmTheme",
+	"default_line_ending": "unix",
+	"flatland_sidebar_tree_xsmall": false,
+	"font_size": 13,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Autotools",
+		"EasyClangComplete",
+		"PackageResourceViewer",
+		"SublimeLinter",
+		"Vintage"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
+	"rulers":
+	[
+		80
+	],
+	"scroll_speed": 1.8,
+	"show_encoding": true,
+	"sidebar_large": true,
+	"sidebar_medium": true,
+	"sidebar_xlarge": true,
+	"theme": "Cobalt2.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_automatic_white_space": false,
+	"wide_caret": true,
+	"wrap_width": 80
+}

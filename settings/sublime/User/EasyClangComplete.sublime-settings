@@ -1,0 +1,10 @@
+{
+   "common_flags" : [
+    // some example includes
+    "-I/usr/include",
+    "-I$project_base_path/src",
+    "-I$project_base_path/include",
+    // this is needed to include the correct headers for clang
+    "-I/usr/lib/clang/$clang_version/include"
+  ]
+}

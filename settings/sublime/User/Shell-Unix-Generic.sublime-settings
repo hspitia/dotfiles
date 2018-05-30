@@ -1,0 +1,14 @@
+{
+	"extensions":
+	[
+		".gitignore",
+		".zshrc",
+		".zpreztorc",
+		"zpreztorc",
+		"bashrc",
+		"zlogout",
+		"prompt_hspitia_setup",
+		"prompt_jerome_setup",
+		"git-info"
+	]
+}

@@ -1,0 +1,21 @@
+[
+    { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"} },
+    { "keys": ["ctrl+shift+c"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["ctrl+shift+k"], "command": "find_under_expand" },
+	{ "keys": ["ctrl+d"], "command": "duplicate_line" },
+	{ "keys": ["ctrl+shift+d"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Line.sublime-macro"} },
+    { "keys": ["alt+up"], "command": "swap_line_up" },
+    { "keys": ["alt+down"], "command": "swap_line_down" },
+    {
+        "command": "show_symbols",
+        "context": [
+            {
+                "key": "selector",
+                "match_all": true,
+                "operand": "source -source.css",
+                "operator": "equal"
+            }
+        ],
+        "keys": ["ctr+shift+l"]
+    },
+]
