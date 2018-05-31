@@ -133,6 +133,17 @@ function cptmplt {
   eval $command;
 }
 
+
+function vfile {
+  column -s '	' -t $1 | less -SN
+}
+
+function reheader {
+    cat $2 $1 > tmp;
+    rm -fr $1;
+    mv tmp $1;
+}
+
 # ====================================================================
 # Sources
 # ====================================================================
