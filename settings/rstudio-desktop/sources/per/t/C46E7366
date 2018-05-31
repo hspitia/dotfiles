@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1521741165627.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3899954675",
+    "id" : "C46E7366",
+    "lastKnownWriteTime" : 1527545380,
+    "last_content_update" : 1527545380,
+    "path" : "~/projects/sting/scripts/plot_kmer_ext_depth.R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "101,0",
+        "scrollLine" : "91",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

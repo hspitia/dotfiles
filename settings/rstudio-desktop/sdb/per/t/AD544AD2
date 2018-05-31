@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#!/usr/bin/env Rscript\n\n# Install required packages\npackages <- c(\"gplots\")\nif(any(!(packages %in% installed.packages()))){\n    cat(\"Installing required packages ...\\n\")\n    install.packages(packages[!(packages %in% installed.packages())], quiet = T, repos=\"http://cran.rstudio.com/\")\n    cat(\"Required packages installed!\\n\")\n}\n\n# Load packages\nsuppressPackageStartupMessages(library(argparser, quietly = TRUE))\nsuppressPackageStartupMessages(library(gplots, quietly = TRUE))\n\n# Process command line arguments\n# Create a parser\np <- arg_parser(\"Creates a heatmap with hierarchical clustering from a table of pairwise identities\")\n# Add command line arguments\np <- add_argument(p, \"file\", help = \"Pairwise identities table file\")\np <- add_argument(p, \"--method\",  help = \"Used to compute identities: 'ani or 'mash' MASH\", default = \"ani\")\np <- add_argument(p, \"--format\", help = \"Output file format: 'pdf' or 'png'\", default = \"pdf\")\np <- add_argument(p, \"--output\", help = \"Output filename\", default = \"heatmap.pdf\")\n# Parse the command line arguments\nargv <- parse_args(p)\n\n# Variables initialization\ncommand.line = T\nif(command.line) {\n    input.file    <- argv$file\n    method        <- argv$method\n    out.format    <- argv$format\n    output.file   <- argv$output\n} else {\n    input.file    <- \"./tested_tools/ani/ANI_Distance.tsv\"\n    method        <- \"ani\"\n    out.format    <- \"pdf\"\n    output.file   <- paste0(\"tested_tools/ani/\", paste0(method,\"_heatmap.\",out.format))\n}\n\n# General options\noptions(stringsAsFactors = F)\n\nkey.xlabel  = \"Identity (%)\"\n\n# Load data\ndata = read.delim(input.file, header = F)\ncolnames(data) = c(\"organism_1\", \"organism_2\", \"value\")\n    \nn.organisms    = length(unique(data$organism_1))\n\n# if(method == \"MASH\")\n    # data$value = data$value * 100\n\nval.matrix     = matrix(data$value, nrow = n.organisms, ncol = n.organisms, byrow = T)\n\norganism.names = data$organism_2[1:n.organisms]\norganism.names = gsub(\"H_\", \"H. \", organism.names)\norganism.names = gsub(\"_\", \" \", organism.names)\n\ncolnames(val.matrix) = organism.names\nrownames(val.matrix) = organism.names\n\nif(out.format == tolower(\"pdf\")){\n    pdf(file = output.file, width = 40, height = 40)\n} else if (out.format == tolower(\"png\")){\n    png(filename = output.file, width = 40, height = 40, units = \"in\", res = 300)\n}\n\nmy.palette = colorRampPalette(c(\"blue\", \"white\", \"red\"))(100)\npar(mar=c(3,3,3,3))\n\nheatmap.2(val.matrix, \n          # Rowv = T, \n          # Colv = T, \n          # symm = T, \n          col = my.palette,\n          # colsep = 1:10,\n          trace = 'none', \n          \n          key = T,\n          keysize = 1,\n          key.title = toupper(method),\n          key.xlab = key.xlabel,\n          key.par=list(mar=c(4,4,4,2)),\n          \n          density.info = 'histogram', \n          cexRow=0.6, cexCol=0.6,\n          margins=c(10,10),\n          main = paste(toupper(method), \"Heatmap\"),\n          # srtCol = 50, adjCol = c(1,1),\n          symkey = F)\n\ngraphics.off()\n",
+    "created" : 1487387205512.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4176963264",
+    "id" : "AD544AD2",
+    "lastKnownWriteTime" : 1460241075,
+    "last_content_update" : 1460241075,
+    "path" : "~/projects/compgenomics/tested_tools/ani/get_heatmap.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

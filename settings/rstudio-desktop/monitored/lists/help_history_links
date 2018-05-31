@@ -1,0 +1,15 @@
+help/library/dplyr/html/join.html,R: Join two tbls together
+help/library/ggplot2/html/facet_wrap.html,R: Wrap a 1d ribbon of panels into 2d
+help/library/ggplot2/html/position_stack.html,R: Stack overlapping objects on top of each another
+help/library/ggpubr/html/ggarrange.html,R: Arrange Multiple ggplots
+help/library/ggplot2/html/theme.html,R: Modify components of a theme
+help/library/ggpubr/html/ggbarplot.html,R: Bar plot
+help/library/ggpubr/html/rremove.html,R: Remove a ggplot Component
+help/library/grDevices/html/png.html,"R: BMP, JPEG, PNG and TIFF graphics devices"
+help/library/grid/html/grid.text.html,R: Draw Text
+help/library/grid/html/gpar.html,R: Handling Grid Graphical Parameters
+help/library/grid/html/grid.draw.html,R: Draw a grid grob
+help/library/base/html/paste.html,R: Concatenate Strings
+help/library/ggplot2/html/scale_continuous.html,R: Position scales for continuous data (x & y)
+help/library/ggplot2/html/scale_manual.html,R: Create your own discrete scale
+help/library/ggplot2/html/geom_abline.html,"R: Reference lines: horizontal, vertical, and diagonal"
