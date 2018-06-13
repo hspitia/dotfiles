@@ -25,6 +25,7 @@ extra-cmake-modules
 extundelete
 fonts-powerline
 furiusisomount
+gconf-editor
 gdebi
 gimp
 git
