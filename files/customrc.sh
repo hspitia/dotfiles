@@ -33,9 +33,9 @@ export LOCAL_SCRIPTS=$LOCAL_SOFTWARE/scripts;
 export LOCAL_DIR=$HOME/.local;
 
 export CONFIG_DIR=$HOME/.dotfiles;
-export FILES_DIR=$CONFIG_DIR/files;
-export SETTINGS_DIR=$CONFIG_DIR/settings;
-export UTILS_DIR=$CONFIG_DIR/utils;
+export CONF_FILES_DIR=$CONFIG_DIR/files;
+export CONF_SETTINGS_DIR=$CONFIG_DIR/settings;
+export CONF_UTILS_DIR=$CONFIG_DIR/utils;
 
 export TEMPLATES_DIR=$LOCAL_SCRIPTS/templates;
 export BRC=$HOME/.bashrc;
