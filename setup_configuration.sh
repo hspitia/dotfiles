@@ -51,10 +51,7 @@ done
 
 source .zshrc
 
-# gnome terminal configuraton
-dconf reset -f /org/gnome/terminal/
-dconf load /org/gnome/terminal/ < ${SETTINGS_DIR}/gnome_terminal.settings.txt
-dconf write /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top true
+
 
 # ##############################################################################
 # Custom folders
@@ -64,7 +61,17 @@ if [[ ! -d "${LOCAL_SOFTWARE}" ]]; then
     mkdir ${LOCAL_SOFTWARE};
 fi
 
-git clone git@bitbucket.org:hspitia/scripts.git ${LOCAL_SCRIPTS}
+git clone https://hspitia@bitbucket.org/hspitia/scripts.git ${LOCAL_SCRIPTS}
+#git clone git@bitbucket.org:hspitia/scripts.git 
 
 # Sounds
 ln -s $SETTINGS_DIR/sounds .sounds
+
+# ##############################################################################
+# Custom configuration
+# ##############################################################################
+# gnome terminal configuraton
+dconf reset -f /org/gnome/terminal/
+dconf load /org/gnome/terminal/ < ${SETTINGS_DIR}/gnome_terminal.settings.txt
+dconf write /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top true
+

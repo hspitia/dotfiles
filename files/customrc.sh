@@ -46,6 +46,8 @@ export ZPREZTORC=$HOME/.zprestorc;
 export ANACONDA=$LOCAL_SOFTWARE/anaconda3/bin;
 #export MINICONDA=$LOCAL_SOFTWARE/miniconda3/bin;
 
+export PATH=$LOCAL_DIR/bin:$LOCAL_SOFTWARE:$LOCAL_BIN:$MINICONDA:$ANACONDA:$LOCAL_SCRIPTS:$PATH;
+
 ## export ART=$LOCAL_SOFTWARE/art;
 ## export ARTEMIS=$LOCAL_SOFTWARE/artemis;
 #export ARTEMIS="";
