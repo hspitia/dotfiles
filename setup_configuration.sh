@@ -26,19 +26,8 @@ done
 # ##############################################################################
 # install prezto from my own fork
 sudo apt -y install zsh git
-zsh
-git clone --recursive https://github.com/hspitia/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
-# create symbolic links
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
- ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
-
-# update repo and submodules
-cd $ZPREZTODIR
-git pull
-git submodule update --init --recursiv
+$CONF_SCRIPTS_DIR/install.prezto.szh
 
 # ##############################################################################
 # Custom dotfiles
@@ -62,7 +51,6 @@ if [[ ! -d "${LOCAL_SOFTWARE}" ]]; then
 fi
 
 git clone https://hspitia@bitbucket.org/hspitia/scripts.git ${LOCAL_SCRIPTS}
-#git clone git@bitbucket.org:hspitia/scripts.git 
 
 # Sounds
 ln -s $CONF_SETTINGS_DIR/sounds .sounds
@@ -71,13 +59,24 @@ ln -s $CONF_SETTINGS_DIR/sounds .sounds
 # Packages
 # ##############################################################################
 
-$CONF_SCRIPTS_DIR/install_packages.sh ${CONF_PACKAGES_DIR}/packages.list.txt ${CONF_PACKAGES_DIR}/repos.list.txt
+# Add repos
+$CONF_SCRIPTS_DIR/add_apt_repos.sh ${CONF_PACKAGES_DIR}/repos.list.txt &&
+# Install packages
+$CONF_SCRIPTS_DIR/install_packages.sh ${CONF_PACKAGES_DIR}/packages.list.txt &&
 
 # ##############################################################################
 # Custom configuration
 # ##############################################################################
-# gnome terminal configuraton
+# Gnome terminal configuraton
 dconf reset -f /org/gnome/terminal/
 dconf load /org/gnome/terminal/ < ${CONF_SETTINGS_DIR}/gnome_terminal.settings.txt
 dconf write /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top true
 
+# Nemo file manager configuration
+gsettings set org.nemo.extensions.nemo-terminal default-visible false # disable terminal as default
+gsettings set org.nemo.preferences start-with-dual-pane true # open dual pane as default
+
+# Fix Nemo icon
+cp /usr/share/applications/nemo.desktop $HOME/.local/share/applications
+sudo mv /usr/share/applications/nemo.desktop /usr/share/applications/nemo.desktop.bak
+sed -i 's/Icon=folder/Icon=nemo/g' $HOME/.local/share/applications/nemo.desktop

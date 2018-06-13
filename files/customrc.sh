@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# .bashrc
-
 # CUSTOM CONFIGURATION
 ################################################################################
 # ===================================================================
@@ -20,7 +18,7 @@ alias lstmplts='ls $LOCAL_SCRIPTS/templates';
 alias xtermcolors='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/gawin/bash-colors-256/master/colors)"'
 alias column="column -txs'      '";
 alias gst="git status";
-# alias lh='ls -lh';
+alias lh='ls -lh';
 # alias l='ls -lhA';
 
 # ===================================================================
@@ -36,6 +34,8 @@ export CONFIG_DIR=$HOME/.dotfiles;
 export CONF_FILES_DIR=$CONFIG_DIR/files;
 export CONF_SETTINGS_DIR=$CONFIG_DIR/settings;
 export CONF_UTILS_DIR=$CONFIG_DIR/utils;
+export CONF_SCRIPTS_DIR=$CONFIG_DIR/scripts;
+export CONF_PACKAGES_DIR=$CONFIG_DIR/packages;
 
 export TEMPLATES_DIR=$LOCAL_SCRIPTS/templates;
 export BRC=$HOME/.bashrc;
@@ -46,7 +46,7 @@ export ZPREZTORC=$HOME/.zprestorc;
 export ANACONDA=$LOCAL_SOFTWARE/anaconda3/bin;
 #export MINICONDA=$LOCAL_SOFTWARE/miniconda3/bin;
 
-export PATH=$LOCAL_DIR/bin:$LOCAL_SOFTWARE:$LOCAL_BIN:$MINICONDA:$ANACONDA:$LOCAL_SCRIPTS:$PATH;
+export PATH=$LOCAL_SOFTWARE:$LOCAL_BIN:$ANACONDA:$LOCAL_SCRIPTS:$LOCAL_DIR/bin:$PATH;
 
 ## export ART=$LOCAL_SOFTWARE/art;
 ## export ARTEMIS=$LOCAL_SOFTWARE/artemis;
