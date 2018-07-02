@@ -18,7 +18,7 @@ alias vu='nmcli con up id gatech'
 alias vd='nmcli con down id gatech'
 alias lstmplts='ls $LOCAL_SCRIPTS/templates';
 alias xtermcolors='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/gawin/bash-colors-256/master/colors)"'
-alias column="column -txs'      '";
+alias column="column -s'	' -t ";
 alias gst="git status";
 # alias lh='ls -lh';
 # alias l='ls -lhA';
@@ -45,6 +45,8 @@ export ZPREZTORC=$HOME/.zprestorc;
 
 export ANACONDA=$LOCAL_SOFTWARE/anaconda3/bin;
 #export MINICONDA=$LOCAL_SOFTWARE/miniconda3/bin;
+
+export PATH=$LOCAL_DIR/bin:$LOCAL_SOFTWARE:$LOCAL_BIN:$ANACONDA:$LOCAL_SCRIPTS:$TEMPLATES_DIR:$PATH;
 
 ## export ART=$LOCAL_SOFTWARE/art;
 ## export ARTEMIS=$LOCAL_SOFTWARE/artemis;
@@ -86,7 +88,8 @@ export ANACONDA=$LOCAL_SOFTWARE/anaconda3/bin;
 
 #export TEXLIVE=/usr/local/texlive/2015/bin/x86_64-linux;
 
-#export PATH=$LOCAL_DIR/bin:$LOCAL_SOFTWARE:$LOCAL_BIN:$MINICONDA:$ANACONDA:$LOCAL_SCRIPTS:$TEMPLATES_DIR:$WINE:$VSEARCH:$USEARCH:$TEXLIVE:$TESTDISK:$SRATOOLKIT:$RDPTOOLS:$QTCREATOR:$QT:$PRODIGAL:$PROCESSING:$POPCORN:$PARALLELMETA:$ParallelMETA:$NODEJS:$MUMMER:$MESQUITE:$MAUVE:$LSBSR:$HTSLIB:$GENEMARK:$GATK:$EDIRECT:$ECLIPSE:$CDHIT:$BWA:$BOWTIE2:$BLAT:$BLAST2GO:$BLAST:$BEDTOOLS:$BCFTOOLS:$ARTEMIS:$FOURKSTOGRAM:$PATH;
+
+# export PATH=$LOCAL_DIR/bin:$LOCAL_SOFTWARE:$LOCAL_BIN:$MINICONDA:$ANACONDA:$LOCAL_SCRIPTS:$TEMPLATES_DIR:$WINE:$VSEARCH:$USEARCH:$TEXLIVE:$TESTDISK:$SRATOOLKIT:$RDPTOOLS:$QTCREATOR:$QT:$PRODIGAL:$PROCESSING:$POPCORN:$PARALLELMETA:$ParallelMETA:$NODEJS:$MUMMER:$MESQUITE:$MAUVE:$LSBSR:$HTSLIB:$GENEMARK:$GATK:$EDIRECT:$ECLIPSE:$CDHIT:$BWA:$BOWTIE2:$BLAT:$BLAST2GO:$BLAST:$BEDTOOLS:$BCFTOOLS:$ARTEMIS:$FOURKSTOGRAM:$PATH;
 
 ## ====================================================================
 ## Other variables
@@ -135,7 +138,7 @@ function cptmplt {
 
 
 function vfile {
-  column -s '	' -t $1 | less -SN
+  column -s'	' -t $1 | less -SN
 }
 
 function reheader {
