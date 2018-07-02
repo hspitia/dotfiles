@@ -6,7 +6,7 @@
 	"caret_extra_top": 2,
 	"caret_extra_width": 3,
 	"caret_style": "phase",
-	"color_scheme": "Packages/Theme - Cobalt2/cobalt2.tmTheme",
+	"color_scheme": "Packages/custom/cobalt2.tmTheme",
 	"default_line_ending": "unix",
 	"flatland_sidebar_tree_xsmall": false,
 	"font_size": 13,
@@ -15,6 +15,8 @@
 	"ignored_packages":
 	[
 		"Autotools",
+		"Awk",
+		"C++ Snippets",
 		"EasyClangComplete",
 		"PackageResourceViewer",
 		"SublimeLinter",

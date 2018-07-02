@@ -1,9 +1,11 @@
 #!/usr/bin/env zsh
 
 CONFIG_DIR=$HOME/.dotfiles;
-FILES_DIR=$CONFIG_DIR/files;
-SETTINGS_DIR=$CONFIG_DIR/settings;
-UTILS_DIR=$CONFIG_DIR/utils;
+CONF_FILES_DIR=$CONFIG_DIR/files;
+CONF_SETTINGS_DIR=$CONFIG_DIR/settings;
+CONF_UTILS_DIR=$CONFIG_DIR/utils;
+CONF_SCRIPTS_DIR=$CONFIG_DIR/scripts;
+CONF_PACKAGES_DIR=$CONFIG_DIR/packages;
 
 git clone git@github.com:hspitia/dotfiles.git $CONFIG_DIR
 
@@ -24,37 +26,21 @@ done
 # ##############################################################################
 # install prezto from my own fork
 sudo apt -y install zsh git
-zsh
-git clone --recursive https://github.com/hspitia/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
-# create symbolic links
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
- ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
-
-# update repo and submodules
-cd $ZPREZTODIR
-git pull
-git submodule update --init --recursiv
+$CONF_SCRIPTS_DIR/install.prezto.szh
 
 # ##############################################################################
 # Custom dotfiles
 # ##############################################################################
 FILES=(bashrc condarc customrc.sh gitconfig)
 
-for f in $(ls "${FILES_DIR}"); do
-    cmd="ln -s ${FILES_DIR}/${f} $HOME/.${f}";
+for f in $(ls "${CONF_FILES_DIR}"); do
+    cmd="ln -s ${CONF_FILES_DIR}/${f} $HOME/.${f}";
     echo $cmd;
     eval $cmd;
 done
 
 source .zshrc
-
-# gnome terminal configuraton
-dconf reset -f /org/gnome/terminal/
-dconf load /org/gnome/terminal/ < ${SETTINGS_DIR}/gnome_terminal.settings.txt
-dconf write /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top true
 
 # ##############################################################################
 # Custom folders
@@ -64,7 +50,33 @@ if [[ ! -d "${LOCAL_SOFTWARE}" ]]; then
     mkdir ${LOCAL_SOFTWARE};
 fi
 
-git clone git@bitbucket.org:hspitia/scripts.git ${LOCAL_SCRIPTS}
+git clone https://hspitia@bitbucket.org/hspitia/scripts.git ${LOCAL_SCRIPTS}
 
 # Sounds
-ln -s $SETTINGS_DIR/sounds .sounds
+ln -s $CONF_SETTINGS_DIR/sounds .sounds
+
+# ##############################################################################
+# Packages
+# ##############################################################################
+
+# Add repos
+$CONF_SCRIPTS_DIR/add_apt_repos.sh ${CONF_PACKAGES_DIR}/repos.list.txt &&
+# Install packages
+$CONF_SCRIPTS_DIR/install_packages.sh ${CONF_PACKAGES_DIR}/packages.list.txt &&
+
+# ##############################################################################
+# Custom configuration
+# ##############################################################################
+# Gnome terminal configuraton
+dconf reset -f /org/gnome/terminal/
+dconf load /org/gnome/terminal/ < ${CONF_SETTINGS_DIR}/gnome_terminal.settings.txt
+dconf write /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top true
+
+# Nemo file manager configuration
+gsettings set org.nemo.extensions.nemo-terminal default-visible false # disable terminal as default
+gsettings set org.nemo.preferences start-with-dual-pane true # open dual pane as default
+
+# Fix Nemo icon
+cp /usr/share/applications/nemo.desktop $HOME/.local/share/applications
+sudo mv /usr/share/applications/nemo.desktop /usr/share/applications/nemo.desktop.bak
+sed -i 's/Icon=folder/Icon=nemo/g' $HOME/.local/share/applications/nemo.desktop

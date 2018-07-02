@@ -1,0 +1,27 @@
+"deb https://download.sublimetext.com/ apt/stable/"  # Sublime Text 3
+ppa:atareao/atareao  # pomodoro-indicator
+ppa:go-for-it-team/go-for-it-daily  # go for it
+ppa:iefremov/ppa  # ugene
+ppa:libreoffice/ppa  # libreoffice
+ppa:lyx-devel/release  # lyx
+ppa:numix/ppa  # numix theme
+ppa:peterlevi/ppa  # variety
+ppa:tista/adapta #adapta theme
+ppa:webupd8team/java  # java
+ppa:webupd8team/nemo  # nemo 
+
+## Disabled:
+# "deb http://archive.canonical.com/ ${dist} partner"  
+# "deb https://cran.cnr.Berkeley.edu/bin/linux/ubuntu ${dist}/"  # R language
+# ppa:freyja-dev/unity-tweak-tool-daily  
+# ppa:gezakovacs/ppa  # unetbootin
+# ppa:gspreemann/ppa 
+# ppa:jfi/psensor-unstable  
+# ppa:linrunner/tlp  # tlp - power management
+# ppa:maarten-baert/simplescreenrecorder  # simplescreenrecorder
+# ppa:mank319/go-for-it 
+# ppa:marutter/rrutter  # R language
+# ppa:mc3man/trusty-media 
+# ppa:mhsabbagh/greenproject  # green recorder
+# ppa:nathan-renniewaldock/flux  # flux
+# ppa:rvm/smplayer  #smplayer
