@@ -1,3 +1,4 @@
+~/projects/test_sting/detector/card/prioritary_who_set/final_set/getGenesAndGenomesInfo.R
 ~/projects/test_sting/detector/card/prioritary_who_set/final_set/makePresenceTables.R
 ~/Dropbox/processResults.R
 ~/projects/test_sting/detector/card/prioritary_who_set/processResults.R
@@ -12,4 +13,3 @@
 ~/Dropbox/Bioinfo/scripts/working_with_setaria.R
 ~/projects/paper_h_pylori/scripts/figure_04.family.R
 ~/projects/paper_h_pylori/scripts/figure_02.family.R
-~/projects/sting/scripts/plot_kmer_depth.R

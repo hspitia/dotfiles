@@ -4952,3 +4952,861 @@
 1530508781285:filter(DetectorPresence == 0) %>%
 1530508781285:group_by(SeqDepth) %>%
 1530508781286:summarise(TN = n()))
+1530721982584:#!/usr/bin/env Rscript
+1530721982602:################################################################################
+1530721982602:# Author:      Hector Fabio Espitia Navarro
+1530721982603:#              Georgia Institute of Technology
+1530721982604:# Version:     1.0
+1530721982604:# Date:
+1530721982604:# Description:
+1530721982605:################################################################################
+1530721982605:# Install required packages
+1530721982605:# personal.lib.path <- Sys.getenv("R_LIBS_USER")
+1530721982606:# if(!file.exists(personal.lib.path))
+1530721982612:#   dir.create(personal.lib.path)
+1530721982613:installAndLoadPackages <- function(pkg){
+1530721982613:cat("Please wait a moment! Checking for required packages... ")
+1530721982614:cat("Done!\n")
+1530721982615:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1530721982616:if (length(new.pkg)) {
+1530721982616:cat("Installing new packages... ")
+1530721982617:install.packages(new.pkg, dependencies = TRUE,
+1530721982617:repos="http://cran.rstudio.com/") #,
+1530721982618:# lib = personal.lib.path)
+1530721982618:cat("Done!\n")
+1530721982629:}
+1530721982630:cat("Loading required packages... ")
+1530721982630:sapply(pkg, function(x){
+1530721982631:suppressPackageStartupMessages(require(x, character.only = TRUE, quietly = TRUE))
+1530721982632:})
+1530721982632:cat("Done!\n")
+1530721982633:}
+1530721982634:# github.packages <- c("tibble")
+1530721982635:# packages <- c("argparser", "tidyverse", "RColorBrewer")#, "ggplot2",  "tidyr")
+1530721982641:packages <- c("argparser", "dplyr", "ggplot2", "RColorBrewer", "readr", "tidyr",
+1530721982642:"caret")#, "ggplot2",  "tidyr")
+1530721982646:installAndLoadPackages(packages)
+1530721988526:################################################################################
+1530721988527:# Get script name
+1530721988527:initial.options <- commandArgs(trailingOnly = FALSE)
+1530721988528:script.name     <- basename(sub("--file=", "", initial.options[grep("--file=", initial.options)]))
+1530721988528:# Process command line arguments
+1530721988529:# Create a parser
+1530721988529:p <- arg_parser("This script process results from STing detector",
+1530721988529:name = script.name)
+1530721988578:# Add Positional arguments (required inputs)
+1530721988578:p <- add_argument(p, "blast_file", help = "BLAST results file")
+1530721988579:p <- add_argument(p, "results_file", help = "Detector results file (tidy format)")
+1530721988580:p <- add_argument(p, "identity", help = "BLAST identity cutoff",
+1530721988581:default = 80)
+1530721988582:p <- add_argument(p, "q_coverage", help = "BLAST query coverage cutoff",
+1530721988583:default = 80)
+1530721988584:# p <- add_argument(p, "genes_ref_file", help = "Genes ref file (short: tag and name)")
+1530721988585:# p <- add_argument(p, "genes_full_ref_file", help = "Genes full ref file (short: tag, name adn others)")
+1530721988587:# p <- add_argument(p, "genomes_ref_file", help = "Genomes ref file (short: Accn and Orgnism name)")
+1530721988587:# Add options
+1530721988587:p <- add_argument(p, "--output_dir", help = "Ouput directory",
+1530721988588:default = "./")
+1530721988589:# p <- add_argument(p, "--cutoff", help = "dentity and Coverage cutoff value",
+1530721988589:#                   default = 80)
+1530721988589:# # Parse command line arguments
+1530721988590:# argv <- parse_args(p)
+1530721988590:# Initialization of variables
+1530721988591:# Values to test the script using RStudio
+1530721988591:# testDir          <- "test_07_card"
+1530721988591:# testDir          <- "test_08_card"
+1530721988592:# testDir           <- "test_09_card"
+1530721988592:testDir           <- "test_10_card"
+1530721988593:blastFile         <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/card_vs_positive.unique.blast")
+1530721988594:# resultsFile       <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/results/detector.tsv")
+1530721988595:resultsFile       <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/results/results.tsv")
+1530721988595:identity          <- 100
+1530721988596:qCoverage         <- 100
+1530721988597:outputDir         <- paste0("detector/card/prioritary_who_set/final_set/",testDir)
+1530721988598:# genesRefFile      <- "detector/card/prioritary_who_set/final_set/tags_names_xRef.tsv"
+1530721988598:# genesFullRefFile  <- "detector/card/prioritary_who_set/final_set/card_tags_xRef.tsv"
+1530721988599:# genomesRefFile    <- "detector/card/prioritary_who_set/final_set/genomesTableRef.tsv"
+1530721988599:# cutoff            <- 100
+1530721988600:# Parse command line arguments
+1530721988601:command.line = FALSE   # Turn to FALSE to test the script inside RStudio
+1530721988601:argv <- list()
+1530721988602:if(command.line) {
+1530721988603:argv <- parse_args(p)
+1530721988603:} else {
+1530721988604:argv <- parse_args(p, list(blastFile, resultsFile, identity, qCoverage,
+1530721988604:"--output_dir", outputDir))#,
+1530721988604:# genesRefFile, genesFullRefFile, genomesRefFile,
+1530721988605:# "--cutoff", cutoff))
+1530721988605:}
+1530721988608:# Get argument values from command line
+1530721988609:blastFile         <- argv$blast_file
+1530721988609:resultsFile       <- argv$results_file
+1530721988610:identity          <- argv$identity
+1530721988611:qCoverage         <- argv$q_coverage
+1530721988612:outputDir         <- argv$output_dir
+1530721988613:# genesRefFile      <- argv$genes_ref_file
+1530721988613:# genesFullRefFile  <- argv$genes_full_ref_file
+1530721988614:# genomesRefFile    <- argv$genomes_ref_file
+1530721988614:# cutoff            <- argv$cutoff
+1530721988615:# Function for checking input files ###########################################
+1530721988616:CheckFileExists <- function(file.list) {
+1530721988617:non.exist.files <- !file.exists(file.list)
+1530721988617:if(any(non.exist.files)) {
+1530721988618:sprintf("\n  The file \"%s\" does not exist.", file.list[non.exist.files])
+1530721988618:}
+1530721988619:}
+1530721988620:# Check for input files #######################################################
+1530721988620:files.to.check <- c(blastFile, resultsFile)
+1530721988621:error.message  <- CheckFileExists(files.to.check)
+1530721988623:# if(!is.null(error.message)){
+1530721988623:# stop(error.message)
+1530721988624:# } else {
+1530721988625:# Data --------------------------------------------------------------------
+1530721988625:# Load data files
+1530721988626:blastData    <- read_tsv(blastFile)
+1530721988786:resultsData  <- read_tsv(resultsFile)
+1530721989039:# genesRef     <- read_tsv(genesRefFile, col_names = c("GeneTag", "GeneName"))
+1530721989039:# genesFullRef <- read_tsv(genesFullRefFile, col_names = c("GeneTag", "CARD_description"))
+1530721989039:# genomesRef   <- read_tsv(genomesRefFile)
+1530721989040:# Process results ---------------------------------------------------------
+1530721989040:# cat(paste("Test directory:            ", testDir))
+1530721989041:# cat(paste("Identity & Coverage cutoff:", cutoff))
+1530721989041:(amrGenes <- blastData %>%
+1530721989042:select(Accn = qseqid) %>%
+1530721989042:unique() %>% pull())
+1530721989090:(genomes <- blastData %>%
+1530721989091:select(GeneTag = sseqid) %>%
+1530721989091:unique() %>% pull())
+1530721989136:# (blastFilteredResults <- blastData %>%
+1530721989136:#     mutate(BlastPresence = if_else(pident == 100 & qcovhsp == 100, 1, 0)) %>%
+1530721989136:#     select(Accn = sseqid, GeneTag = qseqid, BlastPresence) %>%
+1530721989136:#     spread(Accn, BlastPresence)
+1530721989137:# )
+1530721989137:(blastFilteredResults <- blastData %>%
+1530721989138:mutate(BlastPresence = if_else(pident == identity & qcovhsp == qCoverage, 1L, 0L)) %>%
+1530721989138:filter(BlastPresence == 1L)
+1530721989138:)
+1530721990081:# BLAST Table presence/absence
+1530721990082:(blastPresenceTable <- blastData %>%
+1530721990082:mutate(BlastPresence = if_else(pident == identity & qcovhsp == qCoverage, 1L, 0L)) %>%
+1530721990083:filter(BlastPresence == 1L) %>%
+1530721990084:select(Accn = sseqid, GeneTag = qseqid, BlastPresence) %>%
+1530721990084:spread(Accn, BlastPresence, fill = 0L)
+1530721990085:)
+1530721990470:(amrGenes_detector <- resultsData %>%
+1530721990471:filter(SampleType == "positive") %>%
+1530721990471:select(GeneTag) %>%
+1530721990471:unique() %>% pull())
+1530721990477:(genomes_detector <- resultsData %>%
+1530721990478:filter(SampleType == "positive") %>%
+1530721990478:select(Accn) %>%
+1530721990478:unique() %>% pull())
+1530721990484:# Check if there are the same number of genes and genomes in both datasets
+1530721990484:# (BLAST and detector)
+1530721990484:setdiff(blastFilteredResults %>% select(sseqid) %>% pull() %>% unique(),
+1530721990485:genomes_detector)
+1530721990488:setdiff(blastFilteredResults %>% select(qseqid) %>% pull() %>% unique(),
+1530721990488:amrGenes_detector)
+1530721990493:# Detector Table presence/absence (whole DB)
+1530721990493:# 20x
+1530721990494:(detectorPresenceTable_wdb_20x <- resultsData %>%
+1530721990494:filter(SampleType == "positive",
+1530721990495:SeqDepth == 20) %>%
+1530721990495:select(Accn, GeneTag, DetectorPresence) %>%
+1530721990496:spread(Accn, DetectorPresence, fill = 0L)
+1530721990496:)
+1530721990857:# 40x
+1530721990857:(detectorPresenceTable_wdb_40x <- resultsData %>%
+1530721990858:filter(SampleType == "positive",
+1530721990858:SeqDepth == 40) %>%
+1530721990859:select(Accn, GeneTag, DetectorPresence) %>%
+1530721990859:spread(Accn, DetectorPresence, fill = 0L)
+1530721990859:)
+1530721991163:# Combined results table: positive dataset
+1530721991163:(positivePresenceTable <- left_join(
+1530721991164:rbind(
+1530721991164:blastPresenceTable %>%
+1530721991165:gather(Accn, BlastPresence, -GeneTag) %>%
+1530721991165:mutate(SeqDepth = 20L),
+1530721991166:blastPresenceTable %>%
+1530721991166:gather(Accn, BlastPresence, -GeneTag) %>%
+1530721991167:mutate(SeqDepth = 40L)
+1530721991168:),
+1530721991168:rbind(
+1530721991169:detectorPresenceTable_wdb_20x %>%
+1530721991169:gather(Accn, DetectorPresence, -GeneTag) %>%
+1530721991170:mutate(SeqDepth = 20L),
+1530721991170:detectorPresenceTable_wdb_40x %>%
+1530721991170:gather(Accn, DetectorPresence, -GeneTag) %>%
+1530721991171:mutate(SeqDepth = 40L)
+1530721991171:)
+1530721991171:) )
+1530721991419:# FN
+1530721991420:positivePresenceTable %>%
+1530721991420:filter(BlastPresence == 1, DetectorPresence == 0)
+1530721991511:(positive_20x_results <- confusionMatrix(data = factor(positivePresenceTable %>% filter(SeqDepth == 20) %>% pull(DetectorPresence)),
+1530721991512:reference = factor(positivePresenceTable %>% filter(SeqDepth == 20) %>% pull(BlastPresence)),
+1530721991512:positive = "1"))
+1530721991740:(positive_40x_results <- confusionMatrix(data = factor(positivePresenceTable %>% filter(SeqDepth == 40) %>% pull(DetectorPresence)),
+1530721991740:reference = factor(positivePresenceTable %>% filter(SeqDepth == 40) %>% pull(BlastPresence)),
+1530721991741:positive = "1"))
+1530721992051:positive_confMatrixResults <- rbind(
+1530721992052:cbind(as.data.frame(as.table(positive_20x_results)),
+1530721992052:SeqDepth = rep(20, 4)),
+1530721992052:cbind(as.data.frame(as.table(positive_40x_results)),
+1530721992052:SeqDepth = rep(40, 4)))
+1530722003006:# Detector Table presence/absence (whole DB)
+1530722003006:# 20x
+1530722003007:(negativePresenceTable <- rbind(
+1530722003007:blastPresenceTable %>%
+1530722003008:gather(Accn, BlastPresence, -GeneTag) %>%
+1530722003008:mutate(SeqDepth = 20L, BlastPresence = 0),
+1530722003008:blastPresenceTable %>%
+1530722003009:gather(Accn, BlastPresence, -GeneTag) %>%
+1530722003009:mutate(SeqDepth = 40L, BlastPresence = 0)
+1530722003010:) %>%
+1530722003010:left_join(resultsData %>%
+1530722003011:filter(SampleType == "negative",
+1530722003012:!is.na(GeneTag)) %>%
+1530722003012:select(Accn, GeneTag, DetectorPresence, SeqDepth)
+1530722003013:) %>%
+1530722003013:replace_na(list(DetectorPresence = 0))
+1530722003013:)
+1530722035057:positivePresenceTable
+1530722068185:wholeResultsTable <- rbind(positivePresenceTable, negativePresenceTable)
+1530722088613:confusionMatrix(data = factor(wholeResultsTable %>% filter(SeqDepth == 20) %>% pull(DetectorPresence)),
+1530722088614:reference = factor(wholeResultsTable %>% filter(SeqDepth == 20) %>% pull(BlastPresence)),
+1530722088615:positive = "1")
+1530722112977:confusionMatrix(data = factor(wholeResultsTable %>% filter(SeqDepth == 40) %>% pull(DetectorPresence)),
+1530722112978:reference = factor(wholeResultsTable %>% filter(SeqDepth == 40) %>% pull(BlastPresence)),
+1530722112978:positive = "1")
+1530722217168:confMatrix_20x <- confusionMatrix(data = factor(wholeResultsTable %>% filter(SeqDepth == 20) %>% pull(DetectorPresence)),
+1530722217169:reference = factor(wholeResultsTable %>% filter(SeqDepth == 20) %>% pull(BlastPresence)),
+1530722217170:positive = "1")
+1530722217656:confMatrix_40x <- confusionMatrix(data = factor(wholeResultsTable %>% filter(SeqDepth == 40) %>% pull(DetectorPresence)),
+1530722217656:reference = factor(wholeResultsTable %>% filter(SeqDepth == 40) %>% pull(BlastPresence)),
+1530722217657:positive = "1")
+1530722232783:confMatrixResults <- rbind(
+1530722232784:cbind(as.data.frame(as.table(confMatrix_20x)),
+1530722232785:SeqDepth = rep(20, 4)),
+1530722232785:cbind(as.data.frame(as.table(confMatrix_40x)),
+1530722232786:SeqDepth = rep(40, 4)))
+1530722235311:confMatrixResults
+1530722247642:(confMatrixResults <- rbind(
+1530722247642:cbind(as.data.frame(as.table(confMatrix_20x)),
+1530722247643:SeqDepth = rep(20, 4)),
+1530722247644:cbind(as.data.frame(as.table(confMatrix_40x)),
+1530722247644:SeqDepth = rep(40, 4))))
+1530722357573:confMatrix_20x
+1530722984614:draw_confusion_matrix <- function(cm) {
+1530722984615:layout(matrix(c(1,1,2)))
+1530722984615:par(mar=c(2,2,2,2))
+1530722984616:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530722984616:title('CONFUSION MATRIX', cex.main=2)
+1530722984617:# create the matrix
+1530722984617:rect(150, 430, 240, 370, col='#3F97D0')
+1530722984618:text(195, 435, 'Class1', cex=1.2)
+1530722984618:rect(250, 430, 340, 370, col='#F7AD50')
+1530722984618:text(295, 435, 'Class2', cex=1.2)
+1530722984619:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530722984619:text(245, 450, 'Actual', cex=1.3, font=2)
+1530722984620:rect(150, 305, 240, 365, col='#F7AD50')
+1530722984620:rect(250, 305, 340, 365, col='#3F97D0')
+1530722984620:text(140, 400, 'Class1', cex=1.2, srt=90)
+1530722984621:text(140, 335, 'Class2', cex=1.2, srt=90)
+1530722984621:# add in the cm results
+1530722984622:res <- as.numeric(cm$table)
+1530722984622:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530722984623:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530722984623:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530722984624:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530722984625:# add in the specifics
+1530722984626:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530722984626:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530722984627:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530722984628:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530722984628:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530722984629:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530722984630:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530722984631:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530722984632:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530722984633:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530722984633:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530722984635:# add in the accuracy information
+1530722984636:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530722984637:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530722984638:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530722984639:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530722984640:}
+1530722996102:draw_confusion_matrix(confMatrix_20x)
+1530723112736:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530723118665:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530723118667:layout(matrix(c(1,1,2)))
+1530723118667:par(mar=c(2,2,2,2))
+1530723118668:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530723118668:title('CONFUSION MATRIX', cex.main=2)
+1530723118669:# create the matrix
+1530723118670:rect(150, 430, 240, 370, col='#3F97D0')
+1530723118670:text(195, 435, positiveClass, cex=1.2)
+1530723118671:rect(250, 430, 340, 370, col='#F7AD50')
+1530723118672:text(295, 435, negativeClass, cex=1.2)
+1530723118672:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530723118673:text(245, 450, 'Actual', cex=1.3, font=2)
+1530723118673:rect(150, 305, 240, 365, col='#F7AD50')
+1530723118673:rect(250, 305, 340, 365, col='#3F97D0')
+1530723118674:text(140, 400, positiveClass, cex=1.2, srt=90)
+1530723118674:text(140, 335, negativeClass, cex=1.2, srt=90)
+1530723118675:# add in the cm results
+1530723118675:res <- as.numeric(cm$table)
+1530723118676:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530723118677:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530723118677:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530723118678:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530723118678:# add in the specifics
+1530723118679:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530723118680:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530723118680:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530723118681:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530723118681:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530723118681:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530723118682:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530723118682:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530723118683:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530723118684:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530723118684:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530723118685:# add in the accuracy information
+1530723118686:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530723118686:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530723118687:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530723118687:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530723118688:}
+1530723121986:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530723121992:layout(matrix(c(1,1,2)))
+1530723121992:par(mar=c(2,2,2,2))
+1530723121993:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530723121993:title('CONFUSION MATRIX', cex.main=2)
+1530723121994:# create the matrix
+1530723121995:rect(150, 430, 240, 370, col='#3F97D0')
+1530723121996:text(195, 435, positiveClass, cex=1.2)
+1530723121997:rect(250, 430, 340, 370, col='#F7AD50')
+1530723121997:text(295, 435, negativeClass, cex=1.2)
+1530723121998:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530723121998:text(245, 450, 'Actual', cex=1.3, font=2)
+1530723121999:rect(150, 305, 240, 365, col='#F7AD50')
+1530723122000:rect(250, 305, 340, 365, col='#3F97D0')
+1530723122001:text(140, 400, positiveClass, cex=1.2, srt=90)
+1530723122001:text(140, 335, negativeClass, cex=1.2, srt=90)
+1530723122003:# add in the cm results
+1530723122003:res <- as.numeric(cm$table)
+1530723122004:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530723122005:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530723122005:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530723122006:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530723122008:# add in the specifics
+1530723122008:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530723122009:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530723122010:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530723122011:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530723122012:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530723122012:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530723122013:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530723122014:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530723122015:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530723122016:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530723122018:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530723122020:# add in the accuracy information
+1530723122020:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530723122021:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530723122023:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530723122024:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530723122025:}
+1530723127675:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530723127676:layout(matrix(c(1,1,2)))
+1530723127676:par(mar=c(2,2,2,2))
+1530723127677:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530723127677:title('CONFUSION MATRIX', cex.main=2)
+1530723127678:# create the matrix
+1530723127679:rect(150, 430, 240, 370, col='#3F97D0')
+1530723127679:text(195, 435, positiveClass, cex=1.2)
+1530723127680:rect(250, 430, 340, 370, col='#F7AD50')
+1530723127681:text(295, 435, negativeClass, cex=1.2)
+1530723127681:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530723127682:text(245, 450, 'Actual', cex=1.3, font=2)
+1530723127682:rect(150, 305, 240, 365, col='#F7AD50')
+1530723127683:rect(250, 305, 340, 365, col='#3F97D0')
+1530723127684:text(140, 400, positiveClass, cex=1.2, srt=90)
+1530723127684:text(140, 335, negativeClass, cex=1.2, srt=90)
+1530723127686:# add in the cm results
+1530723127686:res <- as.numeric(cm$table)
+1530723127687:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530723127688:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530723127688:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530723127689:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530723127690:# add in the specifics
+1530723127691:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530723127692:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530723127692:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530723127693:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530723127694:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530723127695:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530723127695:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530723127696:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530723127697:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530723127698:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530723127698:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530723127700:# add in the accuracy information
+1530723127701:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530723127701:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530723127702:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530723127703:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530723127704:}
+1530723193341:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530723193342:layout(matrix(c(1,1,2)))
+1530723193342:par(mar=c(2,2,2,2))
+1530723193342:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530723193343:title('CONFUSION MATRIX', cex.main=2)
+1530723193344:# create the matrix
+1530723193344:rect(150, 430, 240, 370, col='#3F97D0')
+1530723193345:text(195, 435, positiveClass, cex=1.2)
+1530723193345:rect(250, 430, 340, 370, col='#F7AD50')
+1530723193345:text(295, 435, negativeClass, cex=1.2)
+1530723193346:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530723193346:text(245, 450, 'Actual', cex=1.3, font=2)
+1530723193346:rect(150, 305, 240, 365, col='#F7AD50')
+1530723193347:rect(250, 305, 340, 365, col='#3F97D0')
+1530723193347:text(140, 400, positiveClass, cex=1.2, srt=90)
+1530723193348:text(140, 335, negativeClass, cex=1.2, srt=90)
+1530723193349:# add in the cm results
+1530723193349:res <- as.numeric(cm$table)
+1530723193350:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530723193351:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530723193352:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530723193352:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530723193354:# add in the specifics
+1530723193354:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530723193355:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530723193356:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530723193356:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530723193357:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530723193357:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530723193358:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530723193359:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530723193359:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530723193360:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530723193360:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530723193361:# add in the accuracy information
+1530723193362:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530723193362:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530723193363:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530723193363:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530723193364:}
+1530723209942:dev.off()
+1530723219107:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530723272128:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530723272129:layout(matrix(c(1,1,2)))
+1530723272129:par(mar=c(2,2,2,2))
+1530723272129:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530723272130:title('CONFUSION MATRIX', cex.main=2)
+1530723272130:# create the matrix
+1530723272131:rect(150, 430, 240, 370, col='#3F97D0')
+1530723272131:text(195, 435, negativeClass, cex=1.2)
+1530723272131:rect(250, 430, 340, 370, col='#F7AD50')
+1530723272132:text(295, 435, positiveClass, cex=1.2)
+1530723272132:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530723272133:text(245, 450, 'Actual', cex=1.3, font=2)
+1530723272133:rect(150, 305, 240, 365, col='#F7AD50')
+1530723272133:rect(250, 305, 340, 365, col='#3F97D0')
+1530723272134:text(140, 400, negativeClass, cex=1.2, srt=90)
+1530723272134:text(140, 335, positiveClass, cex=1.2, srt=90)
+1530723272135:# add in the cm results
+1530723272135:res <- as.numeric(cm$table)
+1530723272136:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530723272136:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530723272137:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530723272137:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530723272138:# add in the specifics
+1530723272138:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530723272139:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530723272139:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530723272140:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530723272140:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530723272141:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530723272141:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530723272142:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530723272142:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530723272143:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530723272144:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530723272145:# add in the accuracy information
+1530723272146:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530723272146:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530723272147:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530723272148:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530723272148:}
+1530723275825:dev.off()
+1530723277791:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725454017:as.numeric(cm$table)
+1530725472972:cm = confMatrix_20x
+1530725476793:as.numeric(cm$table)
+1530725519161:cm$byClass[1]
+1530725560203:dev.off()
+1530725561489:par(mar=c(1,1,1,1))
+1530725561891:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725562255:dev.off()
+1530725572454:par(mar=c(0,0,0,0))
+1530725572982:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725573406:dev.off()
+1530725576011:par(mar=c(0,0,0,0))
+1530725576783:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725589920:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530725589921:layout(matrix(c(1,1,2)))
+1530725589922:par(mar=c(1,2,3,3))
+1530725589922:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530725589923:title('CONFUSION MATRIX', cex.main=2)
+1530725589924:# create the matrix
+1530725589924:rect(150, 430, 240, 370, col='#3F97D0')
+1530725589925:text(195, 435, negativeClass, cex=1.2)
+1530725589925:rect(250, 430, 340, 370, col='#F7AD50')
+1530725589926:text(295, 435, positiveClass, cex=1.2)
+1530725589926:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530725589927:text(245, 450, 'Actual', cex=1.3, font=2)
+1530725589927:rect(150, 305, 240, 365, col='#F7AD50')
+1530725589928:rect(250, 305, 340, 365, col='#3F97D0')
+1530725589928:text(140, 400, negativeClass, cex=1.2, srt=90)
+1530725589929:text(140, 335, positiveClass, cex=1.2, srt=90)
+1530725589930:# add in the cm results
+1530725589931:res <- as.numeric(cm$table)
+1530725589932:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530725589932:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530725589933:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530725589934:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530725589935:# add in the specifics
+1530725589936:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530725589936:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530725589937:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530725589937:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530725589938:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530725589938:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530725589939:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530725589939:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530725589940:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530725589940:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530725589941:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530725589944:# add in the accuracy information
+1530725589944:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530725589945:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530725589946:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530725589947:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530725589949:}
+1530725593223:par(mar=c(0,0,0,0))
+1530725593875:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725609454:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530725609455:layout(matrix(c(1,1,2)))
+1530725609456:par(mar=c(1,1,1,1))
+1530725609456:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530725609457:title('CONFUSION MATRIX', cex.main=2)
+1530725609458:# create the matrix
+1530725609458:rect(150, 430, 240, 370, col='#3F97D0')
+1530725609459:text(195, 435, negativeClass, cex=1.2)
+1530725609459:rect(250, 430, 340, 370, col='#F7AD50')
+1530725609460:text(295, 435, positiveClass, cex=1.2)
+1530725609461:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530725609461:text(245, 450, 'Actual', cex=1.3, font=2)
+1530725609462:rect(150, 305, 240, 365, col='#F7AD50')
+1530725609462:rect(250, 305, 340, 365, col='#3F97D0')
+1530725609463:text(140, 400, negativeClass, cex=1.2, srt=90)
+1530725609464:text(140, 335, positiveClass, cex=1.2, srt=90)
+1530725609465:# add in the cm results
+1530725609466:res <- as.numeric(cm$table)
+1530725609466:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530725609467:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530725609468:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530725609469:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530725609470:# add in the specifics
+1530725609471:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530725609471:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530725609472:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530725609473:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530725609473:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530725609474:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530725609475:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530725609476:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530725609476:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530725609477:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530725609478:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530725609479:# add in the accuracy information
+1530725609480:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530725609481:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530725609482:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530725609483:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530725609484:}
+1530725612958:par(mar=c(0,0,0,0))
+1530725613485:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725618944:dev.off()
+1530725620882:par(mar=c(0,0,0,0))
+1530725621510:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725642635:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530725642636:layout(matrix(c(1,1,2)))
+1530725642637:par(mar=c(1.4,1.4,1.4,1.4))
+1530725642638:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530725642638:title('CONFUSION MATRIX', cex.main=2)
+1530725642640:# create the matrix
+1530725642640:rect(150, 430, 240, 370, col='#3F97D0')
+1530725642641:text(195, 435, negativeClass, cex=1.2)
+1530725642642:rect(250, 430, 340, 370, col='#F7AD50')
+1530725642642:text(295, 435, positiveClass, cex=1.2)
+1530725642643:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530725642643:text(245, 450, 'Actual', cex=1.3, font=2)
+1530725642644:rect(150, 305, 240, 365, col='#F7AD50')
+1530725642645:rect(250, 305, 340, 365, col='#3F97D0')
+1530725642645:text(140, 400, negativeClass, cex=1.2, srt=90)
+1530725642646:text(140, 335, positiveClass, cex=1.2, srt=90)
+1530725642647:# add in the cm results
+1530725642648:res <- as.numeric(cm$table)
+1530725642649:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530725642649:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530725642650:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530725642651:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530725642652:# add in the specifics
+1530725642653:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530725642653:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530725642654:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530725642655:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530725642656:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530725642657:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530725642658:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530725642658:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530725642659:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530725642660:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530725642661:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530725642663:# add in the accuracy information
+1530725642664:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530725642665:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530725642666:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530725642667:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530725642668:}
+1530725646860:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725647824:dev.off()
+1530725650095:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725734933:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530725734934:layout(matrix(c(1,1,2)))
+1530725734935:par(mar=c(1.4,1.4,2,1.4))
+1530725734935:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530725734936:title('CONFUSION MATRIX', cex.main=2)
+1530725734937:# create the matrix
+1530725734949:rect(150, 430, 240, 370, col='#3F97D0')
+1530725734950:text(195, 435, negativeClass, cex=1.2)
+1530725734950:rect(250, 430, 340, 370, col='#F7AD50')
+1530725734951:text(295, 435, positiveClass, cex=1.2)
+1530725734952:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530725734953:text(245, 450, 'Actual', cex=1.3, font=2)
+1530725734953:rect(150, 305, 240, 365, col='#F7AD50')
+1530725734954:rect(250, 305, 340, 365, col='#3F97D0')
+1530725734955:text(140, 400, negativeClass, cex=1.2, srt=90)
+1530725734955:text(140, 335, positiveClass, cex=1.2, srt=90)
+1530725734957:# add in the cm results
+1530725734957:res <- as.numeric(cm$table)
+1530725734958:text(195, 400, res[1], cex=1.6, font=2, col='white')
+1530725734959:text(195, 335, res[2], cex=1.6, font=2, col='white')
+1530725734960:text(295, 400, res[3], cex=1.6, font=2, col='white')
+1530725734961:text(295, 335, res[4], cex=1.6, font=2, col='white')
+1530725734962:# add in the specifics
+1530725734963:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530725734964:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530725734965:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530725734966:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530725734967:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530725734968:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530725734968:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530725734969:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530725734970:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530725734971:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530725734972:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530725734974:# add in the accuracy information
+1530725734975:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530725734976:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530725734977:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530725734980:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530725734981:}
+1530725743897:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725842267:# draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725842267:draw_confusion_matrix(positive_20x_results, "Presence", "Absence")
+1530725868994:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530725868995:layout(matrix(c(1,1,2)))
+1530725868996:par(mar=c(1.4,1.4,2,1.4))
+1530725868997:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530725868997:title('CONFUSION MATRIX', cex.main=2)
+1530725868998:# create the matrix
+1530725868999:rect(150, 430, 240, 370, col='#3F97D0')
+1530725869001:text(195, 435, negativeClass, cex=1.2)
+1530725869002:rect(250, 430, 340, 370, col='#F7AD50')
+1530725869002:text(295, 435, positiveClass, cex=1.2)
+1530725869003:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530725869012:text(245, 450, 'Actual', cex=1.3, font=2)
+1530725869013:rect(150, 305, 240, 365, col='#F7AD50')
+1530725869014:rect(250, 305, 340, 365, col='#3F97D0')
+1530725869015:text(140, 400, negativeClass, cex=1.2, srt=90)
+1530725869016:text(140, 335, positiveClass, cex=1.2, srt=90)
+1530725869017:# add in the cm results
+1530725869017:res <- as.numeric(cm$table)
+1530725869018:text(195, 400, res[4], cex=1.6, font=2, col='white')
+1530725869018:text(195, 335, res[3], cex=1.6, font=2, col='white')
+1530725869019:text(295, 400, res[2], cex=1.6, font=2, col='white')
+1530725869019:text(295, 335, res[1], cex=1.6, font=2, col='white')
+1530725869020:# add in the specifics
+1530725869021:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530725869021:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530725869022:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530725869022:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530725869023:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530725869023:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530725869024:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530725869025:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530725869025:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530725869027:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530725869028:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530725869030:# add in the accuracy information
+1530725869031:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530725869032:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530725869033:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530725869034:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530725869035:}
+1530725873244:# draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725873244:draw_confusion_matrix(positive_20x_results, "Presence", "Absence")
+1530725896702:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530725896703:layout(matrix(c(1,1,2)))
+1530725896704:par(mar=c(1.4,1.4,2,1.4))
+1530725896705:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530725896705:title('CONFUSION MATRIX', cex.main=2)
+1530725896706:# create the matrix
+1530725896707:rect(150, 430, 240, 370, col='#3F97D0')
+1530725896708:text(195, 435, positiveClass, cex=1.2)
+1530725896709:rect(250, 430, 340, 370, col='#F7AD50')
+1530725896709:text(295, 435, negativeClass, cex=1.2)
+1530725896710:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530725896711:text(245, 450, 'Actual', cex=1.3, font=2)
+1530725896712:rect(150, 305, 240, 365, col='#F7AD50')
+1530725896714:rect(250, 305, 340, 365, col='#3F97D0')
+1530725896715:text(140, 400, positiveClass, cex=1.2, srt=90)
+1530725896715:text(140, 335, negativeClass, cex=1.2, srt=90)
+1530725896717:# add in the cm results
+1530725896717:res <- as.numeric(cm$table)
+1530725896718:text(195, 400, res[4], cex=1.6, font=2, col='white')
+1530725896719:text(195, 335, res[3], cex=1.6, font=2, col='white')
+1530725896720:text(295, 400, res[2], cex=1.6, font=2, col='white')
+1530725896721:text(295, 335, res[1], cex=1.6, font=2, col='white')
+1530725896722:# add in the specifics
+1530725896723:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "DETAILS", xaxt='n', yaxt='n')
+1530725896724:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530725896725:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530725896726:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530725896727:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530725896728:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530725896729:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530725896730:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530725896731:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530725896732:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530725896733:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530725896735:# add in the accuracy information
+1530725896736:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530725896737:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530725896738:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530725896739:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530725896742:}
+1530725900533:# draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530725900534:draw_confusion_matrix(positive_20x_results, "Presence", "Absence")
+1530725946409:positive_20x_results
+1530725976478:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530726006605:draw_confusion_matrix <- function(cm, positiveClass, negativeClass) {
+1530726006605:layout(matrix(c(1,1,2)))
+1530726006606:par(mar=c(1.4,1.4,2,1.4))
+1530726006606:plot(c(100, 345), c(300, 450), type = "n", xlab="", ylab="", xaxt='n', yaxt='n')
+1530726006606:title('Confusion Matrix', cex.main=2)
+1530726006607:# create the matrix
+1530726006607:rect(150, 430, 240, 370, col='#3F97D0')
+1530726006608:text(195, 435, positiveClass, cex=1.2)
+1530726006608:rect(250, 430, 340, 370, col='#F7AD50')
+1530726006609:text(295, 435, negativeClass, cex=1.2)
+1530726006609:text(125, 370, 'Predicted', cex=1.3, srt=90, font=2)
+1530726006609:text(245, 450, 'Actual', cex=1.3, font=2)
+1530726006610:rect(150, 305, 240, 365, col='#F7AD50')
+1530726006610:rect(250, 305, 340, 365, col='#3F97D0')
+1530726006611:text(140, 400, positiveClass, cex=1.2, srt=90)
+1530726006611:text(140, 335, negativeClass, cex=1.2, srt=90)
+1530726006612:# add in the cm results
+1530726006613:res <- as.numeric(cm$table)
+1530726006613:text(195, 400, res[4], cex=1.6, font=2, col='white')
+1530726006613:text(195, 335, res[3], cex=1.6, font=2, col='white')
+1530726006614:text(295, 400, res[2], cex=1.6, font=2, col='white')
+1530726006614:text(295, 335, res[1], cex=1.6, font=2, col='white')
+1530726006616:# add in the specifics
+1530726006616:plot(c(100, 0), c(100, 0), type = "n", xlab="", ylab="", main = "Details", xaxt='n', yaxt='n')
+1530726006617:text(10, 85, names(cm$byClass[1]), cex=1.2, font=2)
+1530726006617:text(10, 70, round(as.numeric(cm$byClass[1]), 3), cex=1.2)
+1530726006618:text(30, 85, names(cm$byClass[2]), cex=1.2, font=2)
+1530726006618:text(30, 70, round(as.numeric(cm$byClass[2]), 3), cex=1.2)
+1530726006619:text(50, 85, names(cm$byClass[5]), cex=1.2, font=2)
+1530726006620:text(50, 70, round(as.numeric(cm$byClass[5]), 3), cex=1.2)
+1530726006620:text(70, 85, names(cm$byClass[6]), cex=1.2, font=2)
+1530726006621:text(70, 70, round(as.numeric(cm$byClass[6]), 3), cex=1.2)
+1530726006623:text(90, 85, names(cm$byClass[7]), cex=1.2, font=2)
+1530726006624:text(90, 70, round(as.numeric(cm$byClass[7]), 3), cex=1.2)
+1530726006625:# add in the accuracy information
+1530726006626:text(30, 35, names(cm$overall[1]), cex=1.5, font=2)
+1530726006627:text(30, 20, round(as.numeric(cm$overall[1]), 3), cex=1.4)
+1530726006628:text(70, 35, names(cm$overall[2]), cex=1.5, font=2)
+1530726006629:text(70, 20, round(as.numeric(cm$overall[2]), 3), cex=1.4)
+1530726006630:}
+1530726009988:draw_confusion_matrix(confMatrix_20x, "Presence", "Absence")
+1530727472637:#generate random data
+1530727472637:data = data.frame(sample(LETTERS[0:20], 100, replace=T),sample(LETTERS[0:20], 100, replace=T))
+1530727472639:names(data) = c("Actual", "Predicted")
+1530727472640:#compute frequency of actual categories
+1530727472641:actual = as.data.frame(table(data$Actual))
+1530727472642:names(actual) = c("Actual","ActualFreq")
+1530727472643:#build confusion matrix
+1530727472644:confusion = as.data.frame(table(data$Actual, data$Predicted))
+1530727472645:names(confusion) = c("Actual","Predicted","Freq")
+1530727472646:#calculate percentage of test cases based on actual frequency
+1530727472647:confusion = merge(confusion, actual, by=c(&quot;Actual&quot;))
+1530727472648:confusion$Percent = confusion$Freq/confusion$ActualFreq*100
+1530727472650:#render plot
+1530727472651:# we use three different layers
+1530727472651:# first we draw tiles and fill color based on percentage of test cases
+1530727472652:tile <- ggplot() +
+1530727472652:geom_tile(aes(x=Actual, y=Predicted,fill=Percent),data=confusion, color="black",size=0.1) +
+1530727472652:labs(x="Actual",y="Predicted")
+1530727472673:tile = tile +
+1530727472673:geom_text(aes(x=Actual,y=Predicted, label=sprintf("%.1f", Percent)),data=confusion, size=3, colour="black") +
+1530727472674:scale_fill_gradient(low="grey",high="red")
+1530727472720:# lastly we draw diagonal tiles. We use alpha = 0 so as not to hide previous layers but use size=0.3 to highlight border
+1530727472720:tile = tile +
+1530727472720:geom_tile(aes(x=Actual,y=Predicted),data=subset(confusion, as.character(Actual)==as.character(Predicted)), color="black",size=0.3, fill="black", alpha=0)
+1530727472724:#render
+1530727472724:tile
+1530727516483:#compute frequency of actual categories
+1530727516484:actual = as.data.frame(table(data$Actual))
+1530727517060:names(actual) = c("Actual","ActualFreq")
+1530727517753:#build confusion matrix
+1530727517753:confusion = as.data.frame(table(data$Actual, data$Predicted))
+1530727518455:names(confusion) = c("Actual","Predicted","Freq")
+1530727518980:#calculate percentage of test cases based on actual frequency
+1530727518981:confusion = merge(confusion, actual, by=c(&quot;Actual&quot;))
+1530727544698:#calculate percentage of test cases based on actual frequency
+1530727544699:confusion = merge(confusion, actual, by=c("Actual";))
+1530727548994:#calculate percentage of test cases based on actual frequency
+1530727548994:confusion = merge(confusion, actual, by=c("Actual"))
+1530727550375:confusion$Percent = confusion$Freq/confusion$ActualFreq*100
+1530727552851:#render plot
+1530727552851:# we use three different layers
+1530727552851:# first we draw tiles and fill color based on percentage of test cases
+1530727552852:tile <- ggplot() +
+1530727552852:geom_tile(aes(x=Actual, y=Predicted,fill=Percent),data=confusion, color="black",size=0.1) +
+1530727552852:labs(x="Actual",y="Predicted")
+1530727552867:tile = tile +
+1530727552868:geom_text(aes(x=Actual,y=Predicted, label=sprintf("%.1f", Percent)),data=confusion, size=3, colour="black") +
+1530727552868:scale_fill_gradient(low="grey",high="red")
+1530727552931:# lastly we draw diagonal tiles. We use alpha = 0 so as not to hide previous layers but use size=0.3 to highlight border
+1530727552932:tile = tile +
+1530727552932:geom_tile(aes(x=Actual,y=Predicted),data=subset(confusion, as.character(Actual)==as.character(Predicted)), color="black",size=0.3, fill="black", alpha=0)
+1530727552936:#render
+1530727552936:tile

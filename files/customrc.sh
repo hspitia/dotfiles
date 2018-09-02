@@ -6,21 +6,23 @@
 # Aliases
 # ====================================================================
 
+alias column="column -s'	' -t ";
 alias conserver='ssh -X hfen3@thebeast.biology.gatech.edu'
 alias convann='ssh -X hfen3@gpuvannberg.biology.gatech.edu'
 alias concomp='ssh -X hfen3@compgenome2016.biology.gatech.edu'
 alias conbrow='ssh -X hfen3@gbrowse2016.biology.gatech.edu'
+alias ec='expressvpn connect smart'
+alias ed='expressvpn disconnect'
 # alias gatk='java -jar /home/hspitia/.software/gatk/GenomeAnalysisTK.jar'
 alias grep='grep --color=always'
+alias gst="git status";
+# alias l='ls -lhA';
+alias lh='ls -lh';
+alias lstmplts='ls $LOCAL_SCRIPTS/templates';
+alias prettyjson='python -m json.tool'
 alias vu='nmcli con up id gatech'
 alias vd='nmcli con down id gatech'
-alias lstmplts='ls $LOCAL_SCRIPTS/templates';
 alias xtermcolors='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/gawin/bash-colors-256/master/colors)"'
-alias column="column -s'	' -t ";
-alias gst="git status";
-alias lh='ls -lh';
-# alias l='ls -lhA';
-
 # ===================================================================
 # Variables
 # ===================================================================
@@ -29,6 +31,7 @@ export LOCAL_SOFTWARE=$HOME/.software;
 export LOCAL_BIN=$LOCAL_SOFTWARE/bin;
 export LOCAL_SCRIPTS=$LOCAL_SOFTWARE/scripts;
 export LOCAL_DIR=$HOME/.local;
+export CONDA=$LOCAL_SOFTWARE/anaconda3;
 
 export CONFIG_DIR=$HOME/.dotfiles;
 export CONF_FILES_DIR=$CONFIG_DIR/files;
@@ -47,6 +50,11 @@ export ANACONDA=$LOCAL_SOFTWARE/anaconda3/bin;
 #export MINICONDA=$LOCAL_SOFTWARE/miniconda3/bin;
 
 export PATH=$LOCAL_SOFTWARE:$LOCAL_BIN:$ANACONDA:$LOCAL_SCRIPTS:$TEMPLATES_DIR:$LOCAL_DIR/bin:$PATH;
+
+
+# Perl
+eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+export MANPATH=$HOME/perl5/man:$MANPATH
 
 ## export ART=$LOCAL_SOFTWARE/art;
 ## export ARTEMIS=$LOCAL_SOFTWARE/artemis;
@@ -157,3 +165,4 @@ function reheader {
 #if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
 #        source /etc/profile.d/vte.sh
 #fi
+

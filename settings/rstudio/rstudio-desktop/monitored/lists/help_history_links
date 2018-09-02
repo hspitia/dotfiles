@@ -1,4 +1,3 @@
-help/library/base/html/paste.html,R: Concatenate Strings
 help/library/ggplot2/html/scale_continuous.html,R: Position scales for continuous data (x & y)
 help/library/ggplot2/html/scale_manual.html,R: Create your own discrete scale
 help/library/ggplot2/html/geom_abline.html,"R: Reference lines: horizontal, vertical, and diagonal"
@@ -13,3 +12,4 @@ help/library/tidyr/html/gather.html,R: Gather columns into key-value pairs.
 help/library/NULL/help/confusionMatrix,confusionMatrix
 help/library/caret/html/confusionMatrix.html,R: Create a confusion matrix
 help/library/dplyr/html/join.html,R: Join two tbls together
+help/library/graphics/html/par.html,R: Set or Query Graphical Parameters

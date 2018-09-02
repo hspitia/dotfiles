@@ -375,3 +375,14 @@ if(!is.null(error.message)){
   # Code core - End
   # ========================================================================
 }
+
+arr <- c(1, 3, 4, 5, 4, 2, 6)
+arr <- c(1:10)
+sd(arr)
+me = mean(arr)
+sum = 0
+for (i in arr) {
+  sum = sum + i
+}
+m = sum/length(arr)
+
