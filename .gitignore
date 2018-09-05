@@ -1,4 +1,17 @@
+settings/rstudio-desktop/**
+
+settings/sublime/User/Package Control.cache/**
+settings/sublime/User/Package Control.last-run
+
 settings/variety/Downloaded
+settings/variety/.last_change_time
+settings/variety/history.txt
+settings/variety/variety.log
+settings/variety/variety_latest_default.conf
+settings/variety/wallpaper/wallpaper.jpg.txt
+
+
+
 
 
 

@@ -2,6 +2,10 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+		"Emmet",
+		"GitGutter",
+		"MarkdownLivePreview",
+		"MarkdownPreview"
 	],
 	"installed_packages":
 	[
