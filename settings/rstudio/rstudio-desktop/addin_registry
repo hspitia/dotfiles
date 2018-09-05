@@ -1,0 +1,34 @@
+{
+    "covr::addin_report" : {
+        "binding" : "addin_report",
+        "description" : "Calculates the package test coverage and opens a report, using `covr::report()`",
+        "interactive" : false,
+        "name" : "Calculate package test coverage",
+        "package" : "covr",
+        "title" : ""
+    },
+    "questionr::icut" : {
+        "binding" : "icut",
+        "description" : "Interactively generate code for dividing the range of a numeric variable",
+        "interactive" : true,
+        "name" : "Numeric range dividing",
+        "package" : "questionr",
+        "title" : ""
+    },
+    "questionr::iorder" : {
+        "binding" : "iorder",
+        "description" : "Interactively generate code for a variable levels reordering",
+        "interactive" : true,
+        "name" : "Levels ordering",
+        "package" : "questionr",
+        "title" : ""
+    },
+    "questionr::irec" : {
+        "binding" : "irec",
+        "description" : "Interactively generate code for a variable levels recoding",
+        "interactive" : true,
+        "name" : "Levels recoding",
+        "package" : "questionr",
+        "title" : ""
+    }
+}

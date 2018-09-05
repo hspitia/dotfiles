@@ -11750,3 +11750,2041 @@
 1527775379275:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
 1527775379275:"extrafont", "grid")
 1527775379276:installAndLoadPackages(requiredPackages)
+1527801478754:# Avaluation of MentaLiST, Ariba and STing results for MLST, rMLST and cgMLST
+1527801478755:# Install an load packages ------------------------------------------------
+1527801478755:installAndLoadPackages <- function(pkg){
+1527801478756:cat("Please wait a moment! Checking for required packages... ")
+1527801478756:cat("Done!\n")
+1527801478757:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1527801478757:if (length(new.pkg)) {
+1527801478758:cat("Installing new packages... ")
+1527801478758:install.packages(new.pkg, dependencies = TRUE,
+1527801478759:repos="http://cran.rstudio.com/")
+1527801478759:cat("Done!\n")
+1527801478760:}
+1527801478760:cat("Loading packages... \n")
+1527801478760:sapply(pkg, require, character.only = TRUE)
+1527801478761:cat("Done!\n")
+1527801478761:}
+1527801478762:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
+1527801478762:"extrafont", "grid")
+1527801478763:installAndLoadPackages(requiredPackages)
+1527801481045:# Loading Data ------------------------------------------------------------
+1527801481045:mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_mlst_profile.tsv")
+1527801481336:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.tsv")
+1527801481669:cgmlstProfile <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.tsv")
+1527801550066:mentalistMlstResults   <- read_tsv("data/typer/comparison/mentalist/mlst.results.tsv")
+1527801550463:mentalistRmlstResults  <- read_tsv("data/typer/comparison/mentalist/rmlst.results.tsv")
+1527801551124:mentalistCgmlstResults <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.tsv")
+1527801587925:mentalistMlstResults
+1527801719716:stingRmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.rmlst.tsv")
+1527801721493:stingRmlstResults
+1527801801732:stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.tsv")
+1527803747873:stingRmlstResults  <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.rmlst.tsv")
+1527803757544:stingRmlstResults
+1527803817114:# stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.tsv")
+1527803817114:stingRmlstResults[1:2,c(1,2,58,59)]
+1527803827523:# stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.tsv")
+1527803827524:stingRmlstResults[1:2,c(1,2,3,58,59)]
+1527803832922:# stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.tsv")
+1527803832923:stingRmlstResults[1:2,c(1,2,3,4,58,59)]
+1527803838960:# stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.tsv")
+1527803838961:stingRmlstResults[1:2,c(1,3,4,58,59)]
+1527803927366:stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.tsv")
+1527803943645:spec(stingCgmlstResults)
+1527803968825:stingCgmlstResults
+1527803980311:stingCgmlstResults[1:2,c(1,3,4,1610,1611)]
+1527804130973:colnames(mentalistRmlstResults)
+1527804162067:colnames(mentalistRmlstResults)[2:54]
+1527804172502:rmlstProfile
+1527804187566:# Loading Data ------------------------------------------------------------
+1527804187567:mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_mlst_profile.tsv")
+1527804188348:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.tsv")
+1527804191554:rmlstProfile
+1527804209542:colnames(rmlstProfile)
+1527804220077:colnames(mentalistRmlstResults)[2:54] == colnames(rmlstProfile)[3:55]
+1527804230220:cgmlstProfile <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.tsv")
+1527804245571:colnames(cgmlstProfile)
+1527804264993:colnames(cgmlstProfile)[3:1605]
+1527804270847:colnames(mentalistRmlstResults)[2:54] == tail(colnames(cgmlstProfile)[3:1605])
+1527804275534:tail(colnames(cgmlstProfile)[3:1605])
+1527804281969:tail(colnames(cgmlstProfile)[3:1608])
+1527804291275:tail(colnames(cgmlstProfile)[3:1607])
+1527804313013:tail(colnames(mentalistRmlstResults)[2:1604])
+1527804321014:colnames(mentalistRmlstResults)
+1527804329282:colnames(mentalistcgmlstResults)
+1527804332049:tail(colnames(mentalistcgmlstResults)[2:1604])
+1527804337878:tail(colnames(mentalistCgmlstResults)[2:1604])
+1527804347067:tail(colnames(mentalistCgmlstResults)[2:1608])
+1527804357201:tail(colnames(mentalistCgmlstResults)[2:1606])
+1527804359821:tail(colnames(mentalistCgmlstResults)[2:1606]) == colnames(cgmlstProfile)[3:1607]
+1527804370547:colnames(mentalistCgmlstResults)[2:1606] == colnames(cgmlstProfile)[3:1607]
+1527814468763:# Loading Data ------------------------------------------------------------
+1527814468794:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527814468795:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv")
+1527814472156:# Avaluation of MentaLiST, Ariba and STing results for MLST, rMLST and cgMLST
+1527814472157:# Install an load packages ------------------------------------------------
+1527814472157:installAndLoadPackages <- function(pkg){
+1527814472158:cat("Please wait a moment! Checking for required packages... ")
+1527814472158:cat("Done!\n")
+1527814472159:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1527814472160:if (length(new.pkg)) {
+1527814472160:cat("Installing new packages... ")
+1527814472161:install.packages(new.pkg, dependencies = TRUE,
+1527814472161:repos="http://cran.rstudio.com/")
+1527814472162:cat("Done!\n")
+1527814472162:}
+1527814472163:cat("Loading packages... \n")
+1527814472163:sapply(pkg, require, character.only = TRUE)
+1527814472164:cat("Done!\n")
+1527814472165:}
+1527814472166:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
+1527814472167:"extrafont", "grid")
+1527814472167:installAndLoadPackages(requiredPackages)
+1527814488023:# Loading Data ------------------------------------------------------------
+1527814488024:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527814488024:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv")
+1527814491737:rmlstProfile
+1527814497341:cgmlstProfile <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527814499978:cgmlstProfile
+1527814887214:mentalistMlstResults   <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527814888092:mentalistRmlstResults  <- read_tsv("data/typer/comparison/mentalist/rmlst.results.transposed.tsv")
+1527814888751:mentalistCgmlstResults <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527814889813:stingRmlstResults  <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv")
+1527814890598:stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv")
+1527814893428:stingCgmlstResults
+1527814896498:cgmlstProfile
+1527814907150:tail(cgmlstProfile)
+1527814921112:tail(rmlstProfile)
+1527814929903:# Loading Data ------------------------------------------------------------
+1527814929904:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527814929904:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv")
+1527814933059:tail(rmlstProfile)
+1527815006924:# Loading Data ------------------------------------------------------------
+1527815006926:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527815006928:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv")
+1527815009418:tail(rmlstProfile)
+1527815013622:# Loading Data ------------------------------------------------------------
+1527815013623:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527815013623:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv")
+1527815019645:tail(rmlstProfile)
+1527815115604:# Loading Data ------------------------------------------------------------
+1527815115605:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527815115605:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv")
+1527815118154:rmlstProfile
+1527818605715:# Loading Data ------------------------------------------------------------
+1527818605744:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527818605744:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv")
+1527818606946:cgmlstProfile <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527818607426:mentalistMlstResults   <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527818607761:mentalistRmlstResults  <- read_tsv("data/typer/comparison/mentalist/rmlst.results.transposed.tsv")
+1527818609134:mentalistCgmlstResults <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527818610387:stingRmlstResults  <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv")
+1527818610812:stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv")
+1527818611212:tail(rmlstProfile)
+1527818619279:# Avaluation of MentaLiST, Ariba and STing results for MLST, rMLST and cgMLST
+1527818619280:# Install an load packages ------------------------------------------------
+1527818619280:installAndLoadPackages <- function(pkg){
+1527818619281:cat("Please wait a moment! Checking for required packages... ")
+1527818619281:cat("Done!\n")
+1527818619282:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1527818619282:if (length(new.pkg)) {
+1527818619283:cat("Installing new packages... ")
+1527818619283:install.packages(new.pkg, dependencies = TRUE,
+1527818619283:repos="http://cran.rstudio.com/")
+1527818619284:cat("Done!\n")
+1527818619284:}
+1527818619284:cat("Loading packages... \n")
+1527818619285:sapply(pkg, require, character.only = TRUE)
+1527818619285:cat("Done!\n")
+1527818619286:}
+1527818619286:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
+1527818619287:"extrafont", "grid")
+1527818619288:installAndLoadPackages(requiredPackages)
+1527818621406:# Loading Data ------------------------------------------------------------
+1527818621406:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527818621407:rmlstProfile  <- read_tsv("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv")
+1527818623796:rmlstProfile
+1527818631572:tail(rmlstProfile)
+1527818644418:colnames(mentalistRmlstResults)[2:54] == colnames(rmlstProfile)[3:55]
+1527818645556:colnames(mentalistCgmlstResults)[2:1606] == colnames(cgmlstProfile)[3:1607]
+1527818759747:tail(rmlstProfile)
+1527818850162:colnames(rmlstProfile)
+1527818857710:samples <- colnames(rmlstProfile)[-1]
+1527818859371:samples
+1527818949407:# rMLST
+1527818949407:# STing
+1527818949408:stingRmlstTable <- data.frame()
+1527819075389:strsplit(a, ";")
+1527819079000:a <- "1"
+1527819079200:b <- "1;45"
+1527819079855:strsplit(a, ";")
+1527819085600:unlist(strsplit(a, ";"))
+1527819092727:unlist(strsplit(b, ";"))
+1527819133440:rmlstProfile[, 1]
+1527819142322:loci <- pull(rmlstProfile[, 1])
+1527819143864:loci
+1527819245742:# rMLST
+1527819245742:# STing
+1527819245742:stingRmlstTable <- data.frame(locus = loci)
+1527819247600:stingRmlstTable
+1527819400085:for (sample in samples) {
+1527819400085:for (locus in loci) {
+1527819400086:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527819400086:print(reference)
+1527819400087:}
+1527819400087:}
+1527819414425:rmlstProfile[locus, sample]
+1527819420625:rmlstProfile
+1527819428654:locus
+1527819435100:sample
+1527819469681:# Loading Data ------------------------------------------------------------
+1527819469682:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527819469682:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv")
+1527819486268:# Loading Data ------------------------------------------------------------
+1527819486269:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527819486269:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t")
+1527819488226:rmlstProfile
+1527819500190:# Loading Data ------------------------------------------------------------
+1527819500191:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527819500191:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T)
+1527819501214:rmlstProfile
+1527819513900:View(rmlstProfile)
+1527819553493:# Loading Data ------------------------------------------------------------
+1527819553494:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527819553494:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527819554877:rmlstProfile
+1527819567647:for (sample in samples) {
+1527819567647:for (locus in loci) {
+1527819567648:reference <- unlist(strsplit(filter(rmlstProfile[locus, sample]), ";"))
+1527819567649:print(reference)
+1527819567649:}
+1527819567650:}
+1527819592918:options(stringsAsFactors = F)
+1527819596351:# Loading Data ------------------------------------------------------------
+1527819596351:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527819596352:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527819600583:for (sample in samples) {
+1527819600584:for (locus in loci) {
+1527819600584:reference <- unlist(strsplit(filter(rmlstProfile[locus, sample]), ";"))
+1527819600584:print(reference)
+1527819600585:}
+1527819600585:}
+1527819609194:for (sample in samples) {
+1527819609195:for (locus in loci) {
+1527819609195:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527819609196:print(reference)
+1527819609196:}
+1527819609197:}
+1527819637555:for (sample in samples) {
+1527819637555:for (locus in loci) {
+1527819637555:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527819637556:print(paste(locus, sample, reference))
+1527819637556:}
+1527819637556:}
+1527819841736:rmlstProfile
+1527819881378:rmlstProfile["BACT000001", "ERR170753"]
+1527819888850:# Loading Data ------------------------------------------------------------
+1527819888850:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527819888850:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527819890511:rmlstProfile
+1527819913296:rmlstProfile[, "ERR170753"]
+1527819963367:head(rmlstProfile)
+1527820068515:# Avaluation of MentaLiST, Ariba and STing results for MLST, rMLST and cgMLST
+1527820068516:# Install an load packages ------------------------------------------------
+1527820068516:installAndLoadPackages <- function(pkg){
+1527820068516:cat("Please wait a moment! Checking for required packages... ")
+1527820068517:cat("Done!\n")
+1527820068517:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1527820068517:if (length(new.pkg)) {
+1527820068518:cat("Installing new packages... ")
+1527820068518:install.packages(new.pkg, dependencies = TRUE,
+1527820068518:repos="http://cran.rstudio.com/")
+1527820068519:cat("Done!\n")
+1527820068519:}
+1527820068520:cat("Loading packages... \n")
+1527820068521:sapply(pkg, require, character.only = TRUE)
+1527820068522:cat("Done!\n")
+1527820068523:}
+1527820068524:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
+1527820068525:"extrafont", "grid")
+1527820068527:installAndLoadPackages(requiredPackages)
+1527820068532:options(stringsAsFactors = F)
+1527820068534:# Loading Data ------------------------------------------------------------
+1527820068534:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527820068534:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527820068537:cgmlstProfile <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527820068549:mentalistMlstResults   <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527820068568:mentalistRmlstResults  <- read_tsv("data/typer/comparison/mentalist/rmlst.results.transposed.tsv")
+1527820068576:mentalistCgmlstResults <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527820068595:stingRmlstResults  <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv")
+1527820068602:stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv")
+1527820068620:# General configuration ---------------------------------------------------
+1527820068621:tail(rmlstProfile)
+1527820068631:samples <- colnames(rmlstProfile)[-1]
+1527820068632:loci    <- pull(rmlstProfile[, 1])
+1527820068633:a <- "1"
+1527820068634:b <- "1;45"
+1527820068635:unlist(strsplit(a, ";"))
+1527820068636:rmlstProfile[, "ERR170753"]
+1527820068638:head(rmlstProfile)
+1527820068648:# rMLST
+1527820068648:# STing
+1527820068649:stingRmlstTable <- data.frame(locus = loci)
+1527820068650:rmlstProfile["BACT000001", "ERR170753"]
+1527820068651:for (sample in samples) {
+1527820072708:for (sample in samples) {
+1527820072709:for (locus in loci) {
+1527820072709:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527820072710:print(paste(locus, sample, reference))
+1527820072711:}
+1527820072711:}
+1527820079141:# Avaluation of MentaLiST, Ariba and STing results for MLST, rMLST and cgMLST
+1527820079141:# Install an load packages ------------------------------------------------
+1527820079142:installAndLoadPackages <- function(pkg){
+1527820079142:cat("Please wait a moment! Checking for required packages... ")
+1527820079143:cat("Done!\n")
+1527820079143:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1527820079144:if (length(new.pkg)) {
+1527820079144:cat("Installing new packages... ")
+1527820079145:install.packages(new.pkg, dependencies = TRUE,
+1527820079145:repos="http://cran.rstudio.com/")
+1527820079146:cat("Done!\n")
+1527820079146:}
+1527820079146:cat("Loading packages... \n")
+1527820079147:sapply(pkg, require, character.only = TRUE)
+1527820079147:cat("Done!\n")
+1527820079148:}
+1527820079148:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
+1527820079149:"extrafont", "grid")
+1527820079149:installAndLoadPackages(requiredPackages)
+1527820079150:options(stringsAsFactors = F)
+1527820079151:# Loading Data ------------------------------------------------------------
+1527820079151:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527820079152:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527820079153:cgmlstProfile <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527820079153:mentalistMlstResults   <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527820079154:mentalistRmlstResults  <- read_tsv("data/typer/comparison/mentalist/rmlst.results.transposed.tsv")
+1527820079155:mentalistCgmlstResults <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527820079156:stingRmlstResults  <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv")
+1527820079157:stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv")
+1527820079157:# General configuration ---------------------------------------------------
+1527820079158:tail(rmlstProfile)
+1527820079159:samples <- colnames(rmlstProfile)[-1]
+1527820079159:loci    <- pull(rmlstProfile[, 1])
+1527820079160:a <- "1"
+1527820079161:b <- "1;45"
+1527820079161:unlist(strsplit(a, ";"))
+1527820079162:rmlstProfile[, "ERR170753"]
+1527820079163:head(rmlstProfile)
+1527820079163:# rMLST
+1527820079164:# STing
+1527820079164:stingRmlstTable <- data.frame(locus = loci)
+1527820079165:rmlstProfile["BACT000001", "ERR170753"]
+1527820085405:# Avaluation of MentaLiST, Ariba and STing results for MLST, rMLST and cgMLST
+1527820085406:# Install an load packages ------------------------------------------------
+1527820085406:installAndLoadPackages <- function(pkg){
+1527820085406:cat("Please wait a moment! Checking for required packages... ")
+1527820085407:cat("Done!\n")
+1527820085407:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1527820085407:if (length(new.pkg)) {
+1527820085408:cat("Installing new packages... ")
+1527820085408:install.packages(new.pkg, dependencies = TRUE,
+1527820085408:repos="http://cran.rstudio.com/")
+1527820085409:cat("Done!\n")
+1527820085409:}
+1527820085410:cat("Loading packages... \n")
+1527820085410:sapply(pkg, require, character.only = TRUE)
+1527820085410:cat("Done!\n")
+1527820085411:}
+1527820085412:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
+1527820085412:"extrafont", "grid")
+1527820085412:installAndLoadPackages(requiredPackages)
+1527820085415:options(stringsAsFactors = F)
+1527820085416:# Loading Data ------------------------------------------------------------
+1527820085417:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527820085417:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527820085419:cgmlstProfile <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527820085425:mentalistMlstResults   <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527820085438:mentalistRmlstResults  <- read_tsv("data/typer/comparison/mentalist/rmlst.results.transposed.tsv")
+1527820085442:mentalistCgmlstResults <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527820085465:stingRmlstResults  <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv")
+1527820085472:stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv")
+1527820085489:# General configuration ---------------------------------------------------
+1527820085490:tail(rmlstProfile)
+1527820085500:samples <- colnames(rmlstProfile)[-1]
+1527820085500:loci    <- pull(rmlstProfile[, 1])
+1527820085502:a <- "1"
+1527820085502:b <- "1;45"
+1527820085503:unlist(strsplit(a, ";"))
+1527820085504:rmlstProfile[, "ERR170753"]
+1527820085507:head(rmlstProfile)
+1527820085516:# rMLST
+1527820085517:# STing
+1527820085517:stingRmlstTable <- data.frame(locus = loci)
+1527820085518:rmlstProfile["BACT000001", "ERR170753"]
+1527820095339:# Avaluation of MentaLiST, Ariba and STing results for MLST, rMLST and cgMLST
+1527820095340:# Install an load packages ------------------------------------------------
+1527820095340:installAndLoadPackages <- function(pkg){
+1527820095340:cat("Please wait a moment! Checking for required packages... ")
+1527820095341:cat("Done!\n")
+1527820095341:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1527820095342:if (length(new.pkg)) {
+1527820095342:cat("Installing new packages... ")
+1527820095342:install.packages(new.pkg, dependencies = TRUE,
+1527820095343:repos="http://cran.rstudio.com/")
+1527820095343:cat("Done!\n")
+1527820095343:}
+1527820095344:cat("Loading packages... \n")
+1527820095344:sapply(pkg, require, character.only = TRUE)
+1527820095344:cat("Done!\n")
+1527820095345:}
+1527820095346:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
+1527820095346:"extrafont", "grid")
+1527820095346:installAndLoadPackages(requiredPackages)
+1527820095349:options(stringsAsFactors = F)
+1527820095350:# Loading Data ------------------------------------------------------------
+1527820095350:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527820095351:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527820095353:cgmlstProfile <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527820095358:mentalistMlstResults   <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527820095369:mentalistRmlstResults  <- read_tsv("data/typer/comparison/mentalist/rmlst.results.transposed.tsv")
+1527820095375:mentalistCgmlstResults <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527820095386:stingRmlstResults  <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv")
+1527820095391:stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv")
+1527820095402:# General configuration ---------------------------------------------------
+1527820095402:tail(rmlstProfile)
+1527820095408:samples <- colnames(rmlstProfile)[-1]
+1527820095409:loci    <- pull(rmlstProfile[, 1])
+1527820095410:a <- "1"
+1527820095410:b <- "1;45"
+1527820095411:unlist(strsplit(a, ";"))
+1527820095411:rmlstProfile[, "ERR170753"]
+1527820095413:head(rmlstProfile)
+1527820095418:# rMLST
+1527820095419:# STing
+1527820095419:stingRmlstTable <- data.frame(locus = loci)
+1527820095420:rmlstProfile["BACT000001", "ERR170753"]
+1527820143509:# Loading Data ------------------------------------------------------------
+1527820143509:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527820143510:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821184361:# Loading Data ------------------------------------------------------------
+1527821184361:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527821184362:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821190482:cgmlstProfile <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527821190865:mentalistMlstResults   <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527821191121:mentalistRmlstResults  <- read_tsv("data/typer/comparison/mentalist/rmlst.results.transposed.tsv")
+1527821191392:mentalistCgmlstResults <- read_tsv("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv")
+1527821191772:stingRmlstResults  <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv")
+1527821192110:stingCgmlstResults <- read_tsv("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv")
+1527821193668:tail(rmlstProfile)
+1527821194691:samples <- colnames(rmlstProfile)[-1]
+1527821196676:loci    <- pull(rmlstProfile[, 1])
+1527821222093:tail(rmlstProfile)
+1527821222910:samples <- colnames(rmlstProfile)[-1]
+1527821223567:loci    <- rownames(rmlstProfile)
+1527821225195:loci
+1527821230056:rmlstProfile[, "ERR170753"]
+1527821241469:for (sample in samples) {
+1527821241470:for (locus in loci) {
+1527821241470:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527821241471:print(paste(locus, sample, reference))
+1527821241472:}
+1527821241473:}
+1527821267739:for (sample in samples) {
+1527821267740:for (locus in loci) {
+1527821267741:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527821267742:print(paste(paste(locus, sample), reference)))
+1527821267743:}
+1527821267743:}
+1527821279579:for (sample in samples) {
+1527821279580:for (locus in loci) {
+1527821279580:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527821279581:print(paste(paste(locus, sample), reference))
+1527821279582:}
+1527821279583:}
+1527821351127:for (sample in samples) {
+1527821351127:for (locus in loci) {
+1527821351128:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527821351129:print(paste(locus, sample), reference)
+1527821351130:reference
+1527821351130:}
+1527821351131:}
+1527821355493:for (sample in samples) {
+1527821355494:for (locus in loci) {
+1527821355495:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527821355495:# print(paste(locus, sample), reference)
+1527821355496:reference
+1527821355497:}
+1527821355497:}
+1527821365037:for (sample in samples) {
+1527821365038:for (locus in loci) {
+1527821365039:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527821365040:# print(paste(locus, sample), reference)
+1527821365040:print(reference)
+1527821365041:}
+1527821365041:}
+1527821493874:# Loading Data ------------------------------------------------------------
+1527821493875:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527821493875:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821554383:# Avaluation of MentaLiST, Ariba and STing results for MLST, rMLST and cgMLST
+1527821554384:# Install an load packages ------------------------------------------------
+1527821554384:installAndLoadPackages <- function(pkg){
+1527821554385:cat("Please wait a moment! Checking for required packages... ")
+1527821554385:cat("Done!\n")
+1527821554385:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1527821554386:if (length(new.pkg)) {
+1527821554386:cat("Installing new packages... ")
+1527821554387:install.packages(new.pkg, dependencies = TRUE,
+1527821554387:repos="http://cran.rstudio.com/")
+1527821554387:cat("Done!\n")
+1527821554388:}
+1527821554388:cat("Loading packages... \n")
+1527821554388:sapply(pkg, require, character.only = TRUE)
+1527821554389:cat("Done!\n")
+1527821554389:}
+1527821554390:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
+1527821554391:"extrafont", "grid")
+1527821554391:installAndLoadPackages(requiredPackages)
+1527821554395:options(stringsAsFactors = F)
+1527821554396:# Loading Data ------------------------------------------------------------
+1527821554397:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527821554397:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821554400:cgmlstProfile <- read.table("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821554403:mentalistMlstResults   <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821554416:mentalistRmlstResults  <- read.table("data/typer/comparison/mentalist/rmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821554419:mentalistCgmlstResults <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821554433:stingRmlstResults  <- read.table("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821554435:stingCgmlstResults <- read.table("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527821558016:stingRmlstResults
+1527821584193:stingRmlstResults[locus, sample]
+1527821888459:vacio <- c()
+1527821906793:1 %in% a
+1527821911523:1 %in% vacio
+1527821980362:predicted %in% reference
+1527822144781:for (sample in samples) {
+1527822144782:resColumn <- c()
+1527822144782:for (locus in loci) {
+1527822144783:reference <- unlist(strsplit(rmlstProfile[locus, sample], ";"))
+1527822144784:predicted <- stingRmlstResults[locus, sample]
+1527822144784:result <- 0
+1527822144785:if (length(reference) > 0) {
+1527822144786:if (predicted %in% reference) {
+1527822144786:result <- 1
+1527822144787:}
+1527822144788:} else {
+1527822144788:result <- 1
+1527822144789:}
+1527822144789:resColumn <- c(resColumn, result)
+1527822144791:}
+1527822144791:stingRmlstTable <- cbind.data.frame(stingRmlstTable, resColumn)
+1527822144792:}
+1527822147553:stingRmlstTable
+1527822223299:colnames(stingRmlstTable) <- c("locus", samples)
+1527822227722:stingRmlstTable
+1527824634310:checkResults <- function(reference, results) {
+1527824634312:samples <- colnames(reference)[-1]
+1527824634313:loci    <- rownames(reference)
+1527824634313:outTable <- data.frame(locus = loci)
+1527824634314:for (sample in samples) {
+1527824634315:resColumn <- c()
+1527824634316:for (locus in loci) {
+1527824634316:refVals <- unlist(strsplit(reference[locus, sample], ";"))
+1527824634318:predVal <- results[locus, sample]
+1527824634318:result  <- 0
+1527824634319:if (length(refVals) > 0) {
+1527824634320:if (predVal %in% refVals) {
+1527824634320:result <- 1
+1527824634321:}
+1527824634322:} else {
+1527824634322:result <- 1
+1527824634323:}
+1527824634324:resColumn <- c(resColumn, result)
+1527824634325:}
+1527824634325:outTable <- cbind.data.frame(outTable, resColumn)
+1527824634326:}
+1527824634327:colnames(outTable) <- c("locus", samples)
+1527824634328:outTable
+1527824634329:}
+1527824655493:checkResults(rmlstProfile, stingRmlstResults)
+1527824678720:stingCgmlstTable <- checkResults(cgmlstProfile, stingCgmlstResults)
+1527824680620:stingCgmlstTable
+1527824715353:cgmlstProfile
+1527824719968:stingRmlstResults
+1527824723477:stingCgmlstResults
+1527824731099:cgmlstProfile
+1527824741260:cgmlstProfile <- read.table("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527824764553:stingCgmlstTable <- checkResults(cgmlstProfile, stingCgmlstResults)
+1527824766248:stingCgmlstTable
+1527824770592:cgmlstProfile
+1527824779378:cgmlstProfile <- read.table("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527824780614:cgmlstProfile
+1527824864601:cgmlstProfile <- read.table("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527824865861:cgmlstProfile
+1527824874405:stingCgmlstTable <- checkResults(cgmlstProfile, stingCgmlstResults)
+1527824888489:cgmlstProfile
+1527824892941:cgmlstProfile
+1527824895828:stingCgmlstResults
+1527824900042:stingCgmlstTable <- checkResults(cgmlstProfile, stingCgmlstResults)
+1527824913751:locus
+1527824925031:cgmlstProfile
+1527824927371:stingCgmlstResults
+1527825000939:strsplit(cgmlstProfile["NEIS0001", "ERR036060"], ";")
+1527825045420:reference <- cgmlstProfile
+1527825046035:results <- stingCgmlstResults
+1527825064897:samples <- colnames(reference)[-1]
+1527825065628:loci    <- rownames(reference)
+1527825066662:outTable <- data.frame(locus = loci)
+1527825068178:samples
+1527825071600:loci
+1527825143022:cgmlstProfile <- read.table("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825144426:# Loading Data ------------------------------------------------------------
+1527825144427:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527825144428:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825144672:cgmlstProfile <- read.table("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825147804:mentalistMlstResults   <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825147824:mentalistRmlstResults  <- read.table("data/typer/comparison/mentalist/rmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825147828:mentalistCgmlstResults <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825147847:stingRmlstResults  <- read.table("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825147851:stingCgmlstResults <- read.table("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825152896:stingCgmlstTable <- checkResults(cgmlstProfile, stingCgmlstResults)
+1527825166692:stingCgmlstTable
+1527825347748:# Avaluation of MentaLiST, Ariba and STing results for MLST, rMLST and cgMLST
+1527825347749:# Install an load packages ------------------------------------------------
+1527825347749:installAndLoadPackages <- function(pkg){
+1527825347750:cat("Please wait a moment! Checking for required packages... ")
+1527825347751:cat("Done!\n")
+1527825347751:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1527825347752:if (length(new.pkg)) {
+1527825347752:cat("Installing new packages... ")
+1527825347753:install.packages(new.pkg, dependencies = TRUE,
+1527825347754:repos="http://cran.rstudio.com/")
+1527825347754:cat("Done!\n")
+1527825347755:}
+1527825347755:cat("Loading packages... \n")
+1527825347756:sapply(pkg, require, character.only = TRUE)
+1527825347757:cat("Done!\n")
+1527825347757:}
+1527825347759:requiredPackages <- c("dplyr", "readr", "ggpubr", "RColorBrewer", "gridExtra",
+1527825347759:"extrafont", "grid")
+1527825347760:installAndLoadPackages(requiredPackages)
+1527825347765:options(stringsAsFactors = F)
+1527825347766:# Functions ---------------------------------------------------------------
+1527825347767:checkResults <- function(reference, results) {
+1527825347768:samples <- colnames(reference)[-1]
+1527825347768:loci    <- rownames(reference)
+1527825347769:outTable <- data.frame(locus = loci)
+1527825347770:for (sample in samples) {
+1527825347770:resColumn <- c()
+1527825347771:for (locus in loci) {
+1527825347771:refVals <- unlist(strsplit(reference[locus, sample], ";"))
+1527825347772:predVal <- results[locus, sample]
+1527825347773:result  <- 0
+1527825347773:if (length(refVals) > 0) {
+1527825347774:if (predVal %in% refVals) {
+1527825347775:result <- 1
+1527825347775:}
+1527825347776:} else {
+1527825347777:result <- 1
+1527825347777:}
+1527825347778:resColumn <- c(resColumn, result)
+1527825347779:}
+1527825347780:outTable <- cbind.data.frame(outTable, resColumn)
+1527825347780:}
+1527825347781:colnames(outTable) <- c("locus", samples)
+1527825347782:outTable
+1527825347782:}
+1527825347784:# Loading Data ------------------------------------------------------------
+1527825347784:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527825347785:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825347788:cgmlstProfile <- read.table("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825347808:mentalistMlstResults   <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825347828:mentalistRmlstResults  <- read.table("data/typer/comparison/mentalist/rmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825347832:mentalistCgmlstResults <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825347852:stingRmlstResults  <- read.table("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825347855:stingCgmlstResults <- read.table("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825347876:# General configuration ---------------------------------------------------
+1527825350251:stingRmlstTable <- checkResults(rmlstProfile, stingRmlstResults)
+1527825351242:stingRmlstTable
+1527825444388:lapply(stingRmlstTable, function(x) {sum(x)/length(x)})
+1527825456656:stingRmlstTable
+1527825477331:class(stingRmlstTable[,1])
+1527825648394:# Functions ---------------------------------------------------------------
+1527825648394:checkResults <- function(reference, results) {
+1527825648395:samples <- colnames(reference)[-1]
+1527825648396:loci    <- rownames(reference)
+1527825648396:outTable <- data.frame(locus = loci)
+1527825648397:for (sample in samples) {
+1527825648398:resColumn <- c()
+1527825648398:for (locus in loci) {
+1527825648399:refVals <- unlist(strsplit(reference[locus, sample], ";"))
+1527825648400:predVal <- results[locus, sample]
+1527825648401:result  <- 0.0
+1527825648401:if (length(refVals) > 0) {
+1527825648402:if (predVal %in% refVals) {
+1527825648402:result <- 1.0
+1527825648403:}
+1527825648404:} else {
+1527825648404:result <- 1.0
+1527825648405:}
+1527825648406:resColumn <- c(resColumn, result)
+1527825648407:}
+1527825648407:outTable <- cbind.data.frame(outTable, resColumn)
+1527825648408:}
+1527825648409:colnames(outTable) <- c("locus", samples)
+1527825648409:outTable
+1527825648410:}
+1527825648411:# Loading Data ------------------------------------------------------------
+1527825648412:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527825648412:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825648416:cgmlstProfile <- read.table("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825648436:mentalistMlstResults   <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825648454:mentalistRmlstResults  <- read.table("data/typer/comparison/mentalist/rmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825648458:mentalistCgmlstResults <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825648477:stingRmlstResults  <- read.table("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825648480:stingCgmlstResults <- read.table("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825648503:# General configuration ---------------------------------------------------
+1527825648504:stingRmlstTable  <- checkResults(rmlstProfile, stingRmlstResults)
+1527825653268:stingRmlstTable
+1527825667187:class(stingRmlstTable[,1])
+1527825675018:stingRmlstTable
+1527825711631:tibble(stingRmlstTable)
+1527825730023:as_tibble(stingRmlstTable)
+1527825744414:# Functions ---------------------------------------------------------------
+1527825744415:checkResults <- function(reference, results) {
+1527825744416:samples <- colnames(reference)[-1]
+1527825744417:loci    <- rownames(reference)
+1527825744417:outTable <- data.frame(locus = loci)
+1527825744418:for (sample in samples) {
+1527825744419:resColumn <- c()
+1527825744419:for (locus in loci) {
+1527825744420:refVals <- unlist(strsplit(reference[locus, sample], ";"))
+1527825744421:predVal <- results[locus, sample]
+1527825744421:result  <- 0
+1527825744422:if (length(refVals) > 0) {
+1527825744423:if (predVal %in% refVals) {
+1527825744423:result <- 1
+1527825744424:}
+1527825744424:} else {
+1527825744425:result <- 1
+1527825744426:}
+1527825744426:resColumn <- c(resColumn, result)
+1527825744428:}
+1527825744428:outTable <- cbind.data.frame(outTable, resColumn)
+1527825744429:}
+1527825744430:colnames(outTable) <- c("locus", samples)
+1527825744431:outTable
+1527825744431:}
+1527825744432:# Loading Data ------------------------------------------------------------
+1527825744433:# mlstProfile   <- read_tsv("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv")
+1527825744433:rmlstProfile  <- read.table("data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825744437:cgmlstProfile <- read.table("data/typer/comparison/mentalist/20nm_cgmlst_profile.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825744457:mentalistMlstResults   <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825744475:mentalistRmlstResults  <- read.table("data/typer/comparison/mentalist/rmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825744479:mentalistCgmlstResults <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825744498:stingRmlstResults  <- read.table("data/typer/comparison/mentalist/typer.v0.23.rmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825744501:stingCgmlstResults <- read.table("data/typer/comparison/mentalist/typer.v0.23.cgmlst.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527825744525:# General configuration ---------------------------------------------------
+1527825744526:stingRmlstTable  <- checkResults(rmlstProfile, stingRmlstResults)
+1527825747786:as_tibble(stingRmlstTable)
+1527826009888:stingRmlstTable
+1527826017994:lapply(stingRmlstTable[,-1], function(x) {sum(x)/length(x)})
+1527826036977:lapply(stingCgmlstTable[,-1], function(x) {sum(x)/length(x)})
+1527826050200:unlist(lapply(stingCgmlstTable[,-1], function(x) {sum(x)/length(x)}))
+1527826057516:mean(unlist(lapply(stingCgmlstTable[,-1], function(x) {sum(x)/length(x)})))
+1527826068047:mean(unlist(lapply(stingRmlstTable[,-1], function(x) {sum(x)/length(x)})))
+1527826069656:mean(unlist(lapply(stingCgmlstTable[,-1], function(x) {sum(x)/length(x)})))
+1527826115940:stingRmlstCorrectAlleles  <- mean(unlist(lapply(stingRmlstTable[,-1], function(x) {sum(x)/length(x)})))
+1527826116572:stingCgmlstCorrectAlleles <- mean(unlist(lapply(stingCgmlstTable[,-1], function(x) {sum(x)/length(x)})))
+1527826118269:stingRmlstCorrectAlleles
+1527826120686:stingCgmlstCorrectAlleles
+1527826226129:mentalistRmlstTable  <- checkResults(rmlstProfile, mentalistRmlstResults)
+1527826228884:mentalistCgmlstTable <- checkResults(cgmlstProfile, mentalistCgmlstResults)
+1527826245018:mentalistRmlstCorrectAlleles  <- mean(unlist(lapply(mentalistRmlstTable[,-1], function(x) {sum(x)/length(x)})))
+1527826246372:mentalistCgmlstCorrectAlleles <- mean(unlist(lapply(mentalistCgmlstTable[,-1], function(x) {sum(x)/length(x)})))
+1527826247738:mentalistRmlstCorrectAlleles
+1527826250273:mentalistCgmlstCorrectAlleles
+1527826552745:mean(stingRmlstTable[,-1])
+1527826559253:stingRmlstTable[,-1]
+1527829711205:# mentalistMlstResults   <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.tsv", sep = "\t", header = T, row.names = 1)
+1527829711206:mentalistRmlstResults  <- read.table("data/typer/comparison/mentalist/rmlst.results.transposed.noplus.tsv", sep = "\t", header = T, row.names = 1)
+1527829711845:mentalistCgmlstResults <- read.table("data/typer/comparison/mentalist/cgmlst.results.transposed.noplus.tsv", sep = "\t", header = T, row.names = 1)
+1527829720209:mentalistRmlstTable  <- checkResults(rmlstProfile, mentalistRmlstResults)
+1527829721176:mentalistCgmlstTable <- checkResults(cgmlstProfile, mentalistCgmlstResults)
+1527829725551:mentalistRmlstCorrectAlleles  <- mean(unlist(lapply(mentalistRmlstTable[,-1], function(x) {sum(x)/length(x)})))
+1527829727227:mentalistCgmlstCorrectAlleles <- mean(unlist(lapply(mentalistCgmlstTable[,-1], function(x) {sum(x)/length(x)})))
+1527829729472:mentalistRmlstCorrectAlleles
+1527829732561:mentalistCgmlstCorrectAlleles
+1527829743896:stingRmlstCorrectAlleles
+1527829748193:stingCgmlstCorrectAlleles
+1527830007553:finalTable <- data.frame(scheme = c("rMLST", "cgMLST"),
+1527830007554:STing = c(stingRmlstCorrectAlleles, stingCgmlstCorrectAlleles),
+1527830007555:MentaLiST = c(mentalistRmlstCorrectAlleles, mentalistCgmlstCorrectAlleles))
+1527830010719:finalTable
+1527900188097:sd(c(1, 3, 4, 5, 4, 2, 6))
+1527900228872:arr <- c(1, 3, 4, 5, 4, 2, 6)
+1527900229437:sd(arr)
+1527900233456:m = mean(arr)
+1527900236987:m
+1527900258297:for (i in arr) {
+1527900258298:print(i)
+1527900258298:}
+1527900304892:for (i in arr) {
+1527900304893:sum = sum + i
+1527900304894:}
+1527900306780:sum = 0
+1527900307112:for (i in arr) {
+1527900307113:sum = sum + i
+1527900307113:}
+1527900310158:sum
+1527900315785:me= mean(arr)
+1527900340108:m = sum/length(arr)
+1527900341705:m
+1527900346912:me
+1527900392230:arr <- c(1:10)
+1527900393095:sd(arr)
+1528511176899:# Packages ----------------------------------------------------------------
+1528511176929:personal.lib.path <- Sys.getenv("R_LIBS_USER")
+1528511176930:if(!file.exists(personal.lib.path))
+1528511176930:dir.create(personal.lib.path)
+1528511176932:installAndLoadPackages <- function(pkg){
+1528511176932:cat("Please wait a moment! Checking for required packages... ")
+1528511176933:cat("Done!\n")
+1528511176934:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1528511176934:if (length(new.pkg)) {
+1528511176935:cat("Installing new packages... ")
+1528511176935:install.packages(new.pkg, dependencies = TRUE,
+1528511176936:repos="http://cran.rstudio.com/",
+1528511176937:lib = personal.lib.path)
+1528511176937:cat("Done!\n")
+1528511176938:}
+1528511176938:cat("Loading required packages... ")
+1528511176939:sapply(pkg, function(x){
+1528511176939:suppressPackageStartupMessages(require(x, character.only = TRUE, quietly = TRUE))
+1528511176939:})
+1528511176939:cat("Done!\n")
+1528511176940:}
+1528511176941:# github.packages <- c("tibble")
+1528511176941:# packages <- c("argparser", "tidyverse", "RColorBrewer")#, "ggplot2",  "tidyr")
+1528511176941:packages <- c("argparser", "dplyr", "ggplot2", "RColorBrewer", "readr", "tidyr", "caret")#, "ggplot2",  "tidyr")
+1528511176942:installAndLoadPackages(packages)
+1528512170786:# Data --------------------------------------------------------------------
+1528512170814:# Define file paths
+1528512170814:blastFile      <- "detector/card/prioritary_who_set/final_set/test_07_card/card_vs_final_set.blast.presence.tsv"
+1528512170815:resultsFile    <- "detector/card/prioritary_who_set/final_set/test_07_card/results/detector.formatted.tsv"
+1528512170815:genesRefFile   <- "detector/card/prioritary_who_set/final_set/tags_names_xRef.tsv"
+1528512170816:genomesRefFile <- "detector/card/prioritary_who_set/final_set/genomesTableRef.tsv"
+1528512170816:# Load data files
+1528512170817:blastData   <- read_tsv(blastFile)
+1528512171182:resultsData <- read_tsv(resultsFile)
+1528512171449:genesRef    <- read_tsv(genesRefFile, col_names = c("GeneTag", "GeneName"))
+1528512171477:genomesRef  <- read_tsv(genomesRefFile)
+1528512171485:# Process results ---------------------------------------------------------
+1528512171486:# Get the AMR genes present in the genome set
+1528512171486:(blastFilteredResults <- blastData %>%
+1528512171489:filter(pident >= 95, qcovs >= 95) %>%
+1528512171489:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528512171490:# filter(presence == 1) %>%
+1528512171490:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528512171490:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528512171491:select(Accn = sseqid, Organism = ScientificName,
+1528512171491:GeneTag = qseqid, GeneName, BlastPresence = presence))
+1528512172492:(amrGenes <- blastFilteredResults %>%
+1528512172493:select(GeneTag, GeneName) %>%
+1528512172493:unique())
+1528512172665:(genomes <- blastFilteredResults %>%
+1528512172666:select(Accn, Organism) %>%
+1528512172667:unique())
+1528512172712:head(as.data.frame(genomes) %>% arrange(Organism), 60)
+1528512172724:depths <- c(20,40)
+1528512172725:sampletypes <- c("positive", "negative")
+1528512172726:(resultsTable20x <- blastFilteredResults %>%
+1528512172726:mutate(SeqDepth = 20L) %>%
+1528512172727:select(Accn,
+1528512172727:Organism,
+1528512172728:GeneTag,
+1528512172728:GeneName,
+1528512172729:SeqDepth,
+1528512172729:BlastPresence) %>%
+1528512172729:unique()
+1528512172730:)
+1528512172907:(res20x <- resultsTable20x %>%
+1528512172907:left_join(resultsData %>%
+1528512172908:filter(SampleType == "positive",
+1528512172908:SeqDepth == 20)) %>%
+1528512172909:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1528512172910:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovs, GeneCov, SeqDepth)
+1528512172910:)
+1528512239221:resultsTable40x
+1528512245056:# Packages ----------------------------------------------------------------
+1528512245057:personal.lib.path <- Sys.getenv("R_LIBS_USER")
+1528512245057:if(!file.exists(personal.lib.path))
+1528512245058:dir.create(personal.lib.path)
+1528512245060:installAndLoadPackages <- function(pkg){
+1528512245060:cat("Please wait a moment! Checking for required packages... ")
+1528512245061:cat("Done!\n")
+1528512245061:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1528512245062:if (length(new.pkg)) {
+1528512245062:cat("Installing new packages... ")
+1528512245063:install.packages(new.pkg, dependencies = TRUE,
+1528512245063:repos="http://cran.rstudio.com/",
+1528512245064:lib = personal.lib.path)
+1528512245064:cat("Done!\n")
+1528512245065:}
+1528512245065:cat("Loading required packages... ")
+1528512245066:sapply(pkg, function(x){
+1528512245067:suppressPackageStartupMessages(require(x, character.only = TRUE, quietly = TRUE))
+1528512245068:})
+1528512245068:cat("Done!\n")
+1528512245069:}
+1528512245070:# github.packages <- c("tibble")
+1528512245070:# packages <- c("argparser", "tidyverse", "RColorBrewer")#, "ggplot2",  "tidyr")
+1528512245070:packages <- c("argparser", "dplyr", "ggplot2", "RColorBrewer", "readr", "tidyr", "caret")#, "ggplot2",  "tidyr")
+1528512245071:installAndLoadPackages(packages)
+1528512245075:# Data --------------------------------------------------------------------
+1528512245075:# Define file paths
+1528512245076:blastFile      <- "detector/card/prioritary_who_set/final_set/test_07_card/card_vs_final_set.blast.presence.tsv"
+1528512245076:resultsFile    <- "detector/card/prioritary_who_set/final_set/test_07_card/results/detector.formatted.tsv"
+1528512245077:genesRefFile   <- "detector/card/prioritary_who_set/final_set/tags_names_xRef.tsv"
+1528512245077:genomesRefFile <- "detector/card/prioritary_who_set/final_set/genomesTableRef.tsv"
+1528512245078:# Load data files
+1528512245078:blastData   <- read_tsv(blastFile)
+1528512245090:resultsData <- read_tsv(resultsFile)
+1528512245118:genesRef    <- read_tsv(genesRefFile, col_names = c("GeneTag", "GeneName"))
+1528512245122:genomesRef  <- read_tsv(genomesRefFile)
+1528512245126:# Process results ---------------------------------------------------------
+1528512245127:# Get the AMR genes present in the genome set
+1528512245127:(blastFilteredResults <- blastData %>%
+1528512245127:filter(pident >= 95, qcovs >= 95) %>%
+1528512245128:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528512245128:# filter(presence == 1) %>%
+1528512245128:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528512245129:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528512245129:select(Accn = sseqid, Organism = ScientificName,
+1528512245129:GeneTag = qseqid, GeneName, BlastPresence = presence))
+1528512245203:(amrGenes <- blastFilteredResults %>%
+1528512245203:select(GeneTag, GeneName) %>%
+1528512245204:unique())
+1528512245229:(genomes <- blastFilteredResults %>%
+1528512245229:select(Accn, Organism) %>%
+1528512245230:unique())
+1528512245255:head(as.data.frame(genomes) %>% arrange(Organism), 60)
+1528512245263:depths <- c(20,40)
+1528512245263:sampletypes <- c("positive", "negative")
+1528512245264:(resultsTable20x <- blastFilteredResults %>%
+1528512245264:mutate(SeqDepth = 20L) %>%
+1528512245265:select(Accn,
+1528512245265:Organism,
+1528512245265:GeneTag,
+1528512245265:GeneName,
+1528512245266:SeqDepth,
+1528512245266:BlastPresence) %>%
+1528512245266:unique()
+1528512245267:)
+1528512245357:(res20x <- resultsTable20x %>%
+1528512245357:left_join(resultsData %>%
+1528512245357:filter(SampleType == "positive",
+1528512245358:SeqDepth == 20)) %>%
+1528512245358:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1528512245358:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovs, GeneCov, SeqDepth)
+1528512245358:)
+1528512245471:(resultsTable40x <- blastFilteredResults %>%
+1528512245472:mutate(SeqDepth = 40L) %>%
+1528512245472:select(Accn,
+1528512245472:Organism,
+1528512245473:GeneTag,
+1528512245473:GeneName,
+1528512245473:SeqDepth,
+1528512245473:BlastPresence) %>%
+1528512245474:unique()
+1528512245474:)
+1528512245564:(res40x <- resultsTable40x %>%
+1528512245564:left_join(resultsData %>%
+1528512245564:filter(SampleType == "positive",
+1528512245565:SeqDepth == 40)) %>%
+1528512245565:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1528512245565:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovs, GeneCov, SeqDepth)
+1528512245566:)
+1528512245662:resultsTable <- rbind(res20x, res40x)
+1528512245664:right_join(
+1528512245664:right_join(
+1528512245665:resultsTable %>%
+1528512245665:filter(BlastPresence == 1, DetectorPresence == 1) %>%
+1528512245665:group_by(SeqDepth) %>%
+1528512245666:summarise(TP = n()),
+1528512245666:resultsTable %>%
+1528512245666:filter(BlastPresence == 0, DetectorPresence == 1) %>%
+1528512245667:group_by(SeqDepth) %>%
+1528512245667:summarise(FP = n())),
+1528512245667:right_join(
+1528512245668:resultsTable %>%
+1528512245668:filter(BlastPresence == 1, DetectorPresence == 0) %>%
+1528512245668:group_by(SeqDepth) %>%
+1528512245669:summarise(FN = n()),
+1528512245669:resultsTable %>%
+1528512245669:filter(BlastPresence == 0, DetectorPresence == 0) %>%
+1528512245670:group_by(SeqDepth) %>%
+1528512245670:summarise(TN = n()))
+1528512245670:)
+1528512245927:library(caret)
+1528512252515:resultsTable
+1528512260047:View(amrGenes)
+1528512275159:View(genomes)
+1528518422623:cardGenesCompleteRef <- "detector/card/prioritary_who_set/db/card_nucleotide_tags_original_ids.xRef.tsv"
+1528518427934:cardGenesCompleteRefFile <- "detector/card/prioritary_who_set/db/card_nucleotide_tags_original_ids.xRef.tsv"
+1528518458413:genesCompleteRefFile <- "detector/card/prioritary_who_set/db/card_nucleotide_tags_original_ids.xRef.tsv"
+1528518464541:rm(cardGenesCompleteRef)
+1528518515873:genesCompleteRef  <- read_tsv(genesCompleteRefFile, col_names = c("GeneTag", "Description"))
+1528518517269:genesCompleteRef
+1528518523239:# Packages ----------------------------------------------------------------
+1528518523239:personal.lib.path <- Sys.getenv("R_LIBS_USER")
+1528518523240:if(!file.exists(personal.lib.path))
+1528518523241:dir.create(personal.lib.path)
+1528518523242:installAndLoadPackages <- function(pkg){
+1528518523242:cat("Please wait a moment! Checking for required packages... ")
+1528518523243:cat("Done!\n")
+1528518523243:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1528518523244:if (length(new.pkg)) {
+1528518523244:cat("Installing new packages... ")
+1528518523245:install.packages(new.pkg, dependencies = TRUE,
+1528518523245:repos="http://cran.rstudio.com/",
+1528518523246:lib = personal.lib.path)
+1528518523246:cat("Done!\n")
+1528518523247:}
+1528518523247:cat("Loading required packages... ")
+1528518523248:sapply(pkg, function(x){
+1528518523248:suppressPackageStartupMessages(require(x, character.only = TRUE, quietly = TRUE))
+1528518523249:})
+1528518523249:cat("Done!\n")
+1528518523250:}
+1528518523251:# github.packages <- c("tibble")
+1528518523251:# packages <- c("argparser", "tidyverse", "RColorBrewer")#, "ggplot2",  "tidyr")
+1528518523251:packages <- c("argparser", "dplyr", "ggplot2", "RColorBrewer", "readr", "tidyr", "caret")#, "ggplot2",  "tidyr")
+1528518523252:installAndLoadPackages(packages)
+1528518528813:# Data --------------------------------------------------------------------
+1528518528814:# Define file paths
+1528518528815:blastFile            <- "detector/card/prioritary_who_set/final_set/test_07_card/card_vs_final_set.blast.presence.tsv"
+1528518528816:resultsFile          <- "detector/card/prioritary_who_set/final_set/test_07_card/results/detector.formatted.tsv"
+1528518528817:genesRefFile         <- "detector/card/prioritary_who_set/final_set/tags_names_xRef.tsv"
+1528518528818:genomesRefFile       <- "detector/card/prioritary_who_set/final_set/genomesTableRef.tsv"
+1528518528819:genesCompleteRefFile <- "detector/card/prioritary_who_set/db/card_nucleotide_tags_original_ids.xRef.tsv"
+1528518528820:# Load data files
+1528518528820:blastData         <- read_tsv(blastFile)
+1528518529247:resultsData       <- read_tsv(resultsFile)
+1528518529503:genesRef          <- read_tsv(genesRefFile, col_names = c("GeneTag", "GeneName"))
+1528518529521:genomesRef        <- read_tsv(genomesRefFile)
+1528518529525:genesCompleteRef  <- read_tsv(genesCompleteRefFile, col_names = c("GeneTag", "Description"))
+1528518532036:genesCompleteRef  <- read_tsv(genesCompleteRefFile, col_names = c("GeneTag", "Description"))
+1528518535331:genesCompleteRef
+1528518571882:(blastFilteredResults <- blastData %>%
+1528518571883:filter(pident >= 95, qcovs >= 95) %>%
+1528518571883:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528518571884:# filter(presence == 1) %>%
+1528518571884:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528518571885:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528518571885:left_join(genesCompleteRef, by = c("qseqid" = "GeneTag")) %>%
+1528518571885:select(Accn = sseqid, Organism = ScientificName,
+1528518571886:GeneTag = qseqid, GeneName, BlastPresence = presence))
+1528518587385:View(blastFilteredResults)
+1528518612630:(blastFilteredResults <- blastData %>%
+1528518612631:filter(pident >= 95, qcovs >= 95) %>%
+1528518612632:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528518612632:# filter(presence == 1) %>%
+1528518612633:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528518612634:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528518612635:left_join(genesCompleteRef, by = c("qseqid" = "GeneTag")) %>%
+1528518612635:select(Accn = sseqid, Organism = ScientificName,
+1528518612636:GeneTag = qseqid, GeneName, Description, BlastPresence = presence))
+1528518617595:View(blastFilteredResults)
+1528518647652:(amrGenes <- blastFilteredResults %>%
+1528518647653:select(GeneTag, GeneName) %>%
+1528518647653:unique())
+1528518653386:(amrGenes <- blastFilteredResults %>%
+1528518653386:select(GeneTag, GeneName, Description) %>%
+1528518653387:unique())
+1528520941907:View(genesCompleteRef)
+1528521044198:genesCompleteRefFile <- "detector/card/prioritary_who_set/db/card_nucleotide_tags_original_ids.xRef.formatted.tsv"
+1528521045991:genesCompleteRef  <- read_tsv(genesCompleteRefFile, col_names = c("GeneTag", "Description"))
+1528521094523:genesCompleteRef  <- read_tsv(genesCompleteRefFile, col_names = c("GeneTag", "GI", "GiNumber", "Strand", "Coordinates", "Ontology", "Description"))
+1528521110221:genesCompleteRef  <- read_tsv(genesCompleteRefFile, col_names = c("GeneTag", "GI", "GiNumber", "Strand", "Coordinates", "Ontology", "Description"))
+1528521185241:genesCompleteRef  <- read_tsv(genesCompleteRefFile, col_names = c("GeneTag", "GI", "GiNumber", "Strand", "Coordinates", "Ontology", "Description"))
+1528521187137:genesCompleteRef
+1528521197851:View(genesCompleteRef)
+1528521217629:# Packages ----------------------------------------------------------------
+1528521217629:personal.lib.path <- Sys.getenv("R_LIBS_USER")
+1528521217630:if(!file.exists(personal.lib.path))
+1528521217631:dir.create(personal.lib.path)
+1528521217633:installAndLoadPackages <- function(pkg){
+1528521217633:cat("Please wait a moment! Checking for required packages... ")
+1528521217634:cat("Done!\n")
+1528521217634:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1528521217635:if (length(new.pkg)) {
+1528521217636:cat("Installing new packages... ")
+1528521217636:install.packages(new.pkg, dependencies = TRUE,
+1528521217637:repos="http://cran.rstudio.com/",
+1528521217638:lib = personal.lib.path)
+1528521217638:cat("Done!\n")
+1528521217639:}
+1528521217640:cat("Loading required packages... ")
+1528521217640:sapply(pkg, function(x){
+1528521217641:suppressPackageStartupMessages(require(x, character.only = TRUE, quietly = TRUE))
+1528521217641:})
+1528521217642:cat("Done!\n")
+1528521217642:}
+1528521217643:# github.packages <- c("tibble")
+1528521217643:# packages <- c("argparser", "tidyverse", "RColorBrewer")#, "ggplot2",  "tidyr")
+1528521217643:packages <- c("argparser", "dplyr", "ggplot2", "RColorBrewer", "readr", "tidyr", "caret")#, "ggplot2",  "tidyr")
+1528521217644:installAndLoadPackages(packages)
+1528521217688:# Data --------------------------------------------------------------------
+1528521217689:# Define file paths
+1528521217689:blastFile            <- "detector/card/prioritary_who_set/final_set/test_07_card/card_vs_final_set.blast.presence.tsv"
+1528521217689:resultsFile          <- "detector/card/prioritary_who_set/final_set/test_07_card/results/detector.formatted.tsv"
+1528521217690:genesRefFile         <- "detector/card/prioritary_who_set/final_set/tags_names_xRef.tsv"
+1528521217690:genomesRefFile       <- "detector/card/prioritary_who_set/final_set/genomesTableRef.tsv"
+1528521217691:genesCompleteRefFile <- "detector/card/prioritary_who_set/db/card_nucleotide_tags_original_ids.xRef.formatted.tsv"
+1528521217692:# Load data files
+1528521217692:blastData         <- read_tsv(blastFile)
+1528521217726:resultsData       <- read_tsv(resultsFile)
+1528521217767:genesRef          <- read_tsv(genesRefFile, col_names = c("GeneTag", "GeneName"))
+1528521217772:genomesRef        <- read_tsv(genomesRefFile)
+1528521217776:genesCompleteRef  <- read_tsv(genesCompleteRefFile, col_names = c("GeneTag", "GI", "GiNumber", "Strand", "Coordinates", "Ontology", "Description"))
+1528521217787:# Process results ---------------------------------------------------------
+1528521217787:# Get the AMR genes present in the genome set
+1528521217788:(blastFilteredResults <- blastData %>%
+1528521217788:filter(pident >= 95, qcovs >= 95) %>%
+1528521217788:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528521217789:# filter(presence == 1) %>%
+1528521217789:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528521217789:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528521217790:left_join(genesCompleteRef, by = c("qseqid" = "GeneTag")) %>%
+1528521217790:select(Accn = sseqid, Organism = ScientificName,
+1528521217790:GeneTag = qseqid, GeneName, Ontology, Description, BlastPresence = presence))
+1528521217869:(amrGenes <- blastFilteredResults %>%
+1528521217869:select(GeneTag, GeneName, Ontology, Description) %>%
+1528521217870:unique())
+1528521217923:(genomes <- blastFilteredResults %>%
+1528521217923:select(Accn, Organism) %>%
+1528521217924:unique())
+1528521228960:View(amrGenes)
+1528521760568:cardOntology      <- read_tsv(cardOntologyFile)
+1528521762636:cardOntologyFile     <- "detector/card/prioritary_who_set/db/card_ontology/aro.csv"
+1528521765420:cardOntology      <- read_tsv(cardOntologyFile)
+1528522619002:cardOntology      <- read_tsv(cardOntologyFile)
+1528522621582:cardOntology
+1528522657740:(blastFilteredResults <- blastData %>%
+1528522657741:filter(pident >= 95, qcovs >= 95) %>%
+1528522657741:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528522657742:# filter(presence == 1) %>%
+1528522657743:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528522657743:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528522657744:left_join(genesCompleteRef, by = c("qseqid" = "GeneTag")) %>%
+1528522657745:left_join(cardOntology, by = c("Ontology" = "Accession")) %>%
+1528522657746:select(Accn = sseqid, Organism = ScientificName,
+1528522657746:GeneTag = qseqid, GeneName, Ontology, Description, BlastPresence = presence))
+1528522673586:genesCompleteRef
+1528522677921:View(genesCompleteRef)
+1528522724190:(blastFilteredResults <- blastData %>%
+1528522724190:filter(pident >= 95, qcovs >= 95) %>%
+1528522724191:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528522724192:# filter(presence == 1) %>%
+1528522724192:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528522724193:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528522724193:left_join(genesCompleteRef, by = c("qseqid" = "GeneTag")) %>%
+1528522724194:# left_join(cardOntology, by = c("Ontology" = "Accession")) %>%
+1528522724195:select(Accn = sseqid, Organism = ScientificName,
+1528522724195:GeneTag = qseqid, GeneName, Ontology, Description, BlastPresence = presence))
+1528522750747:(blastFilteredResults <- blastData %>%
+1528522750748:filter(pident >= 95, qcovs >= 95) %>%
+1528522750748:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528522750749:# filter(presence == 1) %>%
+1528522750750:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528522750751:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528522750751:left_join(genesCompleteRef, by = c("qseqid" = "GeneTag")) %>%
+1528522750752:select(Accn = sseqid, Organism = ScientificName,
+1528522750753:GeneTag = qseqid, GeneName, Ontology, Description, BlastPresence = presence) %>%
+1528522750753:left_join(cardOntology, by = c("Ontology" = "Accession"))
+1528522750754:)
+1528522780659:View(blastFilteredResults)
+1528522807289:(amrGenes <- blastFilteredResults %>%
+1528522807290:select(GeneTag, GeneName, Ontology, Description.x) %>%
+1528522807291:unique())
+1528522821555:(blastFilteredResults <- blastData %>%
+1528522821556:filter(pident >= 95, qcovs >= 95) %>%
+1528522821557:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528522821557:# filter(presence == 1) %>%
+1528522821558:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528522821559:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528522821559:left_join(genesCompleteRef, by = c("qseqid" = "GeneTag")) %>%
+1528522821560:left_join(cardOntology, by = c("Ontology" = "Accession")) %>%
+1528522821560:select(Accn = sseqid, Organism = ScientificName,
+1528522821561:GeneTag = qseqid, GeneName, Ontology, Description.x, BlastPresence = presence)
+1528522821562:)
+1528522864503:(blastFilteredResults <- blastData %>%
+1528522864503:filter(pident >= 95, qcovs >= 95) %>%
+1528522864504:# filter(presence == 1, pident >= 95, qcovs >= 100) %>%
+1528522864505:# filter(presence == 1) %>%
+1528522864505:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1528522864506:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1528522864507:left_join(genesCompleteRef, by = c("qseqid" = "GeneTag")) %>%
+1528522864507:left_join(cardOntology, by = c("Ontology" = "Accession")) %>%
+1528522864508:select(Accn = sseqid, Organism = ScientificName,
+1528522864508:GeneTag = qseqid, GeneName, Ontology, GeneDesc = Description.x, OntologyDesc = Description.y, BlastPresence = presence)
+1528522864509:)
+1528522878160:(amrGenes <- blastFilteredResults %>%
+1528522878161:select(GeneTag, GeneName, Ontology, GeneDesc, OntologyDesc) %>%
+1528522878161:unique())
+1528522880576:View(amrGenes)
+1528523009967:write_tsv(amrGenes, "detector/card/prioritary_who_set/final_set/test_07_card/amr_genes.tsv", col_names = T)
+1528523390711:(genomes <- blastFilteredResults %>%
+1528523390712:select(Accn, Organism) %>%
+1528523390712:unique())
+1528523392539:View(genomes)
+1530233474713:#!/usr/bin/env Rscript
+1530233474741:################################################################################
+1530233474742:# Author:      Hector Fabio Espitia Navarro
+1530233474742:#              Georgia Institute of Technology
+1530233474742:# Version:     1.0
+1530233474742:# Date:
+1530233474743:# Description:
+1530233474743:################################################################################
+1530233474743:# Install required packages
+1530233474744:# personal.lib.path <- Sys.getenv("R_LIBS_USER")
+1530233474744:# if(!file.exists(personal.lib.path))
+1530233474745:#   dir.create(personal.lib.path)
+1530233474745:installAndLoadPackages <- function(pkg){
+1530233474746:cat("Please wait a moment! Checking for required packages... ")
+1530233474746:cat("Done!\n")
+1530233474747:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1530233474747:if (length(new.pkg)) {
+1530233474748:cat("Installing new packages... ")
+1530233474748:install.packages(new.pkg, dependencies = TRUE,
+1530233474749:repos="http://cran.rstudio.com/") #,
+1530233474749:# lib = personal.lib.path)
+1530233474749:cat("Done!\n")
+1530233474750:}
+1530233474750:cat("Loading required packages... ")
+1530233474751:sapply(pkg, function(x){
+1530233474751:suppressPackageStartupMessages(require(x, character.only = TRUE, quietly = TRUE))
+1530233474751:})
+1530233474752:cat("Done!\n")
+1530233474752:}
+1530233474753:# github.packages <- c("tibble")
+1530233474753:# packages <- c("argparser", "tidyverse", "RColorBrewer")#, "ggplot2",  "tidyr")
+1530233474754:packages <- c("argparser", "dplyr", "ggplot2", "RColorBrewer", "readr", "tidyr", "caret")#, "ggplot2",  "tidyr")
+1530233474754:installAndLoadPackages(packages)
+1530233484803:################################################################################
+1530233484804:# Get script name
+1530233484804:initial.options <- commandArgs(trailingOnly = FALSE)
+1530233484805:script.name     <- basename(sub("--file=", "", initial.options[grep("--file=", initial.options)]))
+1530233484805:# Process command line arguments
+1530233484806:# Create a parser
+1530233484806:p <- arg_parser("This script process results from STing detector",
+1530233484806:name = script.name)
+1530233484860:# Add Positional arguments (required inputs)
+1530233484861:p <- add_argument(p, "blast_file", help = "BLAST results file")
+1530233484862:p <- add_argument(p, "results_file", help = "Detector results file (tidy format)")
+1530233484864:p <- add_argument(p, "genes_ref_file", help = "Genes ref file (short: tag and name)")
+1530233484865:p <- add_argument(p, "genes_full_ref_file", help = "Genes full ref file (short: tag, name adn others)")
+1530233484866:p <- add_argument(p, "genomes_ref_file", help = "Genomes ref file (short: Accn and Orgnism name)")
+1530233484868:# Add options
+1530233484868:p <- add_argument(p, "--cutoff", help = "dentity and Coverage cutoff value",
+1530233484869:default = 80)
+1530233484870:# # Parse command line arguments
+1530233484871:# argv <- parse_args(p)
+1530233484872:# Initialization of variables
+1530233484872:# Values to test the script using RStudio
+1530233484872:# testDir          <- "test_07_card"
+1530233484873:# testDir          <- "test_08_card"
+1530233484873:# testDir           <- "test_09_card"
+1530233484874:testDir           <- "test_10_card"
+1530233484874:blastFile         <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/card_vs_positive.blast.presence.tsv")
+1530233484875:# resultsFile       <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/results/detector.tsv")
+1530233484876:resultsFile       <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/results/results.tsv")
+1530233484876:genesRefFile      <- "detector/card/prioritary_who_set/final_set/tags_names_xRef.tsv"
+1530233484877:genesFullRefFile  <- "detector/card/prioritary_who_set/final_set/card_tags_xRef.tsv"
+1530233484878:genomesRefFile    <- "detector/card/prioritary_who_set/final_set/genomesTableRef.tsv"
+1530233484878:cutoff            <- 100
+1530233490606:# Parse command line arguments
+1530233490607:command.line = FALSE   # Turn to FALSE to test the script inside RStudio
+1530233490608:argv <- list()
+1530233490609:if(command.line) {
+1530233490610:argv <- parse_args(p)
+1530233490610:} else {
+1530233490611:argv <- parse_args(p, list(blastFile, resultsFile, genesRefFile, genesFullRefFile, genomesRefFile,
+1530233490611:"--cutoff", cutoff))
+1530233490612:}
+1530233496071:# Get argument values from command line
+1530233496071:blastFile         <- argv$blast_file
+1530233496072:resultsFile       <- argv$results_file
+1530233496073:genesRefFile      <- argv$genes_ref_file
+1530233496073:genesFullRefFile  <- argv$genes_full_ref_file
+1530233496074:genomesRefFile    <- argv$genomes_ref_file
+1530233496075:cutoff            <- argv$cutoff
+1530233501540:files.to.check <- c(blastFile, resultsFile, genesRefFile, genesFullRefFile, genomesRefFile)
+1530233501822:error.message  <- CheckFileExists(files.to.check)
+1530233506347:CheckFileExists <- function(file.list) {
+1530233506347:non.exist.files <- !file.exists(file.list)
+1530233506348:if(any(non.exist.files)) {
+1530233506349:sprintf("\n  The file \"%s\" does not exist.", file.list[non.exist.files])
+1530233506350:}
+1530233506351:}
+1530233507908:files.to.check <- c(blastFile, resultsFile, genesRefFile, genesFullRefFile, genomesRefFile)
+1530233508589:error.message  <- CheckFileExists(files.to.check)
+1530233509756:error.message
+1530233516075:# Load data files
+1530233516076:blastData    <- read_tsv(blastFile)
+1530233516521:resultsData  <- read_tsv(resultsFile)
+1530233516749:genesRef     <- read_tsv(genesRefFile, col_names = c("GeneTag", "GeneName"))
+1530233516768:genesFullRef <- read_tsv(genesFullRefFile, col_names = c("GeneTag", "CARD_description"))
+1530233516788:genomesRef   <- read_tsv(genomesRefFile)
+1530233516793:# Process results ---------------------------------------------------------
+1530233516793:cat(paste("Test directory:            ", testDir))
+1530233516794:cat(paste("Identity & Coverage cutoff:", cutoff))
+1530233524790:(blastFilteredResults <- blastData %>%
+1530233524791:filter(pident >= cutoff, qcovhsp >= cutoff, presence == 1) %>% # test_07
+1530233524791:# filter(pident >= 80, qcovhsp >= 80, presence == 1) %>% # test_08
+1530233524792:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1530233524793:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1530233524793:select(Accn = sseqid, Organism = ScientificName,
+1530233524794:GeneTag = qseqid, GeneName, BlastPresence = presence))
+1530233530007:View(blastData)
+1530233548417:(amrGenes <- blastFilteredResults %>%
+1530233548418:select(GeneTag, GeneName) %>%
+1530233548418:unique())
+1530233550315:(genomes <- blastFilteredResults %>%
+1530233550315:select(Accn, Organism) %>%
+1530233550316:unique())
+1530233554378:depths <- c(20,40)
+1530233554824:sampletypes <- c("positive", "negative")
+1530233555789:(resultsTable20x <- blastFilteredResults %>%
+1530233555790:mutate(SeqDepth = 20L) %>%
+1530233555790:select(Accn,
+1530233555791:Organism,
+1530233555792:GeneTag,
+1530233555792:GeneName,
+1530233555793:SeqDepth,
+1530233555793:BlastPresence) #%>%
+1530233555794:# unique()
+1530233555794:)
+1530233564178:(res20x <- resultsTable20x %>%
+1530233564179:left_join(resultsData %>%
+1530233564180:filter(SampleType == "positive",
+1530233564180:SeqDepth == 20)) %>%
+1530233564181:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530233564181:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530233564182:)
+1530233578750:View(res20x)
+1530233621975:(blastFilteredResults <- blastData %>%
+1530233621976:filter(pident >= cutoff, qcovhsp >= cutoff, presence == 1) %>% # test_07
+1530233621976:# filter(pident >= 80, qcovhsp >= 80, presence == 1) %>% # test_08
+1530233621977:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1530233621977:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1530233621977:select(Accn = sseqid, Organism = ScientificName,
+1530233621978:GeneTag = qseqid, GeneName, BlastPresence = presence))
+1530233622061:(amrGenes <- blastFilteredResults %>%
+1530233622062:select(GeneTag, GeneName) %>%
+1530233622062:unique())
+1530233622089:(genomes <- blastFilteredResults %>%
+1530233622089:select(Accn, Organism) %>%
+1530233622090:unique())
+1530233626223:depths <- c(20,40)
+1530233626776:sampletypes <- c("positive", "negative")
+1530233634150:(resultsTable20x <- blastFilteredResults %>%
+1530233634150:mutate(SeqDepth = 20L) %>%
+1530233634151:select(Accn,
+1530233634151:Organism,
+1530233634152:GeneTag,
+1530233634152:GeneName,
+1530233634153:SeqDepth,
+1530233634153:BlastPresence) #%>%
+1530233634154:# unique()
+1530233634154:)
+1530233645374:blastFilteredResults
+1530233689198:resultsTable20x %>%
+1530233689198:left_join(resultsData %>%
+1530233689199:filter(SampleType == "positive",
+1530233689199:SeqDepth == 20))
+1530233721328:resultsTable20x %>%
+1530233721328:left_join(resultsData)
+1530233739323:tmp <- resultsTable20x %>%
+1530233739324:left_join(resultsData)
+1530233744638:View(tmp)
+1530233762019:tmp <- resultsTable20x %>%
+1530233762020:right_join(resultsData)
+1530233767433:(tmp <- resultsTable20x %>%
+1530233767434:right_join(resultsData))
+1530233789988:left_join(resultsTable20x, resultsData)
+1530233839110:(tmp <- resultsTable20x %>%
+1530233839110:left_join(resultsData %>%
+1530233839110:filter(SampleType == "positive",
+1530233839111:SeqDepth == 20)))
+1530233858516:resultsData
+1530233866758:resultsData %>%
+1530233866759:filter(SampleType == "positive",
+1530233866759:SeqDepth == 20L))
+1530233870449:resultsData %>%
+1530233870449:filter(SampleType == "positive",
+1530233870450:SeqDepth == 20L)
+1530234002874:posResults <- data.frame()
+1530234003613:for (i in 1:nrow(blastFilteredResults)) {
+1530234003614:gene   <- blastFilteredResults$GeneTag[i]
+1530234003614:genome <- blastFilteredResults$Accn[i]
+1530234003615:# queryRes <- resultsData %>%
+1530234003616:row <- resultsData %>%
+1530234003616:filter(SampleType == "positive",
+1530234003617:GeneTag == gene,
+1530234003618:Accn == genome) #%>%
+1530234003618:# select(GeneTag, Accn, DetectorPresence)
+1530234003619:posResults <- rbind(posResults, row)
+1530234003619:}
+1530234008107:posResults
+1530234083551:for (i in 1:nrow(blastFilteredResults)) {
+1530234083551:gene   <- blastFilteredResults$GeneTag[i]
+1530234083552:genome <- blastFilteredResults$Accn[i]
+1530234083553:# queryRes <- resultsData %>%
+1530234083553:row <- resultsData %>%
+1530234083554:filter(SampleType == "positive",
+1530234083554:GeneTag == gene,
+1530234083555:Accn == genome) #%>%
+1530234083555:print(paste(Accn, GeneTag, nrow(row)))
+1530234083556:# select(GeneTag, Accn, DetectorPresence)
+1530234083557:posResults <- rbind(posResults, row)
+1530234083557:}
+1530234105424:for (i in 1:nrow(blastFilteredResults)) {
+1530234105425:gene   <- blastFilteredResults$GeneTag[i]
+1530234105425:genome <- blastFilteredResults$Accn[i]
+1530234105426:# queryRes <- resultsData %>%
+1530234105426:row <- resultsData %>%
+1530234105427:filter(SampleType == "positive",
+1530234105428:GeneTag == gene,
+1530234105428:Accn == genome) #%>%
+1530234105429:print(paste(genome, gene, nrow(row)))
+1530234105429:# select(GeneTag, Accn, DetectorPresence)
+1530234105430:posResults <- rbind(posResults, row)
+1530234105431:}
+1530234122347:resultsData
+1530234134546:for (i in 1:nrow(blastFilteredResults)) {
+1530234134547:gene   <- blastFilteredResults$GeneTag[i]
+1530234134547:genome <- blastFilteredResults$Accn[i]
+1530234134547:# queryRes <- resultsData %>%
+1530234134548:row <- resultsData %>%
+1530234134548:filter(SampleType == "positive",
+1530234134548:GeneTag == gene,
+1530234134549:Accn == genome,
+1530234134549:SeqDepth == 20) #%>%
+1530234134549:print(paste(genome, gene, nrow(row)))
+1530234134550:# select(GeneTag, Accn, DetectorPresence)
+1530234134550:posResults <- rbind(posResults, row)
+1530234134550:}
+1530234162823:for (i in 1:nrow(blastFilteredResults)) {
+1530234162824:gene   <- blastFilteredResults$GeneTag[i]
+1530234162824:genome <- blastFilteredResults$Accn[i]
+1530234162825:# queryRes <- resultsData %>%
+1530234162825:row <- resultsData %>%
+1530234162825:filter(SampleType == "positive",
+1530234162826:GeneTag == gene,
+1530234162826:Accn == genome,
+1530234162826:SeqDepth == 20) #%>%
+1530234162826:print(paste(genome, gene, nrow(row)))
+1530234162827:print(row)
+1530234162827:# select(GeneTag, Accn, DetectorPresence)
+1530234162828:posResults <- rbind(posResults, row)
+1530234162828:}
+1530234210893:#!/usr/bin/env Rscript
+1530234210894:################################################################################
+1530234210895:# Author:      Hector Fabio Espitia Navarro
+1530234210896:#              Georgia Institute of Technology
+1530234210897:# Version:     1.0
+1530234210898:# Date:
+1530234210898:# Description:
+1530234210899:################################################################################
+1530234210900:# Install required packages
+1530234210901:# personal.lib.path <- Sys.getenv("R_LIBS_USER")
+1530234210901:# if(!file.exists(personal.lib.path))
+1530234210902:#   dir.create(personal.lib.path)
+1530234210903:installAndLoadPackages <- function(pkg){
+1530234210904:cat("Please wait a moment! Checking for required packages... ")
+1530234210904:cat("Done!\n")
+1530234210905:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1530234210906:if (length(new.pkg)) {
+1530234210906:cat("Installing new packages... ")
+1530234210907:install.packages(new.pkg, dependencies = TRUE,
+1530234210907:repos="http://cran.rstudio.com/") #,
+1530234210908:# lib = personal.lib.path)
+1530234210908:cat("Done!\n")
+1530234210909:}
+1530234210909:cat("Loading required packages... ")
+1530234210910:sapply(pkg, function(x){
+1530234210911:suppressPackageStartupMessages(require(x, character.only = TRUE, quietly = TRUE))
+1530234210911:})
+1530234210912:cat("Done!\n")
+1530234210912:}
+1530234210914:# github.packages <- c("tibble")
+1530234210915:# packages <- c("argparser", "tidyverse", "RColorBrewer")#, "ggplot2",  "tidyr")
+1530234210915:packages <- c("argparser", "dplyr", "ggplot2", "RColorBrewer", "readr", "tidyr", "caret")#, "ggplot2",  "tidyr")
+1530234210916:installAndLoadPackages(packages)
+1530234210924:################################################################################
+1530234210925:# Get script name
+1530234210925:initial.options <- commandArgs(trailingOnly = FALSE)
+1530234210926:script.name     <- basename(sub("--file=", "", initial.options[grep("--file=", initial.options)]))
+1530234210928:# Process command line arguments
+1530234210929:# Create a parser
+1530234210929:p <- arg_parser("This script process results from STing detector",
+1530234210930:name = script.name)
+1530234210948:# Add Positional arguments (required inputs)
+1530234210949:p <- add_argument(p, "blast_file", help = "BLAST results file")
+1530234210950:p <- add_argument(p, "results_file", help = "Detector results file (tidy format)")
+1530234210952:p <- add_argument(p, "genes_ref_file", help = "Genes ref file (short: tag and name)")
+1530234210953:p <- add_argument(p, "genes_full_ref_file", help = "Genes full ref file (short: tag, name adn others)")
+1530234210955:p <- add_argument(p, "genomes_ref_file", help = "Genomes ref file (short: Accn and Orgnism name)")
+1530234210956:# Add options
+1530234210956:p <- add_argument(p, "--cutoff", help = "dentity and Coverage cutoff value",
+1530234210957:default = 80)
+1530234210958:# # Parse command line arguments
+1530234210958:# argv <- parse_args(p)
+1530234210958:# Initialization of variables
+1530234210959:# Values to test the script using RStudio
+1530234210959:# testDir          <- "test_07_card"
+1530234210959:# testDir          <- "test_08_card"
+1530234210960:# testDir           <- "test_09_card"
+1530234210960:testDir           <- "test_10_card"
+1530234210960:blastFile         <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/card_vs_positive.blast.presence.tsv")
+1530234210961:# resultsFile       <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/results/detector.tsv")
+1530234210961:resultsFile       <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/results/results.tsv")
+1530234210962:genesRefFile      <- "detector/card/prioritary_who_set/final_set/tags_names_xRef.tsv"
+1530234210962:genesFullRefFile  <- "detector/card/prioritary_who_set/final_set/card_tags_xRef.tsv"
+1530234210962:genomesRefFile    <- "detector/card/prioritary_who_set/final_set/genomesTableRef.tsv"
+1530234210963:cutoff            <- 100
+1530234210964:# Parse command line arguments
+1530234210964:command.line = FALSE   # Turn to FALSE to test the script inside RStudio
+1530234210964:argv <- list()
+1530234210965:if(command.line) {
+1530234210965:argv <- parse_args(p)
+1530234210965:} else {
+1530234210966:argv <- parse_args(p, list(blastFile, resultsFile, genesRefFile, genesFullRefFile, genomesRefFile,
+1530234210966:"--cutoff", cutoff))
+1530234210966:}
+1530234211098:# Get argument values from command line
+1530234211099:blastFile         <- argv$blast_file
+1530234211100:resultsFile       <- argv$results_file
+1530234211101:genesRefFile      <- argv$genes_ref_file
+1530234211102:genesFullRefFile  <- argv$genes_full_ref_file
+1530234211103:genomesRefFile    <- argv$genomes_ref_file
+1530234211103:cutoff            <- argv$cutoff
+1530234211105:# Function for checking input files ###########################################
+1530234211105:CheckFileExists <- function(file.list) {
+1530234211106:non.exist.files <- !file.exists(file.list)
+1530234211106:if(any(non.exist.files)) {
+1530234211107:sprintf("\n  The file \"%s\" does not exist.", file.list[non.exist.files])
+1530234211108:}
+1530234211108:}
+1530234211109:# Check for input files #######################################################
+1530234211110:files.to.check <- c(blastFile, resultsFile, genesRefFile, genesFullRefFile, genomesRefFile)
+1530234211110:error.message  <- CheckFileExists(files.to.check)
+1530234211111:# if(!is.null(error.message)){
+1530234211111:# stop(error.message)
+1530234211111:# } else {
+1530234211112:# Data --------------------------------------------------------------------
+1530234211113:# Load data files
+1530234211113:blastData    <- read_tsv(blastFile)
+1530234211131:resultsData  <- read_tsv(resultsFile)
+1530234211144:genesRef     <- read_tsv(genesRefFile, col_names = c("GeneTag", "GeneName"))
+1530234211149:genesFullRef <- read_tsv(genesFullRefFile, col_names = c("GeneTag", "CARD_description"))
+1530234211155:genomesRef   <- read_tsv(genomesRefFile)
+1530234211160:# Process results ---------------------------------------------------------
+1530234211160:cat(paste("Test directory:            ", testDir))
+1530234211161:cat(paste("Identity & Coverage cutoff:", cutoff))
+1530234211162:# Get the AMR genes present in the genome set
+1530234211162:(blastFilteredResults <- blastData %>%
+1530234211162:filter(pident >= cutoff, qcovhsp >= cutoff, presence == 1) %>% # test_07
+1530234211163:# filter(pident >= 80, qcovhsp >= 80, presence == 1) %>% # test_08
+1530234211163:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1530234211163:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1530234211164:select(Accn = sseqid, Organism = ScientificName,
+1530234211164:GeneTag = qseqid, GeneName, BlastPresence = presence))
+1530234211241:(amrGenes <- blastFilteredResults %>%
+1530234211242:select(GeneTag, GeneName) %>%
+1530234211242:unique())
+1530234211272:(genomes <- blastFilteredResults %>%
+1530234211272:select(Accn, Organism) %>%
+1530234211272:unique())
+1530234211301:# Save genes and genomes for tables - Begin --------------------------------
+1530234211302:# (genomesTable <- blastFilteredResults %>%
+1530234211302:#    select(Accn, Organism) %>%
+1530234211303:#    unique() %>%
+1530234211303:#    left_join(genomesRef, by = c("Accn" = "Accn")) %>%
+1530234211303:#    select(Accn, Organism = Organism.x, Description = SeqTitle) %>%
+1530234211304:#    arrange(Organism)
+1530234211304:# )
+1530234211304:# write_tsv(genomesTable, paste0("detector/card/prioritary_who_set/final_set/",testDir,"/genomes.tsv"))
+1530234211304:#
+1530234211305:# (genesTable <- blastFilteredResults %>%
+1530234211305:#     select(GeneTag, GeneName) %>%
+1530234211305:#     unique() %>%
+1530234211306:#     left_join(genesRef) %>%
+1530234211306:#     left_join(genesFullRef) %>%
+1530234211306:#     arrange(GeneName)
+1530234211306:# )
+1530234211307:# write_tsv(genesTable, paste0("detector/card/prioritary_who_set/final_set/",testDir,"/genes.tsv"))
+1530234211307:# Save genes and genomes for tables - End ----------------------------------
+1530234211308:depths <- c(20,40)
+1530234211309:sampletypes <- c("positive", "negative")
+1530234216713:(resultsTable20x <- blastFilteredResults %>%
+1530234216713:mutate(SeqDepth = 20L) %>%
+1530234216714:select(Accn,
+1530234216714:Organism,
+1530234216715:GeneTag,
+1530234216715:GeneName,
+1530234216716:SeqDepth,
+1530234216716:BlastPresence) #%>%
+1530234216717:# unique()
+1530234216717:)
+1530234225143:posResults <- data.frame()
+1530234230597:for (i in 1:nrow(blastFilteredResults)) {
+1530234230597:gene   <- blastFilteredResults$GeneTag[i]
+1530234230598:genome <- blastFilteredResults$Accn[i]
+1530234230598:# queryRes <- resultsData %>%
+1530234230598:row <- resultsData %>%
+1530234230599:filter(SampleType == "positive",
+1530234230599:GeneTag == gene,
+1530234230599:Accn == genome,
+1530234230600:SeqDepth == 20) #%>%
+1530234230600:# print(paste(genome, gene, nrow(row)))
+1530234230600:print(row)
+1530234230601:# select(GeneTag, Accn, DetectorPresence)
+1530234230601:posResults <- rbind(posResults, row)
+1530234230602:}
+1530234330146:#!/usr/bin/env Rscript
+1530234330147:################################################################################
+1530234330148:# Author:      Hector Fabio Espitia Navarro
+1530234330148:#              Georgia Institute of Technology
+1530234330148:# Version:     1.0
+1530234330149:# Date:
+1530234330149:# Description:
+1530234330150:################################################################################
+1530234330150:# Install required packages
+1530234330150:# personal.lib.path <- Sys.getenv("R_LIBS_USER")
+1530234330151:# if(!file.exists(personal.lib.path))
+1530234330151:#   dir.create(personal.lib.path)
+1530234330152:installAndLoadPackages <- function(pkg){
+1530234330153:cat("Please wait a moment! Checking for required packages... ")
+1530234330153:cat("Done!\n")
+1530234330154:new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+1530234330154:if (length(new.pkg)) {
+1530234330155:cat("Installing new packages... ")
+1530234330155:install.packages(new.pkg, dependencies = TRUE,
+1530234330156:repos="http://cran.rstudio.com/") #,
+1530234330156:# lib = personal.lib.path)
+1530234330157:cat("Done!\n")
+1530234330157:}
+1530234330158:cat("Loading required packages... ")
+1530234330158:sapply(pkg, function(x){
+1530234330159:suppressPackageStartupMessages(require(x, character.only = TRUE, quietly = TRUE))
+1530234330159:})
+1530234330159:cat("Done!\n")
+1530234330160:}
+1530234330160:# github.packages <- c("tibble")
+1530234330161:# packages <- c("argparser", "tidyverse", "RColorBrewer")#, "ggplot2",  "tidyr")
+1530234330161:packages <- c("argparser", "dplyr", "ggplot2", "RColorBrewer", "readr", "tidyr", "caret")#, "ggplot2",  "tidyr")
+1530234330162:installAndLoadPackages(packages)
+1530234330166:################################################################################
+1530234330166:# Get script name
+1530234330166:initial.options <- commandArgs(trailingOnly = FALSE)
+1530234330167:script.name     <- basename(sub("--file=", "", initial.options[grep("--file=", initial.options)]))
+1530234330168:# Process command line arguments
+1530234330168:# Create a parser
+1530234330168:p <- arg_parser("This script process results from STing detector",
+1530234330169:name = script.name)
+1530234330170:# Add Positional arguments (required inputs)
+1530234330171:p <- add_argument(p, "blast_file", help = "BLAST results file")
+1530234330172:p <- add_argument(p, "results_file", help = "Detector results file (tidy format)")
+1530234330173:p <- add_argument(p, "genes_ref_file", help = "Genes ref file (short: tag and name)")
+1530234330174:p <- add_argument(p, "genes_full_ref_file", help = "Genes full ref file (short: tag, name adn others)")
+1530234330175:p <- add_argument(p, "genomes_ref_file", help = "Genomes ref file (short: Accn and Orgnism name)")
+1530234330176:# Add options
+1530234330176:p <- add_argument(p, "--cutoff", help = "dentity and Coverage cutoff value",
+1530234330177:default = 80)
+1530234330178:# # Parse command line arguments
+1530234330179:# argv <- parse_args(p)
+1530234330179:# Initialization of variables
+1530234330179:# Values to test the script using RStudio
+1530234330180:# testDir          <- "test_07_card"
+1530234330180:# testDir          <- "test_08_card"
+1530234330180:# testDir           <- "test_09_card"
+1530234330181:testDir           <- "test_10_card"
+1530234330181:blastFile         <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/card_vs_positive.blast.presence.tsv")
+1530234330182:resultsFile       <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/results/detector.tsv")
+1530234330182:# resultsFile       <- paste0("detector/card/prioritary_who_set/final_set/",testDir,"/results/results.tsv")
+1530234330182:genesRefFile      <- "detector/card/prioritary_who_set/final_set/tags_names_xRef.tsv"
+1530234330183:genesFullRefFile  <- "detector/card/prioritary_who_set/final_set/card_tags_xRef.tsv"
+1530234330183:genomesRefFile    <- "detector/card/prioritary_who_set/final_set/genomesTableRef.tsv"
+1530234330184:cutoff            <- 100
+1530234330185:# Parse command line arguments
+1530234330185:command.line = FALSE   # Turn to FALSE to test the script inside RStudio
+1530234330185:argv <- list()
+1530234330186:if(command.line) {
+1530234330186:argv <- parse_args(p)
+1530234330187:} else {
+1530234330187:argv <- parse_args(p, list(blastFile, resultsFile, genesRefFile, genesFullRefFile, genomesRefFile,
+1530234330187:"--cutoff", cutoff))
+1530234330187:}
+1530234330189:# Get argument values from command line
+1530234330189:blastFile         <- argv$blast_file
+1530234330190:resultsFile       <- argv$results_file
+1530234330190:genesRefFile      <- argv$genes_ref_file
+1530234330191:genesFullRefFile  <- argv$genes_full_ref_file
+1530234330191:genomesRefFile    <- argv$genomes_ref_file
+1530234330192:cutoff            <- argv$cutoff
+1530234330193:# Function for checking input files ###########################################
+1530234330193:CheckFileExists <- function(file.list) {
+1530234330193:non.exist.files <- !file.exists(file.list)
+1530234330194:if(any(non.exist.files)) {
+1530234330194:sprintf("\n  The file \"%s\" does not exist.", file.list[non.exist.files])
+1530234330194:}
+1530234330195:}
+1530234330195:# Check for input files #######################################################
+1530234330196:files.to.check <- c(blastFile, resultsFile, genesRefFile, genesFullRefFile, genomesRefFile)
+1530234330196:error.message  <- CheckFileExists(files.to.check)
+1530234330197:# if(!is.null(error.message)){
+1530234330197:# stop(error.message)
+1530234330198:# } else {
+1530234330198:# Data --------------------------------------------------------------------
+1530234330199:# Load data files
+1530234330199:blastData    <- read_tsv(blastFile)
+1530234330218:resultsData  <- read_tsv(resultsFile)
+1530234330235:genesRef     <- read_tsv(genesRefFile, col_names = c("GeneTag", "GeneName"))
+1530234330241:genesFullRef <- read_tsv(genesFullRefFile, col_names = c("GeneTag", "CARD_description"))
+1530234330248:genomesRef   <- read_tsv(genomesRefFile)
+1530234330252:# Process results ---------------------------------------------------------
+1530234330253:cat(paste("Test directory:            ", testDir))
+1530234330253:cat(paste("Identity & Coverage cutoff:", cutoff))
+1530234330254:# Get the AMR genes present in the genome set
+1530234330255:(blastFilteredResults <- blastData %>%
+1530234330255:filter(pident >= cutoff, qcovhsp >= cutoff, presence == 1) %>% # test_07
+1530234330255:# filter(pident >= 80, qcovhsp >= 80, presence == 1) %>% # test_08
+1530234330256:left_join(genomesRef, by = c("sseqid" = "Accn")) %>%
+1530234330256:left_join(genesRef, by = c("qseqid" = "GeneTag")) %>%
+1530234330256:select(Accn = sseqid, Organism = ScientificName,
+1530234330257:GeneTag = qseqid, GeneName, BlastPresence = presence))
+1530234330384:(amrGenes <- blastFilteredResults %>%
+1530234330384:select(GeneTag, GeneName) %>%
+1530234330384:unique())
+1530234330414:(genomes <- blastFilteredResults %>%
+1530234330415:select(Accn, Organism) %>%
+1530234330415:unique())
+1530234330447:# Save genes and genomes for tables - Begin --------------------------------
+1530234330447:# (genomesTable <- blastFilteredResults %>%
+1530234330448:#    select(Accn, Organism) %>%
+1530234330448:#    unique() %>%
+1530234330448:#    left_join(genomesRef, by = c("Accn" = "Accn")) %>%
+1530234330449:#    select(Accn, Organism = Organism.x, Description = SeqTitle) %>%
+1530234330449:#    arrange(Organism)
+1530234330449:# )
+1530234330450:# write_tsv(genomesTable, paste0("detector/card/prioritary_who_set/final_set/",testDir,"/genomes.tsv"))
+1530234330450:#
+1530234330450:# (genesTable <- blastFilteredResults %>%
+1530234330450:#     select(GeneTag, GeneName) %>%
+1530234330451:#     unique() %>%
+1530234330451:#     left_join(genesRef) %>%
+1530234330451:#     left_join(genesFullRef) %>%
+1530234330452:#     arrange(GeneName)
+1530234330452:# )
+1530234330452:# write_tsv(genesTable, paste0("detector/card/prioritary_who_set/final_set/",testDir,"/genes.tsv"))
+1530234330453:# Save genes and genomes for tables - End ----------------------------------
+1530234330453:depths <- c(20,40)
+1530234330454:sampletypes <- c("positive", "negative")
+1530234330454:(resultsTable20x <- blastFilteredResults %>%
+1530234330455:mutate(SeqDepth = 20L) %>%
+1530234330455:select(Accn,
+1530234330455:Organism,
+1530234330456:GeneTag,
+1530234330456:GeneName,
+1530234330456:SeqDepth,
+1530234330457:BlastPresence) #%>%
+1530234330457:# unique()
+1530234330457:)
+1530234330560:posResults <- data.frame()
+1530234330561:for (i in 1:nrow(blastFilteredResults)) {
+1530234330561:gene   <- blastFilteredResults$GeneTag[i]
+1530234330561:genome <- blastFilteredResults$Accn[i]
+1530234330562:# queryRes <- resultsData %>%
+1530234330562:row <- resultsData %>%
+1530234330562:filter(SampleType == "positive",
+1530234330562:GeneTag == gene,
+1530234330563:Accn == genome,
+1530234330563:SeqDepth == 20) #%>%
+1530234330563:# print(paste(genome, gene, nrow(row)))
+1530234330564:print(row)
+1530234330564:# select(GeneTag, Accn, DetectorPresence)
+1530234330565:posResults <- rbind(posResults, row)
+1530234330565:}
+1530234348327:posResults
+1530234362052:View(posResults)
+1530234431494:(res20x <- resultsTable20x %>%
+1530234431495:left_join(resultsData %>%
+1530234431495:filter(SampleType == "positive",
+1530234431495:SeqDepth == 20)) %>%
+1530234431496:# left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530234431496:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530234431497:)
+1530234446151:resultsTable20x
+1530234458446:(resultsTable20x <- blastFilteredResults %>%
+1530234458446:mutate(SeqDepth = 20L) %>%
+1530234458447:select(Accn,
+1530234458447:Organism,
+1530234458447:GeneTag,
+1530234458448:GeneName,
+1530234458448:SeqDepth,
+1530234458448:BlastPresence) #%>%
+1530234458449:# unique()
+1530234458449:)
+1530234464428:(res20x <- resultsTable20x %>%
+1530234464429:left_join(resultsData %>%
+1530234464429:filter(SampleType == "positive",
+1530234464430:SeqDepth == 20)) %>%
+1530234464430:# left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530234464431:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530234464431:)
+1530234475934:(res20x <- resultsTable20x %>%
+1530234475935:left_join(resultsData %>%
+1530234475936:filter(SampleType == "positive",
+1530234475936:SeqDepth == 20)) %>%
+1530234475937:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530234475937:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530234475938:)
+1530234484236:blastFilteredResults
+1530234493057:(res20x <- resultsTable20x %>%
+1530234493057:left_join(resultsData %>%
+1530234493058:filter(SampleType == "positive",
+1530234493058:SeqDepth == 20)) %>%
+1530234493058:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530234493059:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530234493059:)
+1530234525502:for (i in 1:nrow(blastFilteredResults)) {
+1530234525503:gene   <- blastFilteredResults$GeneTag[i]
+1530234525503:genome <- blastFilteredResults$Accn[i]
+1530234525504:# queryRes <- resultsData %>%
+1530234525504:row <- resultsData %>%
+1530234525505:filter(SampleType == "positive",
+1530234525505:GeneTag == gene,
+1530234525506:Accn == genome,
+1530234525506:SeqDepth == 20) #%>%
+1530234525507:print(paste(genome, gene, nrow(row)))
+1530234525507:# print(row)
+1530234525507:# select(GeneTag, Accn, DetectorPresence)
+1530234525508:posResults <- rbind(posResults, row)
+1530234525508:}
+1530234525925:posResults
+1530234553129:resultsData %>%
+1530234553130:filter(SampleType == "positive",
+1530234553130:SeqDepth == 20L))
+1530234556181:resultsData %>%
+1530234556181:filter(SampleType == "positive",
+1530234556182:SeqDepth == 20L)
+1530234609186:(res20x <- resultsTable20x %>%
+1530234609187:left_join(resultsData %>%
+1530234609187:filter(SampleType == "positive",
+1530234609188:SeqDepth == 20)) %>%
+1530234609188:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530234609189:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530234609189:)
+1530234612516:View(res20x)
+1530234686305:(resultsTable20x <- blastFilteredResults %>%
+1530234686306:mutate(SeqDepth = 20L,
+1530234686307:Id = paste(Accn,GeneTag,"-")) %>%
+1530234686307:select(Accn,
+1530234686307:Organism,
+1530234686308:GeneTag,
+1530234686308:GeneName,
+1530234686309:SeqDepth,
+1530234686309:BlastPresence) #%>%
+1530234686309:# unique()
+1530234686310:)
+1530234696071:(resultsTable20x <- blastFilteredResults %>%
+1530234696071:mutate(SeqDepth = 20L,
+1530234696072:Id = paste(Accn,GeneTag,"-")) %>%
+1530234696072:select(Id,
+1530234696073:Accn,
+1530234696073:Organism,
+1530234696074:GeneTag,
+1530234696075:GeneName,
+1530234696075:SeqDepth,
+1530234696076:BlastPresence) #%>%
+1530234696076:# unique()
+1530234696077:)
+1530234703825:View(resultsTable20x)
+1530234718507:(resultsTable20x <- blastFilteredResults %>%
+1530234718508:mutate(SeqDepth = 20L,
+1530234718508:Id = paste(Accn, GeneTag, sep = "-")) %>%
+1530234718509:select(Id,
+1530234718509:Accn,
+1530234718509:Organism,
+1530234718509:GeneTag,
+1530234718510:GeneName,
+1530234718510:SeqDepth,
+1530234718510:BlastPresence) #%>%
+1530234718511:# unique()
+1530234718511:)
+1530234729431:View(resultsTable20x)
+1530234835844:m
+1530234837538:(res20xTmp <- resultsTable20x %>%
+1530234837538:left_join(resultsData %>%
+1530234837539:filter(SampleType == "positive",
+1530234837539:SeqDepth == 20)) %>%
+1530234837539:# left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530234837540:# select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530234837540:select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530234837541:)
+1530234853631:resultsTable20x
+1530234861932:resultsData %>%
+1530234861933:filter(SampleType == "positive",
+1530234861933:SeqDepth == 20)
+1530234879377:(res20xTmp <- resultsTable20x %>%
+1530234879377:right_join(resultsData %>%
+1530234879378:filter(SampleType == "positive",
+1530234879378:SeqDepth == 20)) %>%
+1530234879378:# left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530234879379:# select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530234879379:select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530234879379:)
+1530234918491:res20xTmp %>% filter(Id == NA)
+1530234922118:res20xTmp %>% filter(Id == NA)
+1530234935601:res20xTmp %>% filter(is.na(Id))
+1530234946698:View(res20xTmp)
+1530234954300:136 * 149
+1530234958021:136 + 149
+1530234969550:View(res20xTmp)
+1530234993384:res20xTmp %>% filter(is.na(BlastPresence))
+1530235001027:View(res20xTmp)
+1530235196806:res20xTmp %>% filter(is.na(BlastPresence))
+1530235199974:filter(is.na(BlastPresence))
+1530235211628:(res20xTmp <- resultsTable20x %>%
+1530235211628:right_join(resultsData %>%
+1530235211629:filter(SampleType == "positive",
+1530235211629:SeqDepth == 20)) %>%
+1530235211630:# left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530235211630:# select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530235211631:select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530235211631:)
+1530235216865:res20xTmp %>% filter(is.na(BlastPresence))
+1530235236475:res20xTmp
+1530235247738:149 + 136
+1530235261354:naFileds <- res20xTmp %>% filter(is.na(BlastPresence))
+1530235262706:View(naFileds)
+1530235314926:(res20xTmp <- resultsTable20x %>%
+1530235314926:right_join(resultsData %>%
+1530235314927:filter(SampleType == "positive",
+1530235314927:SeqDepth == 20)) %>%
+1530235314927:# left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530235314928:# select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530235314928:select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530235314928:)
+1530235317093:naFileds <- res20xTmp %>% filter(is.na(BlastPresence))
+1530235319125:View(naFileds)
+1530235378554:blastData
+1530235392064:blastData %>%
+1530235392064:filter(qseqid == "card_171")
+1530235409531:View(naFileds)
+1530235446345:blastData %>%
+1530235446346:filter(qseqid == "card_171",
+1530235446346:sseqid == "NC_002745.2")
+1530235476074:(res20xTmp <- resultsTable20x %>%
+1530235476075:right_join(resultsData %>%
+1530235476075:filter(SampleType == "positive",
+1530235476075:SeqDepth == 20)) %>%
+1530235476076:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530235476077:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident, qcovhsp, GeneCov, SeqDepth)
+1530235476077:# select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530235476077:)
+1530235496843:naFileds <- res20xTmp %>% filter(is.na(BlastPresence))
+1530235511999:View(naFileds)
+1530235785377:(res20xTmp <- resultsTable20x %>%
+1530235785377:right_join(resultsData %>%
+1530235785377:filter(SampleType == "positive",
+1530235785378:SeqDepth == 20)) %>%
+1530235785378:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530235785378:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident = BlastIdentity, qcovhsp = BlastQCov, GeneCov, SeqDepth)
+1530235785379:# select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530235785379:)
+1530235838195:resultsData %>%
+1530235838196:filter(SampleType == "positive",
+1530235838196:SeqDepth == 20)
+1530235847114:(res20xTmp <- resultsData %>%
+1530235847115:filter(SampleType == "positive",
+1530235847115:SeqDepth == 20) %>%
+1530235847116:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530235847116:select(Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, pident = BlastIdentity, qcovhsp = BlastQCov, GeneCov, SeqDepth)
+1530235847117:# select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530235847117:)
+1530235859905:(res20xTmp <- resultsData %>%
+1530235859906:filter(SampleType == "positive",
+1530235859906:SeqDepth == 20) %>%
+1530235859907:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530235859907:select(Accn, GeneTag, Organism, GeneName, DetectorPresence, pident = BlastIdentity, qcovhsp = BlastQCov, GeneCov, SeqDepth)
+1530235859908:# select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530235859908:)
+1530235882576:(res20xTmp <- resultsData %>%
+1530235882577:filter(SampleType == "positive",
+1530235882578:SeqDepth == 20) %>%
+1530235882578:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530235882579:select(Accn, GeneTag, Organism, GeneName, DetectorPresence, BlastIdentity = pident, BlastQCov = qcovhsp, GeneCov, SeqDepth)
+1530235882580:# select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530235882580:)
+1530235898312:resultsData %>%
+1530235898313:filter(SampleType == "positive",
+1530235898313:SeqDepth == 20)
+1530235929759:277 - 149 + 1
+1530235935322:View(res20xTmp)
+1530236109554:(res20xTmp <- resultsData %>%
+1530236109555:filter(SampleType == "positive",
+1530236109555:SeqDepth == 20) %>%
+1530236109556:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530236109556:select(Accn, GeneTag, Organism, GeneName, DetectorPresence, BlastIdentity = pident, BlastQCov = qcovhsp, GeneCov, SeqDepth) %>%
+1530236109557:mutate(BlastPresence = if_else(BlastIdentity == 100 & BlastQCov == 100, 1, 0))
+1530236109558:# select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530236109558:)
+1530236117569:View(res20xTmp)
+1530236169049:(res20xTmp <- resultsData %>%
+1530236169050:filter(SampleType == "positive",
+1530236169050:SeqDepth == 20) %>%
+1530236169051:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530236169051:mutate(BlastPresence = if_else(BlastIdentity == 100 & BlastQCov == 100, 1, 0)) %>%
+1530236169052:select(Accn, GeneTag, Organism, GeneName, DetectorPresence,
+1530236169052:BlastIdentity = pident, BlastQCov = qcovhsp, GeneCov, SeqDepth)
+1530236169053:# select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530236169054:)
+1530236196259:(res20xTmp <- resultsData %>%
+1530236196260:filter(SampleType == "positive",
+1530236196261:SeqDepth == 20) %>%
+1530236196261:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530236196262:mutate(BlastPresence = if_else(pident == 100 & qcovhsp == 100, 1, 0)) %>%
+1530236196262:select(Accn, GeneTag, Organism, GeneName, DetectorPresence,
+1530236196263:BlastIdentity = pident, BlastQCov = qcovhsp, GeneCov, SeqDepth)
+1530236196264:# select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530236196265:)
+1530236222089:(res20xTmp <- resultsData %>%
+1530236222090:filter(SampleType == "positive",
+1530236222090:SeqDepth == 20) %>%
+1530236222090:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530236222091:mutate(BlastPresence = if_else(pident == 100 & qcovhsp == 100, 1, 0)) %>%
+1530236222091:select(Accn, GeneTag, Organism, GeneName, BlastPresence,
+1530236222091:DetectorPresence, BlastIdentity = pident,
+1530236222092:BlastQCov = qcovhsp, GeneCov, SeqDepth)
+1530236222093:# select(Id, Accn, GeneTag, Organism, GeneName, BlastPresence, DetectorPresence, GeneCov, SeqDepth)#, pident, qcovhsp, GeneCov, SeqDepth)
+1530236222093:)
+1530236224832:View(res20xTmp)
+1530236631393:res20xTmp %>%
+1530236631393:filter(BlastPresence == 1, DetectorPresence == 1) %>%
+1530236631393:n()
+1530236644323:res20xTmp %>%
+1530236644323:filter(BlastPresence == 1, DetectorPresence == 1) %>%
+1530236644324:nrow()
+1530236684414:# ===========================================================================
+1530236684415:(res20xTmp <- resultsData %>%
+1530236684415:filter(SampleType == "positive") %>% #,
+1530236684416:# SeqDepth == 20) %>%
+1530236684416:left_join(blastData, by = c("Accn" = "sseqid", "GeneTag" = "qseqid")) %>%
+1530236684417:mutate(BlastPresence = if_else(pident == 100 & qcovhsp == 100, 1, 0)) %>%
+1530236684417:select(Accn, GeneTag, Organism, GeneName, BlastPresence,
+1530236684418:DetectorPresence, BlastIdentity = pident,
+1530236684419:BlastQCov = qcovhsp, GeneCov, SeqDepth)

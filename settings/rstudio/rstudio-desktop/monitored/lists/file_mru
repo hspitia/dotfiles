@@ -1,3 +1,9 @@
+~/projects/test_sting/detector/card/prioritary_who_set/final_set/getGenesAndGenomesInfo.R
+~/projects/test_sting/detector/card/prioritary_who_set/final_set/makePresenceTables.R
+~/Dropbox/processResults.R
+~/projects/test_sting/detector/card/prioritary_who_set/processResults.R
+~/projects/sting/scripts/plot_kmer_ext_depth.R
+~/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/20nm_rmlst_profile.tsv
 ~/Dropbox/gatech/projects/STing/manuscript/scripts/asses_mlst_results.R
 ~/Dropbox/gatech/projects/STing/manuscript/scripts/01_sting_vs_stringmlst.revisited.R
 ~/Dropbox/gatech/projects/STing/manuscript/scripts/02_stringmlst_vs_others.R
@@ -7,9 +13,3 @@
 ~/Dropbox/Bioinfo/scripts/working_with_setaria.R
 ~/projects/paper_h_pylori/scripts/figure_04.family.R
 ~/projects/paper_h_pylori/scripts/figure_02.family.R
-~/projects/sting/scripts/plot_kmer_depth.R
-/run/user/1000/gvfs/sftp:host=thebeast.biology.gatech.edu,user=hfen3/data/home/hfen3/projects/dev_sting/scripts/plot_kmer_depth.R
-~/projects/sting/scripts/plot_kmer_ext_depth.R
-~/projects/paper_h_pylori/scripts/regression_correlation.family.R
-~/projects/paper_h_pylori/scripts/regression_correlation.class.R
-~/projects/paper_h_pylori/scripts/figure_03.family.R
