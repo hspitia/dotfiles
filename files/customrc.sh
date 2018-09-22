@@ -8,6 +8,7 @@
 
 alias column="column -s'	' -t ";
 alias conserver='ssh -X hfen3@thebeast.biology.gatech.edu'
+alias consting='ssh hfen3@sting.biosci.gatech.edu'
 alias convann='ssh -X hfen3@gpuvannberg.biology.gatech.edu'
 alias concomp='ssh -X hfen3@compgenome2016.biology.gatech.edu'
 alias conbrow='ssh -X hfen3@gbrowse2016.biology.gatech.edu'

@@ -1,0 +1,453 @@
+# STing vs other sequence typing software
+
+
+# Install an load packages ------------------------------------------------
+installAndLoadPackages <- function(pkg){
+  cat("Please wait a moment! Checking for required packages... ")
+  cat("Done!\n")
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg)) {
+    cat("Installing new packages... ")
+    install.packages(new.pkg, dependencies = TRUE,
+                     repos="http://cran.rstudio.com/")
+    cat("Done!\n")
+  }
+  cat("Loading packages... \n")
+  sapply(pkg, require, character.only = TRUE)
+  cat("Done!\n")
+}
+
+requiredPackages <- c("dplyr", "readr", "readxl", "ggpubr", "RColorBrewer", "gridExtra",
+                      "extrafont", "cowplot", "grid")#, "devtools")
+# requiredPackages <- c("tidyverse","ggpubr", "RColorBrewer", "gridExtra")
+installAndLoadPackages(requiredPackages)
+# devtools::install_github("stan-dev/rstan", ref = "develop", subdir = "rstan/rstan")
+
+
+# Format bar annotation text ----------------------------------------------
+getAnnotationText <- function(value){
+  lapply(value, function(x) {
+    # result = ""
+    if (x != 1) {
+      # result = paste0("bolditalic('",format(round(x, 1), nsmall = 1),"x')")
+      result = paste0("italic('",format(round(x, 1), nsmall = 1),"x')")
+    }
+    # result
+  })
+  
+}
+
+# Sources -----------------------------------------------------------------
+
+# Loading Data ------------------------------------------------------------
+# inFile   <- "data/typer/stringMLST-comparisons.tsv"
+# compData <- read_tsv(inFile)
+inFile   <- "data/typer/Espatiaetal-NatureBiotech-2018-SupplementaryFile1_local.xlsx"
+excel_sheets(inFile)
+compData <- read_excel(inFile, sheet = "STing_vs_others")
+
+# General configuration ---------------------------------------------------
+customPalette <- c("#0a4f75","#91bbe4","#d7e4f5")
+customPalette <- rev(brewer.pal(n = 7, name = "Paired"))
+# customPalette <- rev(c("#0a4f75","#91bbe4","#d7e4f5","#faebd7", "#edc374", "#e8702a", "#c81837"))
+# customPalette <- rev(c("#0a4f75","#91bbe4","#d7e4f5","#faebd7", "#edc374", "#e8702a", "#33A02C"))
+# customPalette <- rev(c("#0a4f75","#91bbe4","#d7e4f5","#faebd7", "#edc374", "#e8702a", "gray50"))
+# customPalette <- rev(c("#0a4f75","#91bbe4","#d7e4f5","#faebd7", "#edc374", "#e8702a", "#86827F"))
+# customPalette <- rev(c("#0a4f75","#91bbe4","#d7e4f5","#e8702a", "#edc374", "#faebd7", "#86827F"))
+# customPalette <- c('#86827F','#faebd7','#edc374','#e8702a','#d7e4f5','#91bbe4','#0a4f75')
+customPalette <- c('#edc374','#e8702a','#d7e4f5','#91bbe4','#0a4f75')
+# customPalette <- c('#d2f0af','#69ba73','#166b46','#faebd7','#edc374','#e8702a','#d7e4f5','#91bbe4','#0a4f75')
+# customPalette <- c('#C6E9CA','#69ba73','#166b46','#faebd7','#edc374','#e8702a','#d7e4f5','#91bbe4','#0a4f75')
+# pal(customPalette)
+
+font_import(pattern="[H/h]elveticaNeueLTStd-Lt", prompt = F)
+# fonttable()
+width                 <- 7
+height                <- width * 0.618
+lineSize              <- 0.5
+annotLinetype         <- "solid"
+axisColor             <- "#000000"
+gridColor             <- "#cccccc"
+baseTextSize          <- 18
+barAnnotTextSize      <- 4
+barWidth              <- 0.75
+# baseFontFamily        <- "Helvetica"
+baseFontFamily        <- "Arial"
+baseFontFamily        <- "HelveticaNeueLT Com 45 Lt"
+baseFontFamily        <- "HelveticaNeueLT Std Lt"
+baseBoldFontFamily    <- "HelveticaNeueLT Std Med"
+baseVariantFontFamily <- "HelveticaNeueLT Std"
+
+publicationTheme <- list(
+  theme_pubr() +
+    theme(
+      axis.line.y  = element_blank(),
+      axis.text    = element_text(size = baseTextSize * 0.875,
+                                  # family = baseFontFamily, 
+                                  color = "black"),
+      axis.title.y = element_text(margin=margin(1, 8, 1, 1, "mm")),
+      # axis.title.x = element_text(margin=margin(4, 1, 1, 1, "mm")),
+      axis.ticks   = element_line(colour = axisColor),
+      axis.ticks.y = element_blank(),
+      axis.title   = element_text(size = baseTextSize),
+      legend.direction  = "horizontal",
+      legend.key.height = unit(4, "mm"),
+      legend.key.width  = unit(4*1.618, "mm"),
+      panel.grid.major  = element_blank(),
+      # panel.grid.major.x = element_line(colour = gridColor, 
+      # size = lineSize),
+      # plot.margin = margin(8, 20, 24, 8, "mm"),
+      plot.margin        = margin(10, 15, 20, 5, "mm"),
+      text = element_text(size = baseTextSize, family = baseFontFamily)
+    )
+)
+
+# Preparing data ----------------------------------------------------------
+
+toolNameLevels <- unique(compData$Tool_Mode)
+
+(dataToPlot <- compData %>% 
+  mutate(Tool_Mode = factor(Tool_Mode, rev(toolNameLevels))) %>%
+  group_by(Tool_Mode, Scheme) %>% 
+  summarise(Correct_Alleles = mean(Correct_Alleles),
+            Time = mean(Time),
+            RAM = mean(RAM)) %>% 
+  filter(Scheme == "MLST"))
+
+timeReference <- dataToPlot %>% 
+  filter(Tool_Mode == "STing-fast") %>% 
+  select(Time) %>% pull()
+
+ramReference <- dataToPlot %>% 
+  filter(Tool_Mode == "STing-fast") %>% 
+  select(RAM) %>% pull()
+  
+(foldData <- dataToPlot %>%
+    filter(Tool_Mode != "STing-fast") %>% 
+    mutate(Time_Fold = Time/timeReference,
+           RAM_Fold = RAM/ramReference))
+
+# Correct Predictions Plot ------------------------------------------------
+(predPlot <- ggplot(dataToPlot, aes(x = Tool_Mode, y = Correct_Alleles,
+                                    fill = Tool_Mode)) +
+  geom_bar(color = "black", size = 0.5, width=barWidth,
+           stat = "identity", 
+           position = position_dodge(width=0.9),
+           show.legend = F) + 
+  scale_y_continuous(expand = c(0, 0), position = "right") +
+  scale_fill_manual(values = rev(customPalette),
+                    limits = toolNameLevels) +
+  labs(x = "Typing tool",
+       y = "Correct allele predictions (%)\n") + 
+  publicationTheme +
+  coord_flip()
+        # axis.title.y = element_text(margin=margin(1, 10, 1, 1, "mm")),) +
+)
+
+# ggsave(filename = "sources/STing_vs_others.prediction.png", plot = predPlot,
+#        width = width, height = 8*0.61803)
+# 
+# ggsave(plot = predPlot, filename = "sources/STing_vs_others.prediction.pdf",
+#        width = width, height = height)
+
+# Time Plot ---------------------------------------------------------------
+
+annotationData <- data.frame(timeMarks = c(30, 60, 2*60),#, 45*60),
+                             labels = c("30 sec", "1 min", "2 min"))#, "45 min"))
+
+(timePlot <- ggplot(dataToPlot, aes(x = Tool_Mode, y = Time)) +
+    geom_hline(data = annotationData, aes(yintercept = timeMarks), 
+               size = lineSize/1.5, color = gridColor, linetype = annotLinetype) +
+    geom_bar(aes(fill = Tool_Mode), color = "black", size = 0.5, width=barWidth,
+             stat = "identity", position = position_dodge(width=0.9),
+             show.legend = F) + 
+    geom_text(data = foldData, position = position_dodge(width = 0.9),
+              hjust = 1.2, vjust = 0.5,
+              size = barAnnotTextSize,
+              # color = "white",
+              parse = TRUE,
+              # aes(label = Time_Fold, group = Application))
+              # aes(label = paste0("bolditalic('",format(round(Time_Fold, 1), nsmall = 1),"x')"),
+              aes(label = getAnnotationText(Time_Fold),
+                  group = Scheme,
+                  family = baseVariantFontFamily
+              )) +
+    scale_y_log10(expand = c(0, 0), position = "right") +
+    scale_fill_manual(values = customPalette) +
+    publicationTheme + 
+    theme(axis.text.y = element_blank(),
+          axis.title.y = element_blank()) +
+    labs(x = "Typing tool",
+         y = "Average run time (s)\n") + 
+    coord_flip())
+# Add annotation times
+for (i in 1:nrow(annotationData)) {
+  timePlot <- timePlot + annotation_custom(
+    grob = textGrob(label = annotationData$labels[i], hjust = 0, vjust = 1, 
+                    rot = 310, gp = gpar(fontsize = baseTextSize * 0.875, 
+                                         col = "#222222")),
+    ymin = log10(annotationData$timeMarks[i]),
+    ymax = log10(annotationData$timeMarks[i]),
+    xmin = 0.35,
+    xmax = 0.35)
+}
+# Remove clipping
+gtTime <- ggplot_gtable(ggplot_build(timePlot))
+gtTime$layout$clip[gtTime$layout$name == "panel"] <- "off"
+grid.draw(gtTime)
+
+# ggsave(filename = "sources/STing_vs_others.time.png", plot = gt,
+#        width = width, height = height)
+# 
+# ggsave(filename = "sources/STing_vs_others.time.pdf", plot = gt,
+#        width = width, height = height)
+
+
+# RAM Plot ----------------------------------------------------------------
+annotationData <- data.frame(ramMarks = c(1000, 3000),#, 10000, 100000),
+                             labels = c("1 GB", "3 GB"))#, "10 GB", "100 GB"))
+
+(ramPlot <- ggplot(dataToPlot, aes(x = Tool_Mode, y = RAM)) +
+    geom_hline(data = annotationData, aes(yintercept = ramMarks), 
+               size = lineSize/1.5, color = gridColor, linetype = annotLinetype) +
+    geom_bar(aes(fill = Tool_Mode), color = "black", size = 0.5, width=barWidth,
+             stat = "identity", position = position_dodge(width=0.9),
+             show.legend = F) + 
+    geom_text(data = foldData, position = position_dodge(width = 0.9),
+              hjust = 1.2, vjust = 0.5,
+              size = barAnnotTextSize,
+              # color = "white",
+              parse = TRUE,
+              # aes(label = Time_Fold, group = Application))
+              # aes(label = paste0("bolditalic('",format(round(RAM_Fold, 1), nsmall = 1),"x')"),
+              aes(label = getAnnotationText(RAM_Fold),
+                  group = Scheme,
+                  family = baseVariantFontFamily
+              )) +
+    scale_y_log10(expand = c(0, 0), position = "right",
+                  breaks = c(1, 10, 100, 1000),
+                  labels = c(expression(1), expression(10), expression(10^2), expression(10^3))) +
+    scale_fill_manual(values = customPalette) +
+    publicationTheme + 
+    theme(axis.text.y = element_blank(),
+          axis.title.y = element_blank()) +
+    labs(x = "Typing tool",
+         y = "Average memory\n(RAM) consumption (MB)\n") + 
+    coord_flip())
+# Add annotation times
+for (i in 1:nrow(annotationData)) {
+  ramPlot <- ramPlot + annotation_custom(
+    grob = textGrob(label = annotationData$labels[i], hjust = 0, vjust = 1, 
+                    rot = 310, gp = gpar(fontsize = baseTextSize * 0.875, 
+                                         col = "#222222")),
+    ymin = log10(annotationData$ramMarks[i]),
+    ymax = log10(annotationData$ramMarks[i]),
+    xmin = 0.35,
+    xmax = 0.35)
+}
+# Remove clipping
+gt <- ggplot_gtable(ggplot_build(ramPlot))
+gt$layout$clip[gt$layout$name == "panel"] <- "off"
+grid.draw(gt)
+
+class(gt)
+class(ramPlot)
+
+# Comparison plot (combined) ----------------------------------------------
+(comparisonPlot <- plot_grid(predPlot,
+                             gtTime,# + theme(plot.margin = unit(c(1,18,1,1), "mm")) ,
+                             gt,# + theme(plot.margin = unit(c(1,18,1,1), "mm")),
+                             labels = c('A', 'B', 'C'), align = 'h', axis = 'tb',
+                             # hjust = -0.2,
+                             label_size = baseTextSize * 1.2,
+                             ncol = 3,
+                             rel_widths = c(1, 0.65, 0.65)))
+
+# if (export) {
+if (TRUE) {
+  # ggsave("sources/comparison.pdf", comparisonPlot, width = 18, height = 5, device=cairo_pdf)
+  ggsave("manuscript_material/fig_01.pdf", comparisonPlot, width = 14, height = 5)
+  # ggsave("sources/comparison.png", comparisonPlot, width = 18, height = 5, 
+  # type = "cairo-png")
+}
+# (comparisonPlot <- ggarrange(predPlot,# + theme(plot.margin = unit(c(1,18,1,1), "mm")),
+#                              timePlot + rremove("y.text") + rremove("ylab"),# + theme(plot.margin = unit(c(1,18,1,1), "mm")) ,
+#                              ramPlot + rremove("y.text") + rremove("ylab"),# + theme(plot.margin = unit(c(1,18,1,1), "mm")), 
+#                              labels = c("(A)", "(B)", "(C)"),
+#                              ncol = 3, nrow = 1,
+#                              widths = c(1, 0.65, 0.65),
+#                              align = "h",
+#                              font.label = list(size = baseTextSize, color = "black", 
+#                                                face = "plain", family = baseBoldFontFamily),
+#                              common.legend = TRUE, legend = c("bottom")))
+
+
+# Plots per species -------------------------------------------------------
+
+barAnnotTextSize <- 3.2
+(dataToPlot <- compData %>% 
+    mutate(Tool_Mode = factor(Tool_Mode, rev(toolNameLevels))) %>%
+    filter(Scheme == "MLST"))
+
+timeReference <- dataToPlot %>% 
+  filter(Tool_Mode == "STing-fast") %>% 
+  select(Time) %>% pull()
+
+ramReference <- dataToPlot %>% 
+  filter(Tool_Mode == "STing-fast") %>% 
+  select(RAM) %>% pull()
+
+# (foldData <- dataToPlot %>%
+#     # filter(Tool_Mode != "STing-fast") %>% 
+#     mutate(Time_Fold = Time/timeReference,
+#            RAM_Fold = RAM/ramReference))
+(dataToPlot <- dataToPlot %>%
+    mutate(Time_Fold = as.numeric(Time_Fold),
+           RAM_Fold = as.numeric(RAM_Fold)) %>% 
+    mutate(Time_Fold = if_else(is.na(Time_Fold), 1, Time_Fold),
+           RAM_Fold = if_else(is.na(RAM_Fold), 1, RAM_Fold)))
+
+
+# Correct Predictions Plot ------------------------------------------------
+# customPalette <- c("#ECD078", "#D95B43", "#C02942", "#542437", "#53777A")
+# customPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+(predPlot <- ggplot(dataToPlot, aes(x = Species, y = Correct_Alleles,
+                                    fill = Tool_Mode, order = -as.numeric(Tool_Mode))) +
+   geom_bar(#aes(),
+            color = "black", size = 0.5, width=barWidth,
+            stat = "identity",
+            position = position_dodge(width=0.9),
+            show.legend = T) +
+   scale_y_continuous(expand = c(0, 0), position = "right") +
+   scale_fill_manual(name = "Typing Tool",
+                     values = rev(customPalette),
+                     limits = toolNameLevels) +
+   # scale_fill_brewer(type = "qual", palette = "Paired", direction = -1) +
+   # scale_fill_hue(l=40) +
+   labs(x = "Species",
+        y = "Correct allele predictions (%)\n") + 
+   publicationTheme +
+   theme(axis.text.y  = element_text(face = "italic"),
+         legend.title = element_text(margin = margin(-0.8,5,1,1, "mm")),
+         legend.text  = element_text(margin = margin(0,4,0,-2, "mm")),
+         legend.position = "top",
+         legend.direction = "horizontal"
+         ) +
+   coord_flip()
+ # axis.title.y = element_text(margin=margin(1, 10, 1, 1, "mm")),) +
+)
+
+annotationData <- data.frame(timeMarks = c(5, 30, 60, 2*60),#, 45*60),
+                             labels = c("5 sec", "30 sec", "1 min", "2 min"))#, "45 min"))
+
+(timePlot <- ggplot(dataToPlot, aes(x = Species, y = Time)) +
+    geom_hline(data = annotationData, aes(yintercept = timeMarks), 
+               size = lineSize/1.5, color = gridColor, linetype = annotLinetype) +
+    geom_bar(aes(fill = Tool_Mode), color = "black", size = 0.5, width=barWidth,
+             stat = "identity", position = position_dodge(width=0.9),
+             show.legend = F) + 
+    geom_text(#data = foldData, 
+              position = position_dodge(width = 0.9),
+              hjust = 1.2, vjust = 0.5,
+              size = barAnnotTextSize,
+              # color = "white",
+              parse = TRUE,
+              # aes(label = Time_Fold, group = Application))
+              # aes(label = paste0("bolditalic('",format(round(Time_Fold, 1), nsmall = 1),"x')"),
+              aes(label = getAnnotationText(Time_Fold),
+                  group = Tool_Mode,
+                  family = baseVariantFontFamily
+              )) +
+    scale_y_log10(expand = c(0, 0), position = "right") +
+    scale_fill_manual(values = customPalette) +
+    # scale_fill_brewer(type = "qual", palette = "Paired", direction = -1) +
+    publicationTheme + 
+    theme(axis.text.y = element_blank(),
+          axis.title.y = element_blank()) + #,
+    #       axis.text.y = element_text(face = "italic")) +
+    labs(x = "Typing tool",
+         y = "Average run time (s)\n") + 
+    coord_flip())
+# Add annotation times
+for (i in 1:nrow(annotationData)) {
+  timePlot <- timePlot + annotation_custom(
+    grob = textGrob(label = annotationData$labels[i], hjust = 0, vjust = 1, 
+                    rot = 310, gp = gpar(fontsize = baseTextSize * 0.875, 
+                                         col = "#222222")),
+    ymin = log10(annotationData$timeMarks[i]),
+    ymax = log10(annotationData$timeMarks[i]),
+    xmin = 0.35,
+    xmax = 0.35)
+}
+# Remove clipping
+gtTime <- ggplot_gtable(ggplot_build(timePlot))
+gtTime$layout$clip[gtTime$layout$name == "panel"] <- "off"
+grid.draw(gtTime)
+
+# RAM Plot ----------------------------------------------------------------
+annotationData <- data.frame(ramMarks = c(100, 500, 1000, 3000),#, 10000, 100000),
+                             labels = c("100 MB", "500 MB", "1 GB", "3 GB"))#, "10 GB", "100 GB"))
+
+(ramPlot <- ggplot(dataToPlot, aes(x = Species, y = RAM)) +
+    geom_hline(data = annotationData, aes(yintercept = ramMarks), 
+               size = lineSize/1.5, color = gridColor, linetype = annotLinetype) +
+    geom_bar(aes(fill = Tool_Mode), color = "black", size = 0.5, width=barWidth,
+             stat = "identity", position = position_dodge(width=0.9),
+             show.legend = F) + 
+    geom_text(#data = foldData, 
+              position = position_dodge(width = 0.9),
+              hjust = 1.2, vjust = 0.5,
+              size = barAnnotTextSize,
+              # color = "white",
+              parse = TRUE,
+              # aes(label = Time_Fold, group = Application))
+              # aes(label = paste0("bolditalic('",format(round(RAM_Fold, 1), nsmall = 1),"x')"),
+              aes(label = getAnnotationText(RAM_Fold),
+                  group = Tool_Mode,
+                  family = baseVariantFontFamily
+              )) +
+    scale_y_log10(expand = c(0, 0), position = "right",
+                  breaks = c(1, 10, 100, 1000),
+                  labels = c(expression(1), expression(10), expression(10^2), expression(10^3))) +
+    scale_fill_manual(values = customPalette) +
+    publicationTheme + 
+    theme(axis.text.y = element_blank(),
+          axis.title.y = element_blank()) +
+    labs(x = "Typing tool",
+         y = "Average memory\n(RAM) consumption (MB)\n") + 
+    coord_flip())
+# Add annotation times
+for (i in 1:nrow(annotationData)) {
+  ramPlot <- ramPlot + annotation_custom(
+    grob = textGrob(label = annotationData$labels[i], hjust = 0, vjust = 1, 
+                    rot = 310, gp = gpar(fontsize = baseTextSize * 0.875, 
+                                         col = "#222222")),
+    ymin = log10(annotationData$ramMarks[i]),
+    ymax = log10(annotationData$ramMarks[i]),
+    xmin = 0.35,
+    xmax = 0.35)
+}
+# Remove clipping
+gt <- ggplot_gtable(ggplot_build(ramPlot))
+gt$layout$clip[gt$layout$name == "panel"] <- "off"
+grid.draw(gt)
+
+
+# Comparison plot (combined) ----------------------------------------------
+legend <- get_legend(predPlot)
+(comparisonPlot <- plot_grid(predPlot + theme(legend.position = "none"),
+                             gtTime,# + theme(plot.margin = unit(c(1,18,1,1), "mm")) ,
+                             gt,# + theme(plot.margin = unit(c(1,18,1,1), "mm")),
+                             labels = c('A', 'B', 'C'), 
+                             align = 'h', axis = 'tb',
+                             label_size = baseTextSize * 1.2,
+                             ncol = 3,
+                             rel_widths = c(1, 0.65, 0.65)))
+(finalPlot <- plot_grid(comparisonPlot,# + theme(plot.margin = margin(0, 0, 10, 0, "mm")), 
+                        legend,
+          ncol = 1, rel_heights = c(1, 0.1)))
+
+  ggsave("manuscript_material/fig_01.species.pdf", finalPlot, width = 14, height = 7)
+  ggsave("manuscript_material/fig_01.species.png", finalPlot, width = 14, height = 7,
+  type = "cairo-png")
+}
