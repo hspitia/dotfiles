@@ -13,7 +13,7 @@ alias gst="git status";
 # alias l='ls -lhA';
 alias lh='ls -lh';
 alias lstmplts='ls $LOCAL_SCRIPTS/templates';
-alias xtermcolors='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/gawin/bash-colors-256/master/colors)"'# ===================================================================
+alias xtermcolors='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/gawin/bash-colors-256/master/colors)"'
 
 # ===================================================================
 # Variables

@@ -2,6 +2,8 @@
 
 # CUSTOM CONFIGURATION
 ################################################################################
+
+
 # Common configuration (aliases, variables and functions)
 source .common.config.sh;
 

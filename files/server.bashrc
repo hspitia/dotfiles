@@ -42,7 +42,7 @@ source $HOME/.customrc.sh;
 # ===================================================================
 # Variables
 # ===================================================================
-export GIT_EXTRAS=$CONF_UTILS_DIR/gitextras;
+export GIT_EXTRAS=$CONFIG_UTILS_DIR/gitextras;
 
 # ===================================================================
 # Prompt
