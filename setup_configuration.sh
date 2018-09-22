@@ -117,7 +117,22 @@ fi
 git clone https://hspitia@bitbucket.org/hspitia/scripts.git ${LOCAL_SCRIPTS}
 
 # Sounds
-ln -s $CONF_SETTINGS_DIR/sounds .sounds
+ln -s $CONF_SETTINGS_DIR/sounds ${HOME}/.sounds
+
+# Variety
+if [ -d "${HOME}/.config/variety" ]; then
+    mv ${HOME}/.config/variety ${HOME}/.config/variety.bak
+fi
+
+ln -s $CONF_SETTINGS_DIR/variety ${HOME}/.config/variety
+
+# RStudio
+if [ -d "${HOME}/.rstudio-desktop" ]; then
+    mv ${HOME}/.rstudio-desktop ${HOME}/.rstudio-desktop.bak
+fi
+
+ln -s $CONF_SETTINGS_DIR/rstudio-desktop ${HOME}/.rstudio-desktop
+
 
 # ##############################################################################
 # Packages

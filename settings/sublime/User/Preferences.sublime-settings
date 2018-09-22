@@ -18,6 +18,10 @@
 		"Awk",
 		"C++ Snippets",
 		"EasyClangComplete",
+		"Emmet",
+		"GitGutter",
+		"MarkdownLivePreview",
+		"MarkdownPreview",
 		"PackageResourceViewer",
 		"SublimeLinter",
 		"Vintage"
