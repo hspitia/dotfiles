@@ -1,7 +1,8 @@
 # ===================================================================
 # Aliases
 # ====================================================================
-alias column="column -s'	' -t ";
+alias ba="byobu a -t";
+alias column="column -s'    ' -t ";
 alias conserver='ssh -X hfen3@thebeast.biology.gatech.edu'
 alias consting='ssh hfen3@sting.biosci.gatech.edu'
 alias convann='ssh -X hfen3@gpuvannberg.biology.gatech.edu'

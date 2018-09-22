@@ -127,7 +127,7 @@ source $HOME/.customrc.sh;
 # ===================================================================
 # Variables
 # ===================================================================
-export GIT_EXTRAS=$UTILS_DIR/gitextras;
+export GIT_EXTRAS=$CONF_UTILS_DIR/gitextras;
 
 # ===================================================================
 # Prompt
@@ -137,7 +137,7 @@ export PS1='[\u@\h \[\e[36m\]\w\[\e[38;5;172m\]$(__git_ps1 " (%s)")\[\e[00m\]]\$
 source $GIT_EXTRAS/git-prompt.sh;
 
 
-linux_bash="$HOME/.ssh/service/ssh-agent"
-if [ -e "$linux_bash" ];then
-setsid "$linux_bash" 2>&1 & disown
-fi
+# linux_bash="$HOME/.ssh/service/ssh-agent"
+# if [ -e "$linux_bash" ];then
+# setsid "$linux_bash" 2>&1 & disown
+# fi

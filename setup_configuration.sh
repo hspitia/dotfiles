@@ -42,16 +42,16 @@ done
 
 # =======================================================
 # Arguments checking
-if [[ $mode == "" ]]; then
+if [[ "$mode" == "" ]]; then
     echo "ERROR: option -m is required\n";
     usage $scriptName;
     exit 1;
 fi
 
 prefix=
-if [[ mode == "d" ]]; then
+if [[ "$mode" == "d" ]]; then
     prefix="desktop"
-elif [[ mode == "s" ]]
+elif [[ "$mode" == "s" ]]
     prefix="server"
 else
     echo "ERROR: Invalid value for -m.\n";
@@ -61,7 +61,6 @@ fi
 
 # =======================================================
 # Begin of code 
-
 
 # Variables
 CONFIG_DIR=$HOME/.dotfiles;
@@ -88,7 +87,9 @@ done
 # Prezto
 # ##############################################################################
 # install prezto from my own fork
-sudo apt -y install zsh git
+if [[ "$mode" == "desktop" ]]; then
+    sudo apt -y install zsh git
+fi
 
 $CONF_SCRIPTS_DIR/install.prezto.szh
 
@@ -98,7 +99,7 @@ $CONF_SCRIPTS_DIR/install.prezto.szh
 FILES=(bashrc condarc customrc.sh gitconfig)
 
 for f in $(ls "${CONF_FILES_DIR}"); do
-    cmd="ln -s ${CONF_FILES_DIR}/${f} $HOME/.${f}";
+    cmd="ln -s ${CONF_FILES_DIR}/${prefix}.${f} $HOME/.${f}";
     echo $cmd;
     eval $cmd;
 done
