@@ -1,0 +1,14 @@
+2018-12-02 12:44:23
+Traceback (most recent call last):
+  File "/Users/wbond/Library/Application Support/Sublime Text 3/Packages/SFTP/sftp/threads.py", line 16, in run_with_except_hook
+  File "/Users/wbond/Library/Application Support/Sublime Text 3/Packages/SFTP/sftp/listeners.py", line 168, in run
+  File "/Users/wbond/Library/Application Support/Sublime Text 3/Packages/SFTP/sftp/config.py", line 240, in setup_tmp_dir
+  File "./python3.3/os.py", line 262, in makedirs
+FileExistsError: [Errno 17] File exists: '/tmp/sublime-sftp-browse-1543626838/thebeast/data/home/hfen3/projects/'
+2018-12-02 12:44:23
+Traceback (most recent call last):
+  File "/Users/wbond/Library/Application Support/Sublime Text 3/Packages/SFTP/sftp/threads.py", line 16, in run_with_except_hook
+  File "/Users/wbond/Library/Application Support/Sublime Text 3/Packages/SFTP/sftp/listeners.py", line 168, in run
+  File "/Users/wbond/Library/Application Support/Sublime Text 3/Packages/SFTP/sftp/config.py", line 240, in setup_tmp_dir
+  File "./python3.3/os.py", line 262, in makedirs
+FileExistsError: [Errno 17] File exists: '/tmp/sublime-sftp-browse-1543626838/thebeast/data/home/hfen3/projects/'

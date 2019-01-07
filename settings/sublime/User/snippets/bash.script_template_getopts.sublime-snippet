@@ -1,0 +1,96 @@
+<snippet>
+    <content><![CDATA[
+#!/bin/bash
+
+set -e              # errexit exit whenever a command exits with a non zero status 
+set -u              # Undefined variables as errors
+set -o pipefail     # Non zero status in a pipe when one command has one non zero status
+
+usage() 
+\{
+    scriptNameSize=\${#0};
+    line="";
+    for i in \$(seq 1 \$scriptNameSize); do 
+        line="\${line}="; 
+    done;
+ 
+cat << EOF
+
+\$0
+\$line
+
+${1:Script description.}
+
+Usage: 
+    \$0 -${2:arg1} <${3:ARGUMENT_VALUE_1}> -${4:arg2} <${5:ARGUMENT_VALUE_1}> ${6:[options]}
+
+Arguments:
+    -${2}  ${3}    ${7:Argument description}
+    -${4}  ${5}    ${8:Argument description}
+
+Options:
+    -${9:opt}  ${10:OPT_VALUE}    ${11:Option description}
+    -h              Show this message and exit
+    -v              Verbose 
+EOF
+}
+
+
+printMessage()
+{
+    if [[ "\$verbose" == 1 ]]; then
+        echo -e "\$1";
+    fi
+}
+
+${12:var1}=
+${13:var2}=
+verbose=0
+
+while getopts “${2}:${4}:hv” OPT
+do
+     case $OPT in
+        h)
+            usage
+            exit 1
+            ;;
+        v)
+            verbose=1
+            ;;
+        ${2})
+            ${12}=\$OPTARG
+            ;;
+        ${4})
+            ${13}=\$OPTARG
+            ;;
+        ?)
+            usage
+            exit
+            ;;
+    esac
+done
+shift \$((OPTIND -1))
+# ==============================================================================
+# Check for required arguments
+
+if [[ -z "\$${12}" || -z "\$${13}" ]]; then
+    echo -e "\$0: One or more arguments are required." 1>&2
+    usage;
+    exit 1; 
+fi
+
+# ==============================================================================
+# CODE - BEGIN
+
+${14:# instructions}${0}
+==============================================================================
+# CODE - END
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>sscro</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.shell</scope>
+    <!-- Optional: Set a description for the snippet -->
+    <description>Bash script template with optargs</description>
+</snippet>
+

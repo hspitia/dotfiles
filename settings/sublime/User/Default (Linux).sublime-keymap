@@ -4,8 +4,10 @@
 	{ "keys": ["ctrl+shift+k"], "command": "find_under_expand" },
 	{ "keys": ["ctrl+d"], "command": "duplicate_line" },
 	{ "keys": ["ctrl+shift+d"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Line.sublime-macro"} },
+    { "keys": ["ctrl+shift+r"], "command": "reindent"},
     { "keys": ["alt+up"], "command": "swap_line_up" },
     { "keys": ["alt+down"], "command": "swap_line_down" },
+    { "keys": ["alt+w"], "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "hh", "h", "ipp", "inl", "m", "mm"]} },
     {
         "command": "show_symbols",
         "context": [

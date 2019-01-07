@@ -1,0 +1,16 @@
+<snippet>
+    <content><![CDATA[
+# ${3:echo} ${4:-e} "${2:Message}"
+cmd="${1:command}"
+${3:echo} \$cmd;
+eval \$cmd;
+# ${3:echo} ${4:-e} "${5:Done!}"
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>scmd</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.shell</scope>
+    <!-- Optional: Set a description for the snippet -->
+    <description>cmd line</description>
+</snippet>
+

@@ -2,10 +2,17 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+		"BracketHighlighter",
+		"ColorPicker",
+		"DoxyDoxygen",
 		"Emmet",
 		"GitGutter",
 		"MarkdownLivePreview",
-		"MarkdownPreview"
+		"MarkdownPreview",
+		"MarkdownTOC",
+		"PackageResourceViewer",
+		"Processing",
+		"ShellScriptImproved"
 	],
 	"installed_packages":
 	[
@@ -20,9 +27,11 @@
 		"C++11",
 		"C++NamespaceTool",
 		"CMakeEditor",
-		"Cobalt2 Flat Theme",
 		"Color Highlighter",
 		"ColorPicker",
+		"ColorSchemeEditor",
+		"Colorsublime",
+		"Compare Side-By-Side",
 		"CTags",
 		"DocBlockr",
 		"Dotfiles Syntax Highlighting",
@@ -35,6 +44,7 @@
 		"Git",
 		"GitGutter",
 		"GitHub Markdown Snippets",
+		"Google Spell Check",
 		"GotoDocumentation",
 		"Gutter Color",
 		"LiveReload",
@@ -54,7 +64,6 @@
 		"SublimeLinter",
 		"SublimeLinter-contrib-perl",
 		"Theme - Cobalt2",
-		"Theme - Flatland",
-		"Theme - Solarized Flat"
+		"Theme - Flatland"
 	]
 }

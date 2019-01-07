@@ -1,0 +1,14 @@
+<snippet>
+    <content><![CDATA[
+${1:opt})
+    ${2:var}=\$OPTARG
+    ;;${0}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>soac</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.shell</scope>
+    <!-- Optional: Set a description for the snippet -->
+    <description>Bash optargs case</description>
+</snippet>
+

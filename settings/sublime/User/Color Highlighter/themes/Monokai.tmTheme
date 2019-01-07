@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>name</key>
@@ -140,7 +138,7 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 			</dict>
 		</dict>
 		<dict>
@@ -173,7 +171,7 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#F92672</string>
 			</dict>
@@ -199,7 +197,7 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#A6E22E</string>
 			</dict>
@@ -251,7 +249,7 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#F92672</string>
 			</dict>
@@ -264,7 +262,7 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#A6E22E</string>
 			</dict>
@@ -277,7 +275,7 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#66D9EF</string>
 			</dict>
@@ -290,7 +288,7 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#66D9EF</string>
 			</dict>
@@ -303,7 +301,7 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#66D9EF</string>
 			</dict>
@@ -329,7 +327,7 @@
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 			</dict>
 		</dict>
 		<dict>
@@ -342,7 +340,7 @@
 				<key>background</key>
 				<string>#F92672</string>
 				<key>fontStyle</key>
-				<string></string>
+				<string />
 				<key>foreground</key>
 				<string>#F8F8F0</string>
 			</dict>
@@ -457,7 +455,189 @@
 			</dict>
 		</dict>
 
-	</array>
+	<dict>
+<key>name</key>
+<string>CH_color</string>
+<key>scope</key>
+<string>CH_color_0a4f75ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#0a4f75ff</string>
+<key>foreground</key>
+<string>#8ACEF4FF</string>
+<key>caret</key>
+<string>#8ACEF4FF</string>
+</dict>
+</dict><dict>
+<key>scope</key>
+<string>CH_text_color_0a4f75ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#FFFFFEFF</string>
+<key>foreground</key>
+<string>#0a4f75ff</string>
+<key>caret</key>
+<string>#8ACEF4FF</string>
+</dict>
+</dict><dict>
+<key>name</key>
+<string>CH_color</string>
+<key>scope</key>
+<string>CH_color_91bbe4ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#91bbe4ff</string>
+<key>foreground</key>
+<string>#1A446DFF</string>
+<key>caret</key>
+<string>#1A446DFF</string>
+</dict>
+</dict><dict>
+<key>scope</key>
+<string>CH_text_color_91bbe4ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#FFFFFEFF</string>
+<key>foreground</key>
+<string>#91bbe4ff</string>
+<key>caret</key>
+<string>#1A446DFF</string>
+</dict>
+</dict><dict>
+<key>name</key>
+<string>CH_color</string>
+<key>scope</key>
+<string>CH_color_d7e4f5ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#d7e4f5ff</string>
+<key>foreground</key>
+<string>#091628FF</string>
+<key>caret</key>
+<string>#091628FF</string>
+</dict>
+</dict><dict>
+<key>scope</key>
+<string>CH_text_color_d7e4f5ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#FFFFFEFF</string>
+<key>foreground</key>
+<string>#d7e4f5ff</string>
+<key>caret</key>
+<string>#091628FF</string>
+</dict>
+</dict><dict>
+<key>name</key>
+<string>CH_color</string>
+<key>scope</key>
+<string>CH_color_faebd7ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#faebd7ff</string>
+<key>foreground</key>
+<string>#281804FF</string>
+<key>caret</key>
+<string>#281804FF</string>
+</dict>
+</dict><dict>
+<key>scope</key>
+<string>CH_text_color_faebd7ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#FFFFFEFF</string>
+<key>foreground</key>
+<string>#faebd7ff</string>
+<key>caret</key>
+<string>#281804FF</string>
+</dict>
+</dict><dict>
+<key>name</key>
+<string>CH_color</string>
+<key>scope</key>
+<string>CH_color_edc374ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#edc374ff</string>
+<key>foreground</key>
+<string>#8B6111FF</string>
+<key>caret</key>
+<string>#8B6111FF</string>
+</dict>
+</dict><dict>
+<key>scope</key>
+<string>CH_text_color_edc374ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#FFFFFEFF</string>
+<key>foreground</key>
+<string>#edc374ff</string>
+<key>caret</key>
+<string>#8B6111FF</string>
+</dict>
+</dict><dict>
+<key>name</key>
+<string>CH_color</string>
+<key>scope</key>
+<string>CH_color_e8702aff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#e8702aff</string>
+<key>foreground</key>
+<string>#451E07FF</string>
+<key>caret</key>
+<string>#451E07FF</string>
+</dict>
+</dict><dict>
+<key>scope</key>
+<string>CH_text_color_e8702aff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#FFFFFEFF</string>
+<key>foreground</key>
+<string>#e8702aff</string>
+<key>caret</key>
+<string>#451E07FF</string>
+</dict>
+</dict><dict>
+<key>name</key>
+<string>CH_color</string>
+<key>scope</key>
+<string>CH_color_c81837ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#c81837ff</string>
+<key>foreground</key>
+<string>#440812FF</string>
+<key>caret</key>
+<string>#440812FF</string>
+</dict>
+</dict><dict>
+<key>scope</key>
+<string>CH_text_color_c81837ff</string>
+<key>settings</key>
+<dict>
+<key>background</key>
+<string>#FFFFFEFF</string>
+<key>foreground</key>
+<string>#c81837ff</string>
+<key>caret</key>
+<string>#440812FF</string>
+</dict>
+</dict></array>
 	<key>uuid</key>
 	<string>D8D5E82E-3D5B-46B5-B38E-8C841C21347D</string>
 </dict>

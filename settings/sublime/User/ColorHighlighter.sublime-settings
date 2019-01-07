@@ -1,22 +1,25 @@
 {
 	"file_exts":
 	[
-		".pde",
+		".back",
 		".css",
-		".sass",
-		".scss",
-		".less",
-		".styl",
-		".html",
-		".js",
-		".sublime-settings",
-		".tmTheme",
-		".stTheme",
 		".erb",
 		".haml",
-		".back",
+		".html",
+		".js",
+		".less",
+		".md",
+		".pde",
 		".py",
-		".md"
+		".sass",
+		".scss",
+		".styl",
+		".stTheme",
+		".sublime-settings",
+		".sublime-color-scheme",
+		".tmTheme",
+		".txt",
+		".xml"
 	],
 	"ha_style": "filled",
 	"search_colors_in":
@@ -28,7 +31,7 @@
 				"color_scheme":
 				{
 					"enabled": true,
-					"highlight_style": "text"
+					"highlight_style": "filled"
 				},
 				"gutter_icons":
 				{
@@ -50,7 +53,7 @@
 			{
 				"color_scheme":
 				{
-					"enabled": false,
+					"enabled": true,
 					"highlight_style": "filled"
 				},
 				"gutter_icons":

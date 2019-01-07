@@ -2,8 +2,5 @@ channels:
   - bioconda
   - conda-forge
   - defaults
-<<<<<<< HEAD
-ssl_verify: true
-=======
   - r
->>>>>>> 68eb85b06cef419b0ed76253c49dd0f6b485180f
+ssl_verify: true

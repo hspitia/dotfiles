@@ -1,4 +1,13 @@
 {
+	"added_words":
+	[
+		"allelic",
+		"analized",
+		"destructors",
+		"accessors",
+		"fastq",
+		"Typer"
+	],
 	"auto_complete_delay": 20,
 	"auto_complete_selector": true,
 	"bold_folder_labels": true,
@@ -6,25 +15,42 @@
 	"caret_extra_top": 2,
 	"caret_extra_width": 3,
 	"caret_style": "phase",
-	"color_scheme": "Packages/custom/cobalt2.tmTheme",
+	"color_scheme": "Packages/Theme - Flatland/Flatland Monokai.tmTheme",
 	"default_line_ending": "unix",
+	"dictionary": "Packages/User/language/en_US.dic",
 	"flatland_sidebar_tree_xsmall": false,
+	"font_face": "Monaco",
 	"font_size": 13,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 		"Autotools",
-		"Awk",
-		"C++ Snippets",
+		"BracketHighlighter",
+		"ColorPicker",
+		"Compare Side-By-Side",
+		"DoxyDoxygen",
 		"EasyClangComplete",
 		"Emmet",
+		"Generic Config",
 		"GitGutter",
 		"MarkdownLivePreview",
 		"MarkdownPreview",
+		"MarkdownTOC",
 		"PackageResourceViewer",
+		"Processing",
+		"ShellScriptImproved",
+		"SideBarEnhancements",
 		"SublimeLinter",
 		"Vintage"
+	],
+	"ignored_words":
+	[
+		"cout",
+		"endl",
+		"gz",
+		"gzipped",
+		"mer"
 	],
 	"indent_guide_options":
 	[
@@ -37,14 +63,15 @@
 	[
 		80
 	],
-	"scroll_speed": 1.8,
+	"scroll_speed": 3,
 	"show_encoding": true,
 	"sidebar_large": true,
 	"sidebar_medium": true,
 	"sidebar_xlarge": true,
+	"spell_check": true,
 	"theme": "Cobalt2.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_space": false,
 	"wide_caret": true,
-	"wrap_width": 80
+	"wrap_width": 0
 }

@@ -1,0 +1,15 @@
+<snippet>
+    <content><![CDATA[
+.bookmark-item[label="${1:BOOKMARK_NAME_HERE}"] image {
+    width:0!important;
+    height:0!important;
+    padding: 0 0 16px 16px !important;
+    background:${2:url(BASE_64_STRING_HERE)}!important; 
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>fibi</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.css</scope>
+    <description>Firefox bookmark icon style</description>
+</snippet>

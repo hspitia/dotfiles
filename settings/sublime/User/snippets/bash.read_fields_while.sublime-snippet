@@ -1,0 +1,15 @@
+<snippet>
+    <content><![CDATA[
+while IFS=\$'\t' read -r ${1:field_1} ${2:field_2}
+do
+    ${4:# actions}${0}
+done < ${3:file-variable}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>srf</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.shell</scope>
+    <!-- Optional: Set a description for the snippet -->
+    <description>Read tab separated fields from a file, line by line (while)</description>
+</snippet>
+
