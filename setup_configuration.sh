@@ -72,14 +72,14 @@ CONF_PACKAGES_DIR=$CONFIG_DIR/packages;
 
 git clone git@github.com:hspitia/dotfiles.git $CONFIG_DIR
 
-FILES=(bashrc condarc customrc.sh gitconfig zprezto zshrc)
+FILES=(bashrc condarc common.config.sh customrc.sh gitconfig zprezto zshrc)
 
 # backup files
 for f in ${FILES[@]}; do
    if [[ -e "$HOME/.${f}" ]]; then
        cmd="mv $HOME/.${f} $HOME/.${f}.bak";
        echo $cmd;
-       eval $cmd;
+       # eval $cmd;
    fi
 done
 
@@ -96,12 +96,15 @@ $CONF_SCRIPTS_DIR/install.prezto.szh
 # ##############################################################################
 # Custom dotfiles
 # ##############################################################################
-FILES=(bashrc condarc customrc.sh gitconfig)
+FILES=(bashrc condarc common.config.sh customrc.sh gitconfig)
 
-for f in $(ls "${CONF_FILES_DIR}"); do
-    cmd="ln -s ${CONF_FILES_DIR}/${prefix}.${f} $HOME/.${f}";
+# for f in $(ls "${CONF_FILES_DIR}/${prefix}.*"); do
+for f in $(ls ${CONF_FILES_DIR}/*); do
+    outName=$(basename $f | sed 's/'${prefix}'//g' )
+    # cmd="ln -s ${CONF_FILES_DIR}/${f} $HOME/.${f}";
+    cmd="ln -s ${f} $HOME/${outName}";
     echo $cmd;
-    eval $cmd;
+    # eval $cmd;
 done
 
 source .zshrc

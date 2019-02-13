@@ -1,15 +1,15 @@
-help/library/ggplot2/html/scale_continuous.html,R: Position scales for continuous data (x & y)
-help/library/ggplot2/html/scale_manual.html,R: Create your own discrete scale
-help/library/ggplot2/html/geom_abline.html,"R: Reference lines: horizontal, vertical, and diagonal"
-help/library/base/html/split.html,R: Divide into Groups and Reassemble
-help/library/base/html/strsplit.html,R: Split the Elements of a Character Vector
-help/library/stats/html/sd.html,R: Standard Deviation
-help/library/stats/html/mad.html,R: Median Absolute Deviation
+help/library/dplyr/html/distinct.html,R: Select distinct/unique rows
+help/library/readr/html/write_delim.html,R: Write a data frame to a delimited file
+help/library/xlsx/html/write.xlsx.html,R: Write a data.frame to an Excel workbook.
+help/library/grDevices/html/pdf.html,R: PDF Graphics Device
+help/library/cowplot/html/plot_grid.html,R: Arrange multiple plots into a grid
 help/library/NULL/help/arrange,arrange
 help/library/dplyr/html/arrange.html,R: Arrange rows by variables
-help/library/tidyr/html/spread.html,R: Spread a key-value pair across multiple columns.
-help/library/tidyr/html/gather.html,R: Gather columns into key-value pairs.
-help/library/NULL/help/confusionMatrix,confusionMatrix
-help/library/caret/html/confusionMatrix.html,R: Create a confusion matrix
-help/library/dplyr/html/join.html,R: Join two tbls together
-help/library/graphics/html/par.html,R: Set or Query Graphical Parameters
+help/library/base/html/cbind.html,R: Combine R Objects by Rows or Columns
+help/library/stringr/html/str_split.html,R: Split up a string into pieces.
+help/library/ggplot2/html/ggsave.html,R: Save a ggplot (or other grid object) with sensible defaults
+help/library/ggplot2/html/geom_text.html,R: Text
+help/library/base/html/load.html,R: Reload Saved Datasets
+help/library/base/html/save.html,R: Save R Objects
+help/library/dplyr/html/summarise_all.html,R: Summarise and mutate multiple columns.
+help/library/readr/html/read_delim.html,R: Read a delimited file (including csv & tsv) into a tibble

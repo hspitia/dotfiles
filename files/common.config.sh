@@ -1,21 +1,4 @@
 # ===================================================================
-# Aliases
-# ====================================================================
-alias ba="byobu a -t";
-alias column="column -s'    ' -t ";
-alias conserver='ssh -X hfen3@thebeast.biology.gatech.edu'
-alias consting='ssh hfen3@sting.biosci.gatech.edu'
-alias convann='ssh -X hfen3@gpuvannberg.biology.gatech.edu'
-alias concomp='ssh -X hfen3@compgenome2016.biology.gatech.edu'
-alias conbrow='ssh -X hfen3@gbrowse2016.biology.gatech.edu'
-alias grep='grep --color=always'
-alias gst="git status";
-# alias l='ls -lhA';
-alias lh='ls -lh';
-alias lstmplts='ls $LOCAL_SCRIPTS/templates';
-alias xtermcolors='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/gawin/bash-colors-256/master/colors)"'# ===================================================================
-
-# ===================================================================
 # Variables
 # ===================================================================
 # PATH
@@ -41,6 +24,24 @@ export ZPREZTORC=$HOME/.zprestorc;
 
 export COMMON_PATH_VARS=$LOCAL_SOFTWARE:$LOCAL_BIN:$ANACONDA_BIN:$LOCAL_SCRIPTS:$TEMPLATES_DIR:$LOCAL_DIR/bin;
 
+# ===================================================================
+# Aliases
+# ====================================================================
+alias ba="byobu a -t";
+alias column="column -s'    ' -t ";
+alias conserver='ssh -X hfen3@thebeast.biology.gatech.edu'
+alias conjupyter='ssh -L hfen3@thebeast.biology.gatech.edu'
+alias consting='ssh hfen3@sting.biosci.gatech.edu'
+alias convann='ssh -X hfen3@gpuvannberg.biology.gatech.edu'
+alias concomp='ssh -X hfen3@compgenome2016.biology.gatech.edu'
+alias conbrow='ssh -X hfen3@gbrowse2016.biology.gatech.edu'
+alias grep='grep --color=always'
+alias gst="git status";
+# alias l='ls -lhA';
+alias lh='ls -lh';
+alias lstmplts='ls $LOCAL_SCRIPTS/templates';
+alias xtermcolors='ruby -e "$(curl -fsSL https://raw.githubusercontent.com/gawin/bash-colors-256/master/colors)"'
+
 # ====================================================================
 # Functions
 # ====================================================================
@@ -57,7 +58,7 @@ function cptemplate {
 }
 
 function vfile {
-  column -s'    ' -t $1 | less -SN
+  column -s'	' -t $1 | less -SN
 }
 
 function reheader {
