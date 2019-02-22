@@ -1,0 +1,1085 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"FAST",
+				"FASTQ1"
+			],
+			[
+				"pat",
+				"pathAppend"
+			],
+			[
+				"out",
+				"out_dir"
+			],
+			[
+				"DIR",
+				"DIRECTORY_EXISTS\t(types.hpp)"
+			],
+			[
+				"MAKE",
+				"MAKE_DIR_SUCCESS\t(types.hpp)"
+			],
+			[
+				"DIRE",
+				"DIRECTORY_NOT_ACCESSIBLE\t(types.hpp)"
+			],
+			[
+				"getP",
+				"getPathName"
+			],
+			[
+				"for",
+				"for\tFor Loop"
+			],
+			[
+				"profile",
+				"profile_full_path"
+			],
+			[
+				"ret",
+				"ret_path"
+			],
+			[
+				"get",
+				"getOutDbDir"
+			],
+			[
+				"comma",
+				"command_string"
+			],
+			[
+				"indexer",
+				"indexerPath"
+			],
+			[
+				"confi",
+				"configFile"
+			],
+			[
+				"file",
+				"fileName"
+			],
+			[
+				"locus",
+				"locusName"
+			],
+			[
+				"blac",
+				"blacklistFile"
+			],
+			[
+				"back",
+				"background-color\tproperty"
+			],
+			[
+				"predi",
+				"predicted_st"
+			],
+			[
+				"infer",
+				"inferred_profile"
+			],
+			[
+				"TSeq",
+				"TSeqInfoVector"
+			],
+			[
+				"TSe",
+				"TSeqInfoVector"
+			],
+			[
+				"top_allele",
+				"top_alleles_info"
+			],
+			[
+				"top_alle",
+				"top_alleles_info"
+			],
+			[
+				"loci_",
+				"loci_table"
+			],
+			[
+				"nomr",
+				"norm_allele_counts"
+			],
+			[
+				"norm",
+				"norm_count"
+			],
+			[
+				"calculate",
+				"calculateSd"
+			],
+			[
+				"kmer_depth",
+				"kmer_depth_sd\t(data_structures.hpp)"
+			],
+			[
+				"calcu",
+				"calculateSd\t(custom_utils.hpp)"
+			],
+			[
+				"tied",
+				"tied_alleles_indices"
+			],
+			[
+				"alle",
+				"alleles.size"
+			],
+			[
+				"allele",
+				"alleles"
+			],
+			[
+				"firs",
+				"first_max_allele"
+			],
+			[
+				"top",
+				"top_alleles_indices"
+			],
+			[
+				"top_alleles_i",
+				"top_alleles_indices\t(Typer.h)"
+			],
+			[
+				"TUi",
+				"TUintVector"
+			],
+			[
+				"curre",
+				"current_allele"
+			],
+			[
+				"pu",
+				"push_back"
+			],
+			[
+				"n_top",
+				"n_top_alleles"
+			],
+			[
+				"end",
+				"endl"
+			],
+			[
+				"per",
+				"per_base_depths"
+			],
+			[
+				"out_",
+				"out_file"
+			],
+			[
+				"loc",
+				"locus.id"
+			],
+			[
+				"retu",
+				"return"
+			],
+			[
+				"infe",
+				"inferred_profiles"
+			],
+			[
+				"zs",
+				"zshrc"
+			],
+			[
+				"all",
+				"allele_kmer_depths"
+			],
+			[
+				"getPrint",
+				"getPrintKmerDepth\t(Typer.cpp)"
+			],
+			[
+				"getA",
+				"getPrintAlleleCov\tbool getPrintAlleleCov() const"
+			],
+			[
+				"dept",
+				"depth_ratio"
+			],
+			[
+				"def",
+				"define"
+			],
+			[
+				"computeTopT",
+				"computeTopTwoMaxNormAlleles"
+			],
+			[
+				"getS",
+				"getNumberStringWithPrecision"
+			],
+			[
+				"kmer",
+				"kmer_counts"
+			],
+			[
+				"loci",
+				"loci_table"
+			],
+			[
+				"col",
+				"column"
+			],
+			[
+				"allel",
+				"allele_lenght"
+			],
+			[
+				"uin",
+				"uint64_t"
+			],
+			[
+				"getPrin",
+				"getPrintKmerDepth"
+			],
+			[
+				"depth",
+				"depth_sum"
+			],
+			[
+				"pus",
+				"push_back\tvoid push_back(value_type &&__x)"
+			],
+			[
+				"dep",
+				"depth_sum"
+			],
+			[
+				"out_file",
+				"out_filename"
+			],
+			[
+				"ArgPar",
+				"ArgParseArgument"
+			],
+			[
+				"seq_",
+				"allele_seq_ids"
+			],
+			[
+				"k",
+				"kmer_length"
+			],
+			[
+				"print",
+				"printVector"
+			],
+			[
+				"first",
+				"first_max_allele"
+			],
+			[
+				"vec",
+				"TUintVector"
+			],
+			[
+				"toVe",
+				"toVectorHelper"
+			],
+			[
+				"tota",
+				"total_kmers"
+			],
+			[
+				"second_ma",
+				"second_max_kmer_counts"
+			],
+			[
+				"inferre",
+				"inferred_profiles"
+			],
+			[
+				"St",
+				"StStatus"
+			],
+			[
+				"NO",
+				"NO_ST_IN_TABLE"
+			],
+			[
+				"stat",
+				"status_str"
+			],
+			[
+				"infee",
+				"inferred_profile"
+			],
+			[
+				"fist",
+				"first_max_allele"
+			],
+			[
+				"fir",
+				"first_inferred_profile"
+			],
+			[
+				"comp",
+				"computeTopTwoMaxAlleles"
+			],
+			[
+				"secon",
+				"second_max_kmer_counts"
+			],
+			[
+				"sec",
+				"second_max_alleles"
+			],
+			[
+				"max",
+				"max_idx"
+			],
+			[
+				"cS",
+				"toCString"
+			],
+			[
+				"kemr",
+				"kmer_matches_perc"
+			],
+			[
+				"perc",
+				"percentages"
+			],
+			[
+				"prece",
+				"presence"
+			],
+			[
+				"do",
+				"double"
+			],
+			[
+				"con",
+				"const"
+			],
+			[
+				"T",
+				"TUintVector"
+			],
+			[
+				"tot",
+				"total_kmers"
+			],
+			[
+				"midd",
+				"middle_kamer"
+			],
+			[
+				"he",
+				"line-height"
+			],
+			[
+				"mi",
+				"united.min.css"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"margi",
+				"margin-right"
+			],
+			[
+				"fq",
+				"fq_files"
+			],
+			[
+				"gen",
+				"genId"
+			],
+			[
+				"ge",
+				"Getopt"
+			],
+			[
+				"lengh",
+				"length"
+			],
+			[
+				"script",
+				"scriptNameSize"
+			],
+			[
+				"scrip",
+				"scriptName"
+			],
+			[
+				"new",
+				"newLength"
+			],
+			[
+				"trun",
+				"truncatedInSeq"
+			],
+			[
+				"in",
+				"inSeq"
+			],
+			[
+				"jp",
+				"pic_01.resized.jpg\tw:310 h:310"
+			],
+			[
+				"kmer_",
+				"kmer_coverage"
+			],
+			[
+				"kme",
+				"kmer_coverage"
+			],
+			[
+				"FILE",
+				"FIELD_SEPARATOR"
+			],
+			[
+				"getI",
+				"getInferredSt"
+			],
+			[
+				"TS",
+				"TStringVector"
+			],
+			[
+				"inferred",
+				"inferred_profile"
+			],
+			[
+				"ce",
+				"cerr"
+			],
+			[
+				"ST",
+				"ST_PREDICTED"
+			],
+			[
+				"GET",
+				"getPredictedSt"
+			],
+			[
+				"Gene",
+				"GeneDetector.h"
+			],
+			[
+				"Kmer",
+				"KmerMatcher.h"
+			],
+			[
+				"program",
+				"program_name"
+			],
+			[
+				"progr",
+				"program_description"
+			],
+			[
+				"FIEL",
+				"FIELD_SEPARATOR"
+			],
+			[
+				"counts",
+				"counts_vector"
+			],
+			[
+				"TCo",
+				"TCountPair"
+			],
+			[
+				"SEPA",
+				"FILE_SEPARATOR"
+			],
+			[
+				"run",
+				"runMlstIndexer"
+			],
+			[
+				"MLS",
+				"MLST_MODE"
+			],
+			[
+				"proce",
+				"processGeneDetectorConfigFile"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+					""
+				],
+				[
+					"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+					""
+				],
+				[
+					"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/Markdown Preview/Markdown.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Markdown Preview/Markdown.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/MarkdownPreview/Markdown.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/MarkdownPreview/Markdown.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					""
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Re-run sketch"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Run sketch (Processing 3 only)"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Run sketch fullscreen"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Export sketch as application"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Kill running sketches"
+				]
+			],
+			[
+				"Packages/Processing/Build Systems/Processing.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"colo",
+				"Color Picker"
+			],
+			[
+				"Easy",
+				"EasyClangComplete: Settings"
+			],
+			[
+				"clang",
+				"EasyClangComplete: Settings"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"mar",
+				"Markdown Preview: Save to HTML"
+			],
+			[
+				"pic",
+				"Color Picker: Insert Color"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Mar",
+				"Markdown Preview: Open Markdown Cheat sheet"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: lis",
+				"Package Control: List Packages"
+			],
+			[
+				"prev",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"marl",
+				"Markdown Preview: Save to HTML"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"isnta",
+				"Package Control: Install Package"
+			],
+			[
+				":line",
+				"Package Control: List Unmanaged Packages"
+			],
+			[
+				"apack",
+				"Package Control: List Packages"
+			],
+			[
+				"pre",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"Insta",
+				"Package Control: Install Package"
+			],
+			[
+				"intall",
+				"Package Control: Install Package"
+			],
+			[
+				"Goto",
+				"Goto Documentation"
+			],
+			[
+				"PackageRe",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"preview",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"\t",
+				"Markdown Preview: Preview in Browser"
+			]
+		],
+		"width": 615.0
+	},
+	"console":
+	{
+		"height": 210.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/hspitia/.zprezto/modules/prompt/functions/prompt_hspitia_setup",
+		"/home/hspitia/.zprezto/.gitignore",
+		"/media/hspitia/MyPassport/Data/documentos/univalle/Pregrado/Asignaturas/IPOO/IPOO/Talleres/Taller-3/GeneradorCodigoClase/ClaseCpp.java",
+		"/media/hspitia/MyPassport/Data/documentos/univalle/Pregrado/Asignaturas/IPOO/IPOO/Talleres/Taller-3/GeneradorCodigoClase/GeneradorCodigoClase.java",
+		"/media/hspitia/MyPassport/Data/documentos/univalle/Pregrado/Asignaturas/IPOO/IPOO/Talleres/Taller-3/GeneradorCodigoClase/Gui.java",
+		"/media/hspitia/MyPassport/Data/documentos/univalle/Pregrado/Asignaturas/IPOO/IPOO/Talleres/Taller-3/GeneradorCodigoClase/ClaseJava.java",
+		"/home/hspitia/projects/autojsoncxx/autojsoncxx/userdef.hpp",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.114,user=hfen3/projects/home/hfen3/.common.config.sh",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.114,user=hfen3/projects/home/hfen3/.customrc.sh",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.114,user=hfen3/projects/home/hfen3/.bashrc",
+		"/home/hspitia/.dotfiles/files/gitconfig",
+		"/home/hspitia/.dotfiles/setup_configuration.sh",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.114,user=hfen3/projects/home/hfen3/.bash_profile",
+		"/home/hspitia/.dotfiles/.gitignore",
+		"/home/hspitia/.dotfiles/files/server.customrc.sh",
+		"/home/hspitia/.dotfiles/files/desktop.customrc.sh",
+		"/home/hspitia/.dotfiles/files/common.config.sh",
+		"/home/hspitia/.dotfiles/scripts/install.prezto.zsh",
+		"/home/hspitia/.dotfiles/files/server.bashrc",
+		"/home/hspitia/.dotfiles/files/desktop.bashrc",
+		"/home/hspitia/.customrc.sh",
+		"/home/hspitia/.dotfiles/files/common.variables.sh",
+		"/home/hspitia/.dotfiles/files/common.aliases.sh",
+		"/home/hspitia/.dotfiles/files/desktop.aliases.sh",
+		"/home/hspitia/projects/qt_seqan/ setting.cpp",
+		"/home/hspitia/projects/sting/src/Mr Anal",
+		"/home/hspitia/projects/archive_test/test.cpp",
+		"/home/hspitia/projects/sting/src/custom_utils.hpp",
+		"/home/hspitia/projects/sting/src/Indexer.h",
+		"/home/hspitia/projects/sting/src/Indexer.cpp",
+		"/home/hspitia/projects/sting/src/Typer.cpp",
+		"/home/hspitia/projects/sting/src/types.hpp",
+		"/home/hspitia/projects/qt_seqan/CMakeLists.txt",
+		"/home/hspitia/projects/qt_seqan/build/release/cleanCmakeConf.sh",
+		"/home/hspitia/projects/qt_seqan/configwin.h",
+		"/home/hspitia/projects/qt_seqan/MyProject.cpp",
+		"/home/hspitia/projects/qt_seqan/configwin.cpp",
+		"/home/hspitia/projects/qt_seqan/utils/scripts/cleanCmakeConf.sh",
+		"/home/hspitia/projects/qt_seqan/build/release/runCmake.sh",
+		"/home/hspitia/.cache/.fr-4cv4Pt/OpenMS-2.3.0/CMakeLists.txt",
+		"/home/hspitia/projects/sting/src/dir_utils.hpp",
+		"/home/hspitia/projects/sting/src/.stdafx.c++.pch",
+		"/home/hspitia/Dropbox/gatech/classes/358652829.edited.txt",
+		"/home/hspitia/projects/sting/src/DataTable.h",
+		"/home/hspitia/projects/sting/include/BST/BST.h",
+		"/home/hspitia/projects/sting/include/gzstream/gzstream.h",
+		"/home/hspitia/.zshrc",
+		"/home/hspitia/projects/WebSTing/sting_webApp/FaSTing_prod/static/resources/scripts/Typer.py",
+		"/home/hspitia/projects/WebSTing/sting_webApp/cronTask.sh",
+		"/home/hspitia/moor/test/test_compress.cpp",
+		"/home/hspitia/moor/test/test2/vector",
+		"/home/hspitia/moor/test/test2/list",
+		"/home/hspitia/projects/WebSTing/sting_webApp/FaSTing_prod/static/resources/scripts/updateTyperDb.sh",
+		"/home/hspitia/projects/sting/scripts/db_util.py",
+		"/home/hspitia/projects/sting/scripts/dbases.xml",
+		"/run/user/1000/gvfs/sftp:host=130.207.171.32,user=hfen3/nethome/hfen3/public_html/readme.txt",
+		"/run/user/1000/gvfs/sftp:host=130.207.171.32,user=hfen3/nethome/hfen3/public_html/git_cheatsheet.html",
+		"/home/hspitia/projects/sting/scripts/pubmlst_util.py",
+		"/home/hspitia/projects/WebSTing/sting_webApp/cronJob.sh",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/data/sting/testing/stringMLST/stringMLST.py",
+		"/home/hspitia/.mozilla/firefox/grpevc2w.default/chrome/userChrome.css",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/manuscript_material/technical_details.md",
+		"/home/hspitia/projects/sting-gui/filedownloader.cpp",
+		"/home/hspitia/projects/sting-gui/downloaderworker.cpp",
+		"/home/hspitia/.dotfiles/scripts/config.iptables.sh",
+		"/home/hspitia/.dotfiles/files/ip_blacklist.txt",
+		"/home/hspitia/.dotfiles/scripts/file.txt",
+		"/home/hspitia/.dotfiles/config.iptables.sh",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/achande3/pubmlst_nm.txt",
+		"/home/hspitia/encfs.txt",
+		"/home/hspitia/Dropbox/Images/palettes/colorscheme _01.css",
+		"/home/hspitia/.config/solaar/config.json",
+		"/home/hspitia/projects/test_sting/detector/card/prioritary_who_set/final_set/test_time.pl",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/hfen3/projects/test_sting/detector/card/prioritary_who_set/final_set/pipeline.sh",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/data/sting/testing/stringMLST/getTimeAndResults.sh",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/hfen3/projects/test_sting/detector/card/prioritary_who_set/final_set/test_detector.pl",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/hfen3/projects/test_sting/detector/card/prioritary_who_set/final_set/filterAndFormatBlastResults.sh",
+		"/home/hspitia/projects/test_sting/detector/card/prioritary_who_set/final_set/filterAndFormatBlastResults.sh",
+		"/home/hspitia/projects/test_sting/detector/card/prioritary_who_set/final_set/pipeline.sh",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/hfen3/projects/test_sting/detector/card/prioritary_who_set/final_set/test_time.pl",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/hfen3/projects/test_sting/detector/card/prioritary_who_set/final_set/formatCardDbFile.sh",
+		"/home/hspitia/projects/test_sting/detector/card/prioritary_who_set/final_set/formatCardDbFile.sh",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/hfen3/projects/test_sting/detector/card/prioritary_who_set/final_set/db/data/geneNames.txt",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/hfen3/projects/test_sting/detector/card/prioritary_who_set/final_set/db/data/names.txt",
+		"/home/hspitia/projects/WebSTing/asmDemo/runCelery.sh",
+		"/home/hspitia/projects/WebSTing/asmDemo/runServer.sh",
+		"/home/hspitia/projects/sting/src/KmerMatcher.h",
+		"/home/hspitia/projects/sting/src/Typer.h",
+		"/home/hspitia/projects/test_sting/detector/card/prioritary_who_set/db/card_ontology/aro.csv",
+		"/home/hspitia/projects/sting/src/KmerMatcher.cpp",
+		"/home/hspitia/projects/sting/src/data_structures.hpp",
+		"/home/hspitia/Downloads/index.html",
+		"/home/hspitia/projects/test_sting/.gitignore",
+		"/home/hspitia/projects/test_sting/detector/card/prioritary_who_set/final_set/test_10_card/description.md",
+		"/run/user/1000/gvfs/sftp:host=130.207.66.249,user=hfen3/data/home/hfen3/projects/test_sting/detector/card/prioritary_who_set/final_set/run_blast.sh",
+		"/home/hspitia/.software/scripts/templates/template.bash.getopts.sh",
+		"/home/hspitia/.config/sublime-text-3/Packages/User/snippets/bash.cmd_line.sublime-snippet",
+		"/home/hspitia/.software/scripts/templates/template.bash.basic_args.sh",
+		"/home/hspitia/.dotfiles/files/customrc.sh",
+		"/home/hspitia/.software/scripts/generic_operations.sh",
+		"/home/hspitia/projects/test_sting/detector/card/prioritary_who_set/final_set/test_10_card/card_vs_positive.blast.presence.tsv",
+		"/home/hspitia/projects/test_sting/detector/card/prioritary_who_set/final_set/test_10_card/card_vs_positive.unique.blast",
+		"/home/hspitia/.dotfiles/settings/sublime/User/dictionaries/Spanish.txt",
+		"/home/hspitia/.dotfiles/settings/sublime/User/dictionaries/Spanish.dic",
+		"/home/hspitia/.dotfiles/settings/sublime/User/dictionaries/Spanish.aff",
+		"/home/hspitia/.dotfiles/settings/sublime/User/dictionaries/English (American).txt",
+		"/home/hspitia/.dotfiles/settings/sublime/User/dictionaries/English (American).dic",
+		"/home/hspitia/.dotfiles/settings/sublime/User/dictionaries/English (American).aff",
+		"/home/hspitia/projects/test_sting/detector/card/prioritary_who_set/db/card_nucleotide_tags_original_ids.xRef.formatted.tsv",
+		"/home/hspitia/.cache/.fr-74WJg8/Ontology-Download-README.txt",
+		"/media/hspitia/5505-37C0/TIMERSET.txt",
+		"/media/hspitia/9016-4EF8/TIMERSET.txt",
+		"/home/hspitia/projects/sting/Makefile.am",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/typer.v0.23.rmlst.tsv",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/header_cgmlst.tsv",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/typer.v0.23.cgmlst.tsv",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/20nm_rmlst_profile.tsv",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/20nm_rmlst_profile.transposed.tsv",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/header_rmlst.tsv",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/cgmlst.results.tsv",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/rmlst.results.tsv",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/mlst.times.tsv",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/mlst.results.tsv",
+		"/media/hspitia/MyPassport/Data/backup/home/hspitia/.R/snippets/r.snippets",
+		"/media/hspitia/MyPassport/Data/backup/home/hspitia/.R/snippets/markdown.snippets",
+		"/home/hspitia/Dropbox/apps_config/ubuntu/desktop/customrc.sh",
+		"/home/hspitia/.software/scripts/battery_check.sh",
+		"/home/hspitia/Dropbox/gatech/projects/STing/manuscript/data/typer/comparison/mentalist/STs.txt"
+	],
+	"find":
+	{
+		"height": 44.0
+	},
+	"find_in_files":
+	{
+		"height": 119.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 41.0
+	},
+	"input":
+	{
+		"height": 45.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CppBuilder":
+	{
+		"height": 132.0
+	},
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 144.0
+	},
+	"output.exec":
+	{
+		"height": 138.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 86.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 144.0
+	},
+	"pinned_build_system": "",
+	"project": "dotfile.sublime-project",
+	"replace":
+	{
+		"height": 80.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"apps/prototype/src/main.cpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 375.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 669.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 218.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
