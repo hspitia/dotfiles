@@ -6,7 +6,8 @@
 		"destructors",
 		"accessors",
 		"fastq",
-		"Typer"
+		"Typer",
+		"Instantiation"
 	],
 	"auto_complete_delay": 20,
 	"auto_complete_selector": true,
@@ -15,12 +16,12 @@
 	"caret_extra_top": 2,
 	"caret_extra_width": 3,
 	"caret_style": "phase",
-	"color_scheme": "Packages/Theme - Flatland/Flatland Monokai.tmTheme",
+	"color_scheme": "Packages/Colorsublime - Themes/Monokai_Soda.tmTheme",
 	"default_line_ending": "unix",
 	"dictionary": "Packages/User/language/en_US.dic",
 	"flatland_sidebar_tree_xsmall": false,
 	"font_face": "Monaco",
-	"font_size": 13,
+	"font_size": 14,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
@@ -33,7 +34,9 @@
 		"EasyClangComplete",
 		"Emmet",
 		"Generic Config",
-		"GitGutter",
+		"Gutter Color",
+		"MarkdownEditing",
+		"MarkdownHighlighting",
 		"MarkdownLivePreview",
 		"MarkdownPreview",
 		"MarkdownTOC",
@@ -42,6 +45,8 @@
 		"ShellScriptImproved",
 		"SideBarEnhancements",
 		"SublimeLinter",
+		"SublimeLinter-contrib-perl",
+		"SublimeLinter-pyflakes",
 		"Vintage"
 	],
 	"ignored_words":

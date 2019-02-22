@@ -1,0 +1,12 @@
+<snippet>
+    <content><![CDATA[
+def __init__(self${1:,param}):
+    ${2:pass}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>init</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.python</scope>
+    <!-- Optional: Set a description for the snippet -->
+    <description>init method</description>
+</snippet>

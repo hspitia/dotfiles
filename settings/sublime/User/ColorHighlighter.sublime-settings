@@ -21,6 +21,10 @@
 		".txt",
 		".xml"
 	],
+	"icon_factory": {
+        "convert_command": "/usr/bin/convert",
+        "convert_timeout": 5
+    },
 	"ha_style": "filled",
 	"search_colors_in":
 	{
@@ -58,7 +62,7 @@
 				},
 				"gutter_icons":
 				{
-					"enabled": false,
+					"enabled": true,
 					"icon_style": "circle"
 				},
 				"phantoms":

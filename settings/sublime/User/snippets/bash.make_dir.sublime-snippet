@@ -1,0 +1,15 @@
+<snippet>
+    <content><![CDATA[
+if [ ! -d  "${1:dirName}" ]; then
+    mkdir -p "${1:dirName}"
+fi
+${0}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>smkd</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.shell</scope>
+    <!-- Optional: Set a description for the snippet -->
+    <description>Create a directory checking if it does not exist</description>
+</snippet>
+

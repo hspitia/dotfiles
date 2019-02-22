@@ -5810,3 +5810,18 @@
 1530727552932:geom_tile(aes(x=Actual,y=Predicted),data=subset(confusion, as.character(Actual)==as.character(Predicted)), color="black",size=0.3, fill="black", alpha=0)
 1530727552936:#render
 1530727552936:tile
+1537320126884:library(ggplot2)
+1537320131227:ggplot(diamonds, aes(carat)) +
+1537320131228:geom_histogram()
+1537320169679:ggplot(diamonds, aes(carat)) +
+1537320169680:geom_histogram(breaks = c(0, 1, 2))
+1537320183006:ggplot(diamonds, aes(carat)) +
+1537320183006:geom_histogram(breaks = c(0, 0.5, 2))
+1537320323463:simple <-
+1537320323464:data.frame(x = rep(1:10, each = 2))
+1537320327108:simple
+1537320330813:base <-
+1537320330814:ggplot(simple, aes(x)) # By default, right = FALSE intervals are of the form [a, b)
+1537320334811:base + stat_bin(binwidth = 1, drop = FALSE, right = FALSE, col = "black") # If right = TRUE, and intervals are of the form (a, b]
+1537320339974:base + stat_bin(binwidth = 1, drop = FALSE, right = TRUE, col = "black")
+1537320526024:seq(20, 50, by=2)

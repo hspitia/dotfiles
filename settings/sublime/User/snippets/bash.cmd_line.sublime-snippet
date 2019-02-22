@@ -3,7 +3,7 @@
 # ${3:echo} ${4:-e} "${2:Message}"
 cmd="${1:command}"
 ${3:echo} \$cmd;
-eval \$cmd;
+# eval \$cmd;
 # ${3:echo} ${4:-e} "${5:Done!}"
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
