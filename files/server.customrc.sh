@@ -2,6 +2,7 @@
 
 # CUSTOM CONFIGURATION
 ################################################################################
+
 # Common configuration (aliases, variables and functions)
 source .common.config.sh;
 
@@ -12,6 +13,7 @@ source .common.config.sh;
 # ==============================================================================
 # Variables
 # ==============================================================================
+export LOCAL_SOFTWARE=$HOME/software.new;
 export ENVEOMICS=$LOCAL_SOFTWARE/enveomics;
 export ENV_SCRIPTS=$ENVEOMICS/Scripts;
 
