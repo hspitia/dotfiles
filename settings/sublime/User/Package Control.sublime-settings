@@ -16,6 +16,7 @@
 	],
 	"installed_packages":
 	[
+		"Align Arguments",
 		"Alignment",
 		"All Autocomplete",
 		"Anaconda",
@@ -43,6 +44,7 @@
 		"FileSystem Autocompletion",
 		"Generic Config",
 		"Git",
+		"Git Conflict Resolver",
 		"GitHub Markdown Snippets",
 		"Google Spell Check",
 		"GotoDocumentation",
