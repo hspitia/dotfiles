@@ -1,0 +1,11 @@
+<snippet>
+    <content><![CDATA[
+print('\{\}${1:\{\}}'.format(${2:var1}))
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>pr</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.python</scope>
+    <!-- Optional: Set a description for the snippet -->
+    <description>init method</description>
+</snippet>
