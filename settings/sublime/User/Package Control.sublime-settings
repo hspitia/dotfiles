@@ -2,16 +2,7 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
-		"BracketHighlighter",
-		"ColorPicker",
-		"DoxyDoxygen",
-		"Emmet",
-		"MarkdownLivePreview",
 		"MarkdownPreview",
-		"MarkdownTOC",
-		"PackageResourceViewer",
-		"Processing",
-		"ShellScriptImproved",
 		"SideBarEnhancements"
 	],
 	"installed_packages":

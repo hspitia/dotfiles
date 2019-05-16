@@ -20,12 +20,15 @@ alias vd='nmcli con down id gatech'
 
 export PATH="$COMMON_PATH_VARS:$PATH"
 
+export JULIA="$LOCAL_SOFTWARE/julia-1.1.0/bin"
+export PATH="$JULIA:$PATH"
 # # Perl
 # eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
 # export MANPATH=$HOME/perl5/man:$MANPATH
 
 # Lib path Java
 export LD_LIBRARY_PATH="/usr/lib/jvm/java-8-oracle/lib/amd64:/usr/lib/jvm/java-8-oracle/jre/lib/amd64/server:$LD_LIBRARY_PATH"
+# export JAVA_LD_LIBRARY_PATH="/usr/lib/jvm/java-8-oracle/lib/amd64/server:$JAVA_LD_LIBRARY_PATH"
 
 # ==============================================================================
 # Functions
@@ -43,4 +46,5 @@ export LD_LIBRARY_PATH="/usr/lib/jvm/java-8-oracle/lib/amd64:/usr/lib/jvm/java-8
 # #if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
 # #        source /etc/profile.d/vte.sh
 # #fi
+
 
