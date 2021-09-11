@@ -11,9 +11,6 @@ source $HOME/.common.config.sh;
 alias ec='expressvpn connect smart'
 alias ed='expressvpn disconnect'
 alias prettyjson='python -m json.tool'
-alias vu='nmcli con up id gatech'
-alias vd='nmcli con down id gatech'
-
 # ==============================================================================
 # Variables
 # ==============================================================================
@@ -44,3 +41,18 @@ export LD_LIBRARY_PATH="/usr/lib/jvm/java-8-oracle/lib/amd64:/usr/lib/jvm/java-8
 # #        source /etc/profile.d/vte.sh
 # #fi
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/hspitia/.software/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/hspitia/.software/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/hspitia/.software/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/hspitia/.software/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+export HOST=$(hostname)

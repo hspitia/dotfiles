@@ -37,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -115,36 +115,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-################################################################################
-# CUSTOM CONFIGURATION
-################################################################################
-# ===================================================================
-# Sources
-# ===================================================================
-source $HOME/.customrc.sh;
-
-# ===================================================================
-# Variables
-# ===================================================================
-export GIT_EXTRAS=$CONFIG_UTILS_DIR/gitextras;
-
-# ===================================================================
-# Prompt
-# ===================================================================
-export PS1='[\u@\h \[\e[36m\]\w\[\e[38;5;172m\]$(__git_ps1 " (%s)")\[\e[00m\]]\$ ';
-
-source $GIT_EXTRAS/git-prompt.sh;
-
-linux_bash="$HOME/.ssh/service/ssh-agent"
-if [ -e "$linux_bash" ];then
-setsid "$linux_bash" 2>&1 & disown
-fi
-
-# # added by Anaconda3 installer
-# export PATH="/home/hspitia/.software/anaconda3/bin:$PATH"
-
-# linux_bash="$HOME/.ssh/service/ssh-agent"
-# if [ -e "$linux_bash" ];then
-# setsid "$linux_bash" 2>&1 & disown
-# fi

@@ -1,15 +1,15 @@
-help/library/grDevices/html/pdf.html,R: PDF Graphics Device
-help/library/cowplot/html/plot_grid.html,R: Arrange multiple plots into a grid
-help/library/NULL/help/arrange,arrange
-help/library/dplyr/html/arrange.html,R: Arrange rows by variables
-help/library/base/html/cbind.html,R: Combine R Objects by Rows or Columns
-help/library/stringr/html/str_split.html,R: Split up a string into pieces.
-help/library/ggplot2/html/ggsave.html,R: Save a ggplot (or other grid object) with sensible defaults
-help/library/ggplot2/html/geom_text.html,R: Text
-help/library/base/html/load.html,R: Reload Saved Datasets
-help/library/base/html/save.html,R: Save R Objects
-help/library/dplyr/html/summarise_all.html,R: Summarise and mutate multiple columns.
-help/library/readr/html/read_delim.html,R: Read a delimited file (including csv & tsv) into a tibble
-help/library/NULL/help/sample,sample
-help/library/base/html/sample.html,R: Random Samples and Permutations
-help/library/caret/html/createDataPartition.html,R: Data Splitting functions
+help/library/ggsci/html/pal_d3.html,R: D3.js Color Palettes
+help/library/ggplot2/html/labs.html,"R: Modify axis, legend, and plot labels"
+help/library/ggplot2/html/scale_manual.html,R: Create your own discrete scale
+help/library/rlang/html/string.html,R: Create a string
+help/library/stringr/html/stringr-package.html,"R: stringr: Simple, Consistent Wrappers for Common String..."
+help/library/stringr/html/00Index.html,"R: Simple, Consistent Wrappers for Common String Operations"
+help/library/stringr/html/case.html,R: Convert case of a string.
+help/library/ggplot2/html/element.html,R: Theme elements
+help/library/ggplot2/html/theme.html,R: Modify components of a theme
+help/library/ggplot2/html/geom_smooth.html,R: Smoothed conditional means
+help/library/tidyr/html/spread.html,R: Spread a key-value pair across multiple columns
+help/library/base/html/Round.html,R: Rounding of Numbers
+help/library/base/html/seq.html,R: Sequence Generation
+help/library/base/html/apply.html,R: Apply Functions Over Array Margins
+help/library/base/html/options.html,R: Options Settings
