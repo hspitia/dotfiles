@@ -2,20 +2,12 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
-		"BracketHighlighter",
-		"ColorPicker",
-		"DoxyDoxygen",
-		"Emmet",
-		"MarkdownLivePreview",
 		"MarkdownPreview",
-		"MarkdownTOC",
-		"PackageResourceViewer",
-		"Processing",
-		"ShellScriptImproved",
 		"SideBarEnhancements"
 	],
 	"installed_packages":
 	[
+		"Align Arguments",
 		"Alignment",
 		"All Autocomplete",
 		"Anaconda",
@@ -43,6 +35,7 @@
 		"FileSystem Autocompletion",
 		"Generic Config",
 		"Git",
+		"Git Conflict Resolver",
 		"GitHub Markdown Snippets",
 		"Google Spell Check",
 		"GotoDocumentation",
