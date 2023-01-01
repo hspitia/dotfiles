@@ -1,7 +1,12 @@
+
+automake
+autotools-dev
+cmake
 encfs
 gconf-editor
 gdebi
 git
+gnome-themes-ubuntu
 gnome-tweak-tool
 gparted
 gpick
@@ -11,6 +16,7 @@ htop
 libxml2-dev
 nemo
 numix-icon-theme-circle
+pandoc
 parallel
 pdfshuffler
 pigz

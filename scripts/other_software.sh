@@ -6,10 +6,14 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt install r-base -y
 
-# Google chrome
-wget -O google-chrome-stable_current_amd64.deb "https://www.google.com/chrome/thank-you.html?installdataindex=empty&statcb=0&defaultbrowser=0#"
+# Rstudio
+wget https://rstudio.org/download/latest/stable/desktop/bionic/rstudio-latest-amd64.deb &&
+sudo gdebi rstudio-latest-amd64.deb -y
 
-sudo gdebi --non-interactive google-chrome-stable_current_amd64.deb
+# Google chrome
+# wget -O google-chrome-stable_current_amd64.deb "https://www.google.com/chrome/thank-you.html?installdataindex=empty&statcb=0&defaultbrowser=0#"
+wget "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" &&
+sudo gdebi --non-interactive google-chrome-stable_current_amd64.deb -y
 
 # AnyDesk
 wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -

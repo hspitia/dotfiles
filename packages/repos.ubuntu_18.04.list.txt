@@ -1,23 +1,26 @@
 "deb https://download.sublimetext.com/ apt/stable/"  # Sublime Text 3
-ppa:atareao/atareao  # pomodoro-indicator
-ppa:go-for-it-team/go-for-it-daily  # go for it
-ppa:iefremov/ppa  # ugene
 ppa:libreoffice/ppa  # libreoffice
-ppa:lyx-devel/release  # lyx
 ppa:numix/ppa  # numix theme
 ppa:peterlevi/ppa  # variety
-ppa:tista/adapta #adapta theme
 ppa:webupd8team/java  # java
-ppa:webupd8team/nemo  # nemo 
+ppa:webupd8team/nemo  # nemo
+
+'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+
 
 ## Disabled:
 # "deb http://archive.canonical.com/ ${dist} partner"  
 # "deb https://cran.cnr.Berkeley.edu/bin/linux/ubuntu ${dist}/"  # R language
+# ppa:atareao/atareao  # pomodoro-indicator
 # ppa:freyja-dev/unity-tweak-tool-daily  
 # ppa:gezakovacs/ppa  # unetbootin
+# ppa:go-for-it-team/go-for-it-daily  # go for it
 # ppa:gspreemann/ppa 
+# ppa:iefremov/ppa  # ugene
 # ppa:jfi/psensor-unstable  
 # ppa:linrunner/tlp  # tlp - power management
+# ppa:lyx-devel/release  # lyx
 # ppa:maarten-baert/simplescreenrecorder  # simplescreenrecorder
 # ppa:mank319/go-for-it 
 # ppa:marutter/rrutter  # R language
@@ -25,3 +28,4 @@ ppa:webupd8team/nemo  # nemo
 # ppa:mhsabbagh/greenproject  # green recorder
 # ppa:nathan-renniewaldock/flux  # flux
 # ppa:rvm/smplayer  #smplayer
+# ppa:tista/adapta #adapta theme

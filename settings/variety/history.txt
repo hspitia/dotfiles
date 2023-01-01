@@ -1,61 +1,101 @@
 0
-/home/hspitia/Dropbox/apps_config/wallpapers/newyorkcitybypaulobarcellosjr.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/C9F.jpg
-/usr/share/backgrounds/Crocus_Wallpaper_by_Roy_Tanck.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-597113.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-38225.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-72016.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-227260.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-18662.png
-/home/hspitia/Dropbox/apps_config/wallpapers/SpectacledBear_EN-US11718932626_1920x1080.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallpaper-2474559.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-271670.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/0f2e72e75502d05fcb681496b6d6b6c21722126f6e8ed4dc77ffb468a4915cd6.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-406427.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/8106733638_0f1781a5f3_h.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/screen-shot-2010-11-18-at-3.09.07-pm.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/img4.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/Shiprock_EN-US11357211356_1920x1080.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-11779.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/DulangIsland_EN-US7669462147_1920x1080.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-394035.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/498f917a9bbc3ce7bf061ef6bb2f832aaa37fc813e40c94d4f5f9f23c3567a5b.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/Sandstone.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-223466.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-444.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-6418.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/ShengshanIsland_EN-US13597723185_1920x1080.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-109498.png
-/home/hspitia/Dropbox/apps_config/wallpapers/7527792082_1fc22930d8_o.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/SolDucValley_EN-US10774187238_1920x1080.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/1244174773203.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-394035.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/c2a92038867c66bea6ec99a9dd2e24615617184250d16764e96e9185caf4a3cc.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallpaper-1573652.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/3490913574_80462d1d25_b.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/aaLDZKTh4pY.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-288241.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/679.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/2ba72ec9fc218159f8f11cfc25e27cf24790adad0f9ff67cf7c5916892ed025a.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/hiTlXbs0-ZU.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-263868.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/VirginRiver_EN-US12576178622_1920x1080.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/launchMUOS4_deep.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/34022250692_d15766874c_b.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/fb92bff3fcba8f3c2418756e4f48923c93410b148c4bace95fd698b36a166aa1.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/Denali1920x1200.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-221350.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/15864949435_0cdb710ee1_o.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/big_ea48be0baed406306b2d3adee4e1c5be559076c8.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/photo-1525439989537-9584b5b4deea.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/IguacuFalls1920x1200.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/laba.ws_japan_views__0002.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/iss044e022682Japan.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-121967.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-38205.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/7527830888_584bb95446_o.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-551246.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/16149940475_0370a2c56d_o.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/Skf7HxARcoc.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/ouahu2d.jpg
-/home/hspitia/Dropbox/apps_config/wallpapers/wallhaven-245291.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Thuwal, Saudi Arabia (ID-5635).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/ThreeNightsPerseids3000.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Menlo Park, United States (ID-1740).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/Ngc1316_Turgeon_1300.jpg
+/usr/share/backgrounds/pop/kate-hazen-pop-retro2.png
+/home/hspitia/.config/variety/Downloaded/nasa_apod/CarinaMosaic_Bobillo_1600.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Kane County, United States (ID-1255).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Greece (ID-5480).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Las Vegas, United States (ID-1516).jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.MtTsubakuro_EN-US2985513957_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/EarthAtNight2016_SuomiNPP_13500.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Ajdabiya, Libya (ID-6256).jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.CosmicCliffs_EN-US8727581889_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/JupiterSaturnPeaks_Hofer_1200.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/1c-english-triplet-16.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/PlanetsAligned_Finazzi_3757.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/markarian_FernandoPena2048.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Nice, France (ID-2017).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/PIA24542_fig2.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Drebkau, Germany (ID-1122).jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.GlassOctopus_EN-US6394802515_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Aktogay District, Kazakhstan (ID-5207).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/FlowerRock_Curiosity_1561.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Seattle, United States (ID-1510).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Dubai, United Arab Emirates (ID-5692).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Al Hizam Al Akhdar, Libya (ID-6257).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/RhoOphAntares_Cogo_1024.jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.CircumnavigationAnni_EN-US9635067459_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Palm Desert, United States (ID-1784).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Charlevoix, United States (ID-5043).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/MwMertola_Claro_2000.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/VenusClouds_Akatzuki_960.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Tambon Song Khlong, Thailand (ID-5763).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Tabas, Iran (ID-1964).jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.FlamingoTeacher_EN-US8819896781_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.ChukchiSea_EN-US6494940864_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Arguamul, Spain (ID-5198).jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.BayofBiscay_EN-US8933430968_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/French Polynesia (ID-6222).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Pomeroy, United States (ID-5901).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/CrescentSaturn_cassini_4824.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/NGC4945-Dietmar-Eric-crop.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/2021-04-15_443amLunarFirefall1080P.jpg
+/usr/share/backgrounds/pop/spacex-81773.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/CrescentSaturn_cassini_4824.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/FindTheMoon_soltanolkotabi_1500.jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.MalaysiaTwinTowers_EN-US7848703415_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/IssSunspot_Letian_2400.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Faiyum, Egypt (ID-1718).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/CenA_SofiaPlusB_2480.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Shanghai, China (ID-1169).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/DarkMatter_KipacAmnh_1200.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Iceland (ID-1817).jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.MentonFrance_EN-US3424001829_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Drebkau, Germany (ID-1123).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Tooele County, United States (ID-1056).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Antarctica (ID-1683).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/VLA_Moonset_NIK_0991.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/Walk_Milkyway.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/Pacman_Struble_1222.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/GWaveSources2020Oct_LigoVIrgo_2977.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/Needle_Galaxy_4-7-22.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/SOLARECLIPSE2021FORDISTROHighRes.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Scottsdale, United States (ID-1807).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/MarkariansChainAnvik.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Massah, Libya (ID-6260).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/LLPegasi_HubbleLodge_1926.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/RingColorsOH_Vanderbei_1400.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/ZhurongRover_CNSA_1920.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/67P_210907.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/perseid_iss_4256.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/NGC_6914.jpg
+/usr/share/backgrounds/pop/jared-evans-119758.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Tucson, United States (ID-1701).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Castilla Province, Peru (ID-1797).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Trebujena, Spain (ID-1588).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/mars_saturn_2022_04_04dp.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/pillars8_hst_1518.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Metairie, United States (ID-1936).jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/United States (ID-7003).jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.SeitanLimania_EN-US5452823219_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/Jupiters1_swimmingstormsACasely.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/NGC5775_NraoEnglish_6067.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/241_lorand_fenyes_bubble_m52.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/Arp244-LRGB.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Guerzim, Algeria (ID-1186).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/AncientTreeNCP_Dai.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/ISSlunartransit110320closeup.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/SteveMilkyWay_NasaTrinder_6144.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/TauHerMeteors_Lyu_1280.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/2021-06-10EclipseFlybywm.jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.PeljesacWind_EN-US5380116190_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Akjoujt, Mauritania (ID-6388).jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/VeilDetail_Hubble_10743.jpg
+/home/hspitia/.config/variety/Downloaded/Bing/OHR.MilitaryTattoo_EN-US2404986711_1920x1080.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/PIA24767.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/PaperMoonSolarEclipse_Letian_3000.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/fourmoons_cassini_960.jpg
+/home/hspitia/.config/variety/Downloaded/nasa_apod/StonehengeSun_alexander_4200.jpg
+/home/hspitia/.config/variety/Downloaded/Earth View/Farina, Australia (ID-5855).jpg

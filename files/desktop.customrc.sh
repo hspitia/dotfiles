@@ -15,10 +15,16 @@ alias prettyjson='python -m json.tool'
 # Variables
 # ==============================================================================
 
-export PATH="$COMMON_PATH_VARS:$PATH"
+export PATH="$PATH:$COMMON_PATH_VARS"
 
+export BROWSER_DRIVERS=$LOCAL_SOFTWARE/browser_drivers;
 export JULIA="$LOCAL_SOFTWARE/julia-1.1.0/bin"
-export PATH="$JULIA:$PATH"
+#export TINYTEX=$LOCAL_SOFTWARE/TinyTeX/bin/x86_64-linux;
+
+#export PATH="$TINYTEX:$PATH"
+export PATH="$PATH:$BROWSER_DRIVERS"
+
+
 # # Perl
 # eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
 # export MANPATH=$HOME/perl5/man:$MANPATH

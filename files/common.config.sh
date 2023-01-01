@@ -44,8 +44,8 @@ export LOCAL_SOFTWARE=$HOME/.software;
 export LOCAL_BIN=$LOCAL_SOFTWARE/bin;
 export LOCAL_SCRIPTS=$LOCAL_SOFTWARE/scripts;
 export LOCAL_DIR=$HOME/.local;
-export ANACONDA=$LOCAL_SOFTWARE/anaconda3;
-export ANACONDA_BIN=$LOCAL_SOFTWARE/anaconda3/bin;
+export CONDA=$LOCAL_SOFTWARE/miniforge3;
+export CONDA_BIN=$CONDA/bin;
 
 export CONFIG_DIR=$HOME/.dotfiles;
 export CONFIG_FILES_DIR=$CONFIG_DIR/files;
@@ -62,7 +62,7 @@ export ZPREZTORC=$HOME/.zprestorc;
 
 export KENTUTILS=$LOCAL_SOFTWARE/kentutils;
 
-export COMMON_PATH_VARS=$LOCAL_SOFTWARE:$KENTUTILS:$LOCAL_BIN:$LOCAL_SCRIPTS:$TEMPLATES_DIR:$LOCAL_DIR/bin;
+export COMMON_PATH_VARS=$LOCAL_SOFTWARE:$KENTUTILS::$LOCAL_BIN:$LOCAL_SCRIPTS:$TEMPLATES_DIR:$LOCAL_DIR/bin;
 
 export blast_fields="qseqid sseqid pident length qlen mismatch gapopen qstart qend sstart send evalue bitscore sstrand qcovhsp"
 # ====================================================================
