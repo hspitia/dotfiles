@@ -82,36 +82,36 @@ fi
 # =======================================================
 # Begin of code 
 
-# if [[ "$mode" == "desktop" ]]; then
-#     # Install azsh and git
-#     test -z $(which git) && echo sudo apt install git -y;
-#     test -z $(which zsh) && echo sudo apt install zsh -y;
-#     # sudo apt -y install zsh git
-# fi
+if [[ "$mode" == "desktop" ]]; then
+    # Install azsh and git
+    test -z $(which git) && echo sudo apt install git -y;
+    test -z $(which zsh) && echo sudo apt install zsh -y;
+    # sudo apt -y install zsh git
+fi
 
 
-# # Clone dotfiles
-# test ! -d  "$CONFIG_DIR" && git clone git@github.com:hspitia/dotfiles.git $CONFIG_DIR
+# Clone dotfiles
+test ! -d  "$CONFIG_DIR" && git clone git@github.com:hspitia/dotfiles.git $CONFIG_DIR
 
 
-# # backup files
-# for f in ${BAK_FILES[@]}; do
-#    if [[ -e "$HOME/.${f}" ]]; then
-#        cmd="mv $HOME/.${f} $HOME/.${f}.bak";
-#        echo $cmd;
-#        eval $cmd;
-#    fi
-# done
+# backup files
+for f in ${BAK_FILES[@]}; do
+   if [[ -e "$HOME/.${f}" ]]; then
+       cmd="mv $HOME/.${f} $HOME/.${f}.bak";
+       echo $cmd;
+       eval $cmd;
+   fi
+done
 
-# # ##############################################################################
-# # Prezto
-# # ##############################################################################
-# install prezto from my own fork
-# if [[ "$mode" == "desktop" ]]; then
-#     sudo apt -y install zsh git
-# fi
+# ##############################################################################
+# Prezto
+# ##############################################################################
+install prezto from my own fork
+if [[ "$mode" == "desktop" ]]; then
+    sudo apt -y install zsh git
+fi
 
-# $CONF_SCRIPTS_DIR/install.prezto.zsh
+$CONF_SCRIPTS_DIR/install.prezto.zsh
 
 # ##############################################################################
 # Custom dotfiles
@@ -126,15 +126,15 @@ done
 
 source .zshrc
 
-# # ##############################################################################
-# # Custom folders
-# # ##############################################################################
-# # Scripts
-# if [[ ! -d "${LOCAL_SOFTWARE}" ]]; then
-#     mkdir ${LOCAL_SOFTWARE};
-# fi
+# ##############################################################################
+# Custom folders
+# ##############################################################################
+# Scripts
+if [[ ! -d "${LOCAL_SOFTWARE}" ]]; then
+    mkdir ${LOCAL_SOFTWARE};
+fi
 
-# git clone https://hspitia@bitbucket.org/hspitia/scripts.git ${LOCAL_SCRIPTS}
+git clone https://hspitia@bitbucket.org/hspitia/scripts.git ${LOCAL_SCRIPTS}
 
 # # Sounds
 # ln -s $CONF_SETTINGS_DIR/sounds ${HOME}/.sounds
