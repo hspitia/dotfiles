@@ -124,7 +124,7 @@ for f in $(ls "${CONF_FILES_DIR}/${prefix}".*); do
     eval $cmd;
 done
 
-source .zshrc
+source $HOME/.zshrc
 
 # ##############################################################################
 # Custom folders
