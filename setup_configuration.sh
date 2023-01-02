@@ -134,7 +134,8 @@ if [[ ! -d "${LOCAL_SOFTWARE}" ]]; then
     mkdir ${LOCAL_SOFTWARE};
 fi
 
-git clone https://hspitia@bitbucket.org/hspitia/scripts.git ${LOCAL_SCRIPTS}
+# ### git clone https://hspitia@bitbucket.org/hspitia/scripts.git ${LOCAL_SCRIPTS}
+git clone git@github.com:hspitia/scripts.git ${LOCAL_SCRIPTS}
 
 # # Sounds
 # ln -s $CONF_SETTINGS_DIR/sounds ${HOME}/.sounds
