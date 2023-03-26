@@ -79,50 +79,50 @@ else
     exit 1;
 fi
 
-# =======================================================
-# Begin of code 
+# # =======================================================
+# # Begin of code 
 
-if [[ "$mode" == "desktop" ]]; then
-    # Install azsh and git
-    test -z $(which git) && echo sudo apt install git -y;
-    test -z $(which zsh) && echo sudo apt install zsh -y;
-    # sudo apt -y install zsh git
-fi
-
-
-# Clone dotfiles
-test ! -d  "$CONFIG_DIR" && git clone git@github.com:hspitia/dotfiles.git $CONFIG_DIR
+# if [[ "$mode" == "desktop" ]]; then
+#     # Install azsh and git
+#     test -z $(which git) && echo sudo apt install git -y;
+#     test -z $(which zsh) && echo sudo apt install zsh -y;
+#     # sudo apt -y install zsh git
+# fi
 
 
-# backup files
-for f in ${BAK_FILES[@]}; do
-   if [[ -e "$HOME/.${f}" ]]; then
-       cmd="mv $HOME/.${f} $HOME/.${f}.bak";
-       echo $cmd;
-       eval $cmd;
-   fi
-done
+# # Clone dotfiles
+# test ! -d  "$CONFIG_DIR" && git clone git@github.com:hspitia/dotfiles.git $CONFIG_DIR
 
-# ##############################################################################
-# Prezto
-# ##############################################################################
-install prezto from my own fork
-if [[ "$mode" == "desktop" ]]; then
-    sudo apt -y install zsh git
-fi
 
-$CONF_SCRIPTS_DIR/install.prezto.zsh
+# # backup files
+# for f in ${BAK_FILES[@]}; do
+#    if [[ -e "$HOME/.${f}" ]]; then
+#        cmd="mv $HOME/.${f} $HOME/.${f}.bak";
+#        echo $cmd;
+#        eval $cmd;
+#    fi
+# done
 
-# ##############################################################################
-# Custom dotfiles
-# ##############################################################################
+# # ##############################################################################
+# # Prezto
+# # ##############################################################################
+# install prezto from my own fork
+# if [[ "$mode" == "desktop" ]]; then
+#     sudo apt -y install zsh git
+# fi
 
-for f in $(ls "${CONF_FILES_DIR}/${prefix}".*); do
-    outName=$(basename $f | sed 's/'${prefix}'//g')
-    cmd="ln -s ${f} $HOME/${outName}";
-    echo $cmd;
-    eval $cmd;
-done
+# $CONF_SCRIPTS_DIR/install.prezto.zsh
+
+# # ##############################################################################
+# # Custom dotfiles
+# # ##############################################################################
+
+# for f in $(ls "${CONF_FILES_DIR}/${prefix}".*); do
+#     outName=$(basename $f | sed 's/'${prefix}'//g')
+#     cmd="ln -s ${f} $HOME/${outName}";
+#     echo $cmd;
+#     eval $cmd;
+# done
 
 source $HOME/.zshrc
 
