@@ -11,15 +11,20 @@ source $HOME/.common.config.sh;
 alias ec='expressvpn connect smart'
 alias ed='expressvpn disconnect'
 alias prettyjson='python -m json.tool'
+# alias uvpn='sudo openconnect -b --user hespitianavarro@ufl.edu -i uf_vpn vpn.ufl.edu'
+alias uvpn='echo "Esh1ooc.i8" | sudo openconnect -b --user hespitianavarro@ufl.edu --passwd-on-stdin -i uf_vpn vpn.ufl.edu'
+alias dvpn='sudo killall openconnect'
+alias condemeter='ssh hespitia@10.251.28.155'
+
 # ==============================================================================
 # Variables
 # ==============================================================================
 
 export PATH="$PATH:$COMMON_PATH_VARS"
-
 export BROWSER_DRIVERS=$LOCAL_SOFTWARE/browser_drivers;
 export JULIA="$LOCAL_SOFTWARE/julia-1.1.0/bin"
 #export TINYTEX=$LOCAL_SOFTWARE/TinyTeX/bin/x86_64-linux;
+export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 #export PATH="$TINYTEX:$PATH"
 export PATH="$PATH:$BROWSER_DRIVERS"
