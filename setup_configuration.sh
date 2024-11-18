@@ -116,7 +116,8 @@ $CONF_SCRIPTS_DIR/install.prezto.zsh
 
 # wget -O $HOME/prompt_hspitia_setup https://gist.githubusercontent.com/hspitia/d539d481f726187ae2641aea849924ed/raw/6389bda40e55e8366f71633d8482fcbe2b3a79c2/prompt_hspitia_setup
 # mv $HOME/prompt_hspitia_setup .zprezto/modules/prompt/functions
-ln -s "${CONF_FILES_DIR}/${prefix}.prompt_hspitia_setup" "$HOME/.zprezto/modules/prompt/functions/prompt_hspitia_setup"
+# ln -s "${CONF_FILES_DIR}/${prefix}.prompt_hspitia_setup" "$HOME/.zprezto/modules/prompt/functions/prompt_hspitia_setup"
+ln -s "${CONF_SETTINGS_DIR}/prezto/prompt_hspitia_setup" "$HOME/.zprezto/modules/prompt/functions/prompt_hspitia_setup"
 
 # ##############################################################################
 # Custom dotfiles
