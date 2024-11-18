@@ -30,7 +30,7 @@ CONF_UTILS_DIR="$CONFIG_DIR/utils";
 CONF_SCRIPTS_DIR="$CONFIG_DIR/scripts";
 CONF_PACKAGES_DIR="$CONFIG_DIR/packages";
 BAK_FILES=(bashrc condarc common.config.sh customrc.sh gitconfig zprezto zshrc)
-LINK_FILES=(bashrc condarc common.config.sh customrc.sh gitconfig)
+LINK_FILES=(bashrc condarc common.config.sh customrc.sh gitconfig zshrc)
 
 # Options
 mode=
@@ -94,19 +94,19 @@ fi
 test ! -d  "$CONFIG_DIR" && git clone git@github.com:hspitia/dotfiles.git $CONFIG_DIR
 
 
-# # backup files
-# for f in ${BAK_FILES[@]}; do
-#    if [[ -e "$HOME/.${f}" ]]; then
-#        cmd="mv $HOME/.${f} $HOME/.${f}.bak";
-#        echo $cmd;
-#        eval $cmd;
-#    fi
-# done
+# backup files
+for f in ${BAK_FILES[@]}; do
+   if [[ -e "$HOME/.${f}" ]]; then
+       cmd="mv $HOME/.${f} $HOME/.${f}.bak";
+       echo $cmd;
+       eval $cmd;
+   fi
+done
 
 # ##############################################################################
 # Prezto
 # ##############################################################################
-# install prezto from my own fork
+# install prezto
 if [[ "$prefix" == "desktop" ]]; then
     # sudo apt -y install zsh git
     test ! -d "${ZDOTDIR:-$HOME}/.zprezto" && $CONF_SCRIPTS_DIR/install.prezto.zsh
@@ -114,16 +114,20 @@ fi
 
 $CONF_SCRIPTS_DIR/install.prezto.zsh
 
-# # ##############################################################################
-# # Custom dotfiles
-# # ##############################################################################
+# wget -O $HOME/prompt_hspitia_setup https://gist.githubusercontent.com/hspitia/d539d481f726187ae2641aea849924ed/raw/6389bda40e55e8366f71633d8482fcbe2b3a79c2/prompt_hspitia_setup
+# mv $HOME/prompt_hspitia_setup .zprezto/modules/prompt/functions
+ln -s "${CONF_FILES_DIR}/${prefix}.prompt_hspitia_setup" "$HOME/.zprezto/modules/prompt/functions/prompt_hspitia_setup"
 
-# for f in $(ls "${CONF_FILES_DIR}/${prefix}".*); do
-#     outName=$(basename $f | sed 's/'${prefix}'//g')
-#     cmd="ln -s ${f} $HOME/${outName}";
-#     echo $cmd;
-#     eval $cmd;
-# done
+# ##############################################################################
+# Custom dotfiles
+# ##############################################################################
+
+for f in $(ls "${CONF_FILES_DIR}/${prefix}".*); do
+    outName=$(basename $f | sed 's/'${prefix}'//g')
+    cmd="ln -s ${f} $HOME/${outName}";
+    echo $cmd;
+    eval $cmd;
+done
 
 source $HOME/.zshrc
 
@@ -156,35 +160,6 @@ git clone git@github.com:hspitia/scripts.git ${LOCAL_SCRIPTS}
 # # ln -s $CONF_SETTINGS_DIR/rstudio-desktop ${HOME}/.rstudio-desktop
 
 
-# # ##############################################################################
-# # Custom folders
-# # ##############################################################################
-# # Scripts
-# if [[ ! -d "${LOCAL_SOFTWARE}" ]]; then
-#     mkdir ${LOCAL_SOFTWARE};
-# fi
-
-# # ### git clone https://hspitia@bitbucket.org/hspitia/scripts.git ${LOCAL_SCRIPTS}
-# git clone git@github.com:hspitia/scripts.git ${LOCAL_SCRIPTS}
-
-# # # Sounds
-# # ln -s $CONF_SETTINGS_DIR/sounds ${HOME}/.sounds
-
-# # # Variety
-# # if [ -d "${HOME}/.config/variety" ]; then
-# #     mv ${HOME}/.config/variety ${HOME}/.config/variety.bak
-# # fi
-
-# # ln -s $CONF_SETTINGS_DIR/variety ${HOME}/.config/variety
-
-# # # # RStudio
-# # # if [ -d "${HOME}/.rstudio-desktop" ]; then
-# # #     mv ${HOME}/.rstudio-desktop ${HOME}/.rstudio-desktop.bak
-# # # fi
-
-# # # ln -s $CONF_SETTINGS_DIR/rstudio-desktop ${HOME}/.rstudio-desktop
-
-
 # # # ##############################################################################
 # # # Packages
 # # # ##############################################################################
@@ -197,18 +172,18 @@ git clone git@github.com:hspitia/scripts.git ${LOCAL_SCRIPTS}
 # ##############################################################################
 # Custom configuration
 # ##############################################################################
-# Gnome terminal configuraton
-dconf reset -f /org/gnome/terminal/
-dconf load /org/gnome/terminal/ < ${CONF_SETTINGS_DIR}/gnome_terminal.settings.txt
-# dconf write /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top true
+# # Gnome terminal configuraton
+# dconf reset -f /org/gnome/terminal/
+# dconf load /org/gnome/terminal/ < ${CONF_SETTINGS_DIR}/gnome_terminal.settings.txt
+# # dconf write /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top true
 
-# Nemo file manager configuration
-gsettings set org.nemo.extensions.nemo-terminal default-visible false # disable terminal as default
-gsettings set org.nemo.preferences start-with-dual-pane true # open dual pane as default
+# # Nemo file manager configuration
+# gsettings set org.nemo.extensions.nemo-terminal default-visible false # disable terminal as default
+# gsettings set org.nemo.preferences start-with-dual-pane true # open dual pane as default
 
-# Fix Nemo icon
-cp /usr/share/applications/nemo.desktop $HOME/.local/share/applications
-sudo mv /usr/share/applications/nemo.desktop /usr/share/applications/nemo.desktop.bak
-sed -i 's/Icon=folder/Icon=nemo/g' $HOME/.local/share/applications/nemo.desktop
+# # Fix Nemo icon
+# cp /usr/share/applications/nemo.desktop $HOME/.local/share/applications
+# sudo mv /usr/share/applications/nemo.desktop /usr/share/applications/nemo.desktop.bak
+# sed -i 's/Icon=folder/Icon=nemo/g' $HOME/.local/share/applications/nemo.desktop
 
 # End of code =======================================================
