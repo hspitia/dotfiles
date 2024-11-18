@@ -6,7 +6,8 @@ if [[ -d "${ZDOTDIR:-$HOME}/.zprezto" ]]; then
     eval $cmd
 fi
 
-cmd="git clone --recursive https://github.com/hspitia/prezto.git "${ZDOTDIR:-$HOME}/.zprezto;
+# cmd="git clone --recursive https://github.com/hspitia/prezto.git "${ZDOTDIR:-$HOME}/.zprezto;
+cmd="git clone --recursive https://github.com/sorin-ionescu/prezto.git ${ZDOTDIR:-$HOME}/.zprezto";
 echo $cmd;
 eval $cmd;
 
@@ -15,7 +16,7 @@ setopt EXTENDED_GLOB
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
     cmd="ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}
     echo $cmd;
-    # eval $cmd;
+    eval $cmd;
 done
 
 # update repo and submodules
