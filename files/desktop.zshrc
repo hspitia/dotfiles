@@ -7,6 +7,7 @@
 
 # zmodload zsh/zprof
 
+# Load macgnu
 test -f "$HOME/.macgnu" && source "$HOME/.macgnu"
 
 # Source Prezto.
@@ -50,4 +51,24 @@ test -f "$CONFIG_SCRIPTS_DIR/config.history.zsh" && source "$CONFIG_SCRIPTS_DIR/
 
 # zprof
 
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/canolab_13/.software/miniforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/canolab_13/.software/miniforge/etc/profile.d/conda.sh" ]; then
+        . "/Users/canolab_13/.software/miniforge/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/canolab_13/.software/miniforge/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/Users/canolab_13/.software/miniforge/etc/profile.d/mamba.sh" ]; then
+    . "/Users/canolab_13/.software/miniforge/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
 

@@ -1,0 +1,134 @@
+#
+# A single line theme with Git information on the left based on sorin and jerome
+# themes.
+#
+# Initial Authors:
+#   Steve Losh <steve@stevelosh.com>
+#   Bart Trojanowski <bart@jukie.net>
+#   Brian Carper <brian@carper.ca>
+#   steeef <steeef@gmail.com>
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Yan Pritzker <yan@pritzker.ws>
+#
+# Screenshots:
+#   http://i.imgur.com/gLgVp6Y.png
+#
+# Last modifications author:
+#   Hector Espitia <hspitia@gmail.com>
+
+root_prompt_char="#"
+# user_prompt_char="▸";
+# user_prompt_char="►";
+user_prompt_char="▶"
+git_status_char="●"
+# git_clean_char="✔";
+# git_dirty_char="✗";
+
+function prompt_char {
+  if [ $UID -eq 0 ]; then
+    # _prompt_char_=${root_prompt_char};
+    echo ${root_prompt_char}
+  else
+    # _prompt_char_=${user_prompt_char};
+    echo ${user_prompt_char}
+  fi
+}
+
+function prompt_hspitia_precmd {
+  # Get Git repository information.
+  if (($ + functions[git - info])); then
+    git-info
+  fi
+
+  # # Get Ruby information.
+  # if (( $+functions[ruby-info] )); then
+  #   ruby-info
+  # fi
+}
+
+function prompt_hspitia_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent sp subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
+  # Add hook to set up prompt parameters before each command.
+  add-zsh-hook precmd prompt_hspitia_precmd
+
+  # Use extended color pallete if available.
+  if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
+    _prompt_hspitia_colors=(
+      # "%F{81}"  # Turquoise
+      "%F{032}" # Blue
+      # "%F{166}" # Orange
+      "%F{172}" # Orange
+      "%F{135}" # Purple
+      # "%F{161}" # Hotpink
+      "%F{1}" # Red
+      # "%F{124}" # Red
+      # "%F{118}" # Limegreen
+      "%F{028}" # Green
+      "%F{240}" # Grey
+      "%F{056}" # Purple
+    )
+  else
+    _prompt_hspitia_colors=(
+      "%F{cyan}"
+      "%F{yellow}"
+      "%F{magenta}"
+      "%F{red}"
+      "%F{green}"
+      "%F{white}"
+    )
+  fi
+
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info' verbose 'yes'
+  zstyle ':prezto:module:git:info:branch' format "${_prompt_hspitia_colors[2]}%b%f"
+  # zstyle ':prezto:module:git:info:added' format "${_prompt_hspitia_colors[5]}●%f"
+  # zstyle ':prezto:module:git:info:deleted' format "${_prompt_hspitia_colors[2]}●%f"
+  # zstyle ':prezto:module:git:info:modified' format "${_prompt_hspitia_colors[4]}●%f"
+  # zstyle ':prezto:module:git:info:untracked' format "${_prompt_hspitia_colors[1]}●%f"
+  # Complete based on sorin setup
+  # zstyle ':prezto:module:git:info:keys' format 'prompt' "${_prompt_hspitia_colors[2]}(%f"'%b%d%a%m%u'"${_prompt_hspitia_colors[2]})%f"
+
+  # Minimalist based on jerome setup
+  zstyle ':prezto:module:git:info:clean' format " ${_prompt_hspitia_colors[5]}${git_status_char}%f"
+  zstyle ':prezto:module:git:info:dirty' format " ${_prompt_hspitia_colors[4]}${git_status_char}%f"
+
+  zstyle ':prezto:module:git:info:keys' format \
+    'prompt' '${_prompt_hspitia_colors[2]}(%f$(coalesce "%b" "%p" "%c")${git_info[rprompt]}%s${_prompt_hspitia_colors[2]})%f' \
+    'rprompt' '%C%D'
+
+  # # Set ruby-info parameters.
+  # zstyle ':prezto:module:ruby:info:version' format '[%v]'
+
+  # machine name in red color when connected to thebeast server
+  local machine_color=${_prompt_hspitia_colors[5]}
+  if [[ "$(hostname)" == "biojordan" ]]; then
+    machine_color=${_prompt_hspitia_colors[4]}
+  elif [[ "$(hostname)" == "bioappsting" ]]; then
+    machine_color=${_prompt_hspitia_colors[2]}
+  fi
+
+  # Define return status
+  # local ret_status="%(?:%{${_prompt_hspitia_colors[5]}${user_prompt_char}%f%}:%{${_prompt_hspitia_colors[4]}${user_prompt_char}%f%})"
+  local ret_status="%(?:%{${_prompt_hspitia_colors[5]}%}$(prompt_char)%f:%{${_prompt_hspitia_colors[4]}%}$(prompt_char)%f)"
+
+  # Define prompt elements
+  local user_str="${_prompt_hspitia_colors[5]}%n%f"
+  local machine_str="${machine_color}%m%f"
+  local at_str="${_prompt_hspitia_colors[6]}@%f"
+  local colon_str="${_prompt_hspitia_colors[6]}:%f"
+  local pwd_str="${_prompt_hspitia_colors[1]}%~%f "
+  local status_str="${ret_status} "
+
+  # Define prompts.
+  PROMPT="%B${user_str}${at_str}${machine_str}${colon_str}${pwd_str}"'${git_info:+${(e)git_info[prompt]}}'"${status_str}%b"
+  # RPROMPT='%F{blue}${ruby_info[version]}'
+  RPROMPT=''
+}
+
+prompt_hspitia_setup "$@"
