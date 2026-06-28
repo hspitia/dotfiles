@@ -171,13 +171,33 @@ else
   exit 0
 fi
 
+# Verify the Numix theme has actual icon files
+if ! find "/usr/share/icons/${numix_theme}" -name '*.svg' -o -name '*.png' 2>/dev/null | grep -q .; then
+  log "WARNING: Numix theme ${numix_theme} found but has no icon files; skipping hybrid icon theme setup"
+  exit 0
+fi
+
 mapfile -t yaru_themes < <(find /usr/share/icons -maxdepth 1 -mindepth 1 -type d -name 'Yaru*' -printf '%f\n' | sort -u)
 if [[ "${#yaru_themes[@]}" -eq 0 ]]; then
   log "WARNING: No Yaru icon themes found; skipping hybrid icon theme setup"
   exit 0
 fi
 
-for yaru_theme in "${yaru_themes[@]}"; do
+# Filter Yaru themes to only those with actual icon content
+mapfile -t valid_yaru_themes < <(
+  for theme in "${yaru_themes[@]}"; do
+    if find "/usr/share/icons/${theme}" -name '*.svg' -o -name '*.png' 2>/dev/null | grep -q .; then
+      echo "$theme"
+    fi
+  done
+)
+
+if [[ "${#valid_yaru_themes[@]}" -eq 0 ]]; then
+  log "WARNING: No valid Yaru icon themes found with icon files; skipping hybrid icon theme setup"
+  exit 0
+fi
+
+for yaru_theme in "${valid_yaru_themes[@]}"; do
   create_hybrid_theme "$numix_theme" "$yaru_theme" "$(hybrid_theme_name "$yaru_theme")"
 done
 
