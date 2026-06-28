@@ -3,6 +3,7 @@
 # ====================================================================
 alias awk='awk -F"\t"'
 alias ba="byobu a -t";
+alias bat='batcat';
 alias column="column -s'	' -t ";
 alias conserver='ssh -X hfen3@thebeast.biology.gatech.edu'
 alias consting='ssh hfen3@sting.biosci.gatech.edu'
