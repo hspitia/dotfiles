@@ -149,6 +149,7 @@ fi
 
 LOCAL_SOFTWARE="${LOCAL_SOFTWARE:-${HOME}/software}"
 LOCAL_SCRIPTS="${LOCAL_SCRIPTS:-${LOCAL_SOFTWARE}/scripts}"
+XDG_CONFIG_HOME_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}"
 
 prefer_ssh=0
 if [[ -f "${HOME}/.ssh/id_ed25519" || -f "${HOME}/.ssh/id_rsa" ]]; then
@@ -204,6 +205,8 @@ if [[ "$prefix" == "desktop" ]]; then
     link_dotfile "${CONFIG_DIR}/files/desktop.bashrc" "${HOME}/.bashrc"
     link_dotfile "${CONFIG_DIR}/files/desktop.common.config.sh" "${HOME}/.common.config.sh"
     link_dotfile "${CONFIG_DIR}/files/desktop.customrc.sh" "${HOME}/.customrc.sh"
+    link_dotfile "${CONFIG_DIR}/files/desktop.zshrc" "${HOME}/.zshrc"
+    link_dotfile "${CONFIG_DIR}/files/desktop.zpreztorc" "${HOME}/.zpreztorc"
     link_dotfile "${CONFIG_DIR}/files/desktop.gitconfig" "${HOME}/.gitconfig"
     link_dotfile "${CONFIG_DIR}/files/desktop.condarc" "${HOME}/.condarc"
 else
@@ -235,6 +238,16 @@ if [[ "$install_software" -eq 1 ]]; then
     fi
 else
     debug "Skipping software installation (-i not set)"
+fi
+
+if [[ "$prefix" == "desktop" ]]; then
+    if command -v ghostty >/dev/null 2>&1 && command -v zsh >/dev/null 2>&1; then
+        log "Configuring Ghostty to launch Zsh by default"
+        run_cmd mkdir -p "${XDG_CONFIG_HOME_DIR}/ghostty"
+        link_dotfile "${CONFIG_DIR}/config/ghostty/config" "${XDG_CONFIG_HOME_DIR}/ghostty/config"
+    else
+        debug "Ghostty or zsh is unavailable; skipping Ghostty configuration"
+    fi
 fi
 
 run_cmd mkdir -p "$LOCAL_SOFTWARE"
