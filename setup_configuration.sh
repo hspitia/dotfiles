@@ -292,6 +292,11 @@ if [[ "$prefix" == "desktop" && "$is_graphical_session" -eq 1 ]]; then
         log "Installing hybrid Numix Circle + Yaru folder icon theme"
         DRY_RUN="$dry_run" bash "$CONF_SCRIPTS_DIR/config.icon_theme.sh"
     fi
+
+    if command -v variety >/dev/null 2>&1; then
+        log "Applying Variety configuration"
+        DRY_RUN="$dry_run" bash "$CONF_SCRIPTS_DIR/config.variety.sh"
+    fi
 fi
 
 log "Setup complete. Open a new terminal session to load updated shell configuration."
