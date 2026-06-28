@@ -11,8 +11,15 @@ source $HOME/.common.config.sh;
 alias ec='expressvpn connect smart'
 alias ed='expressvpn disconnect'
 alias prettyjson='python -m json.tool'
-# alias uvpn='sudo openconnect -b --user hespitianavarro@ufl.edu -i uf_vpn vpn.ufl.edu'
-alias uvpn='echo "Esh1ooc.i8" | sudo openconnect -b --user hespitianavarro@ufl.edu --passwd-on-stdin -i uf_vpn vpn.ufl.edu'
+
+uvpn() {
+	local user="${UFL_VPN_USER:-hespitianavarro@ufl.edu}"
+	local vpn_group="${UFL_VPN_GROUP:-uf_vpn}"
+	read -r -s -p "VPN password for ${user}: " vpn_pass
+	echo
+	printf '%s' "${vpn_pass}" | sudo openconnect -b --user "${user}" --passwd-on-stdin -i "${vpn_group}" vpn.ufl.edu
+}
+
 alias dvpn='sudo killall openconnect'
 alias condemeter='ssh hespitia@10.251.28.155'
 
@@ -50,11 +57,10 @@ export LD_LIBRARY_PATH="/usr/lib/jvm/java-8-oracle/lib/amd64:/usr/lib/jvm/java-8
 # # source $GIT_EXTRAS/git-prompt.sh;
 # # source $HOME/projects/nthi/scripts/load_path_variables.sh;
 
-# ## Tilix
-# #if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-# #        source /etc/profile.d/vte.sh
-# #fi
-
+# # Tilix
+# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+# 	source /etc/profile.d/vte.sh
+# fi
 
 # # >>> conda initialize >>>
 # # !! Contents within this block are managed by 'conda init' !!
