@@ -1,31 +1,50 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-package_list_file=$1; # package list file 
-# repo_list_file=$2; # package list file 
+set -euo pipefail
 
-dist=$(lsb_release -sc);
+DRY_RUN="${DRY_RUN:-0}"
 
-# Install Keys
-# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9 # R language
-# wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+run_cmd() {
+	if [[ "$DRY_RUN" == "1" ]]; then
+		echo "[dry-run] $*"
+	else
+		"$@"
+	fi
+}
 
-# R key
-# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+package_list_file="${1:-}"
 
+if [[ -z "${package_list_file}" ]]; then
+	echo "usage: $0 <package_list_file>" >&2
+	exit 1
+fi
 
-# # Add repos
-# ./add_apt_repos.sh $repo_list_file
+if [[ ! -f "${package_list_file}" ]]; then
+	echo "ERROR: package list file not found: ${package_list_file}" >&2
+	exit 1
+fi
 
-sudo apt-get update
-sudo apt-get dist-upgrade
+if ! command -v sudo >/dev/null 2>&1; then
+	echo "ERROR: sudo is required" >&2
+	exit 1
+fi
 
-# Packages without dependencies
-# sudo apt-get -y install lyx --no-install-recommends
-# sudo apt-get -y install tikzit --no-install-recommends
-# sudo apt-get -y install texstudio --no-install-recommends
+echo "[packages] Updating apt cache"
+run_cmd sudo apt-get update -y
 
-# Format and remove duplicated packages from list file
-sed 's/ /\n/g' ${package_list_file} | sort -V | uniq > tmp && rm ${package_list_file} && mv tmp ${package_list_file}
+if [[ "${DO_UPGRADE:-0}" == "1" ]]; then
+	echo "[packages] Running apt upgrade (dist-upgrade is disabled by default)"
+	run_cmd sudo env DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+fi
 
-# Install packages
-sudo apt-get -y install $(grep -vE "^\s*#" ${package_list_file}  | tr "\n" " ")
+mapfile -t packages < <(
+	grep -vE '^\s*(#|$)' "${package_list_file}" | xargs -n1 | sort -u
+)
+
+if [[ "${#packages[@]}" -eq 0 ]]; then
+	echo "[packages] No packages to install"
+	exit 0
+fi
+
+echo "[packages] Installing ${#packages[@]} packages"
+run_cmd sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y "${packages[@]}"
