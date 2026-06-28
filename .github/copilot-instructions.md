@@ -1,0 +1,7 @@
+- Goal: automated installation of dotfiles
+- Include all necessary dependencies and configurations for a seamless setup.
+- Use ZSH via prezto ans automated package installation in Ubuntu
+- Entry point: `.dotfiles/setup_configuration.sh`
+- Package install is optional
+- SSH cloning if key are configures first
+- Dist-upgrade should be disabled
