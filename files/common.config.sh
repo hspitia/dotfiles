@@ -130,3 +130,36 @@ function get_crtime() {
    done
 }
 
+function set_numix_yaru {
+  local variant="${1:-}"
+  local theme_name=""
+  local icon_root="${HOME}/.local/share/icons"
+
+  if ! command -v gsettings >/dev/null 2>&1; then
+    echo "gsettings is not available"
+    return 1
+  fi
+
+  if [[ -z "$variant" || "$variant" == "list" || "$variant" == "--list" ]]; then
+    find "$icon_root" -maxdepth 1 -mindepth 1 -type d -name 'Numix-Circle*-Folders' -printf '%f\n' | sort
+    return 0
+  fi
+
+  if [[ "$variant" == "yaru" ]]; then
+    theme_name="Numix-Circle-Yaru-Folders"
+  elif [[ "$variant" == Numix-Circle*-Folders ]]; then
+    theme_name="$variant"
+  else
+    theme_name="Numix-Circle-${variant}-Folders"
+  fi
+
+  if [[ ! -d "${icon_root}/${theme_name}" ]]; then
+    echo "Hybrid icon theme not found: ${theme_name}"
+    echo "Run: bash ~/.dotfiles/scripts/config.icon_theme.sh"
+    return 1
+  fi
+
+  gsettings set org.gnome.desktop.interface icon-theme "$theme_name"
+  echo "Active icon theme: ${theme_name}"
+}
+

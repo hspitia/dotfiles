@@ -182,7 +182,7 @@ if [[ "$prefix" == "desktop" ]]; then
         fi
     fi
     log "Installing/updating prezto"
-    DRY_RUN="$dry_run" "$CONF_SCRIPTS_DIR/install.prezto.zsh"
+    DRY_RUN="$dry_run" zsh "$CONF_SCRIPTS_DIR/install.prezto.zsh"
     verify_prezto_prompt
 fi
 
@@ -217,19 +217,19 @@ fi
 if [[ "$install_software" -eq 1 ]]; then
     require_cmd sudo
     log "Installing baseline software stack"
-    DRY_RUN="$dry_run" "$CONF_SCRIPTS_DIR/install_baseline_software.sh"
+    DRY_RUN="$dry_run" bash "$CONF_SCRIPTS_DIR/install_baseline_software.sh"
 
     if [[ -f "$repo_file" ]]; then
         require_cmd add-apt-repository
         log "Adding extra apt repositories from ${repo_file}"
-        DRY_RUN="$dry_run" "$CONF_SCRIPTS_DIR/add_apt_repos.sh" "$repo_file"
+        DRY_RUN="$dry_run" bash "$CONF_SCRIPTS_DIR/add_apt_repos.sh" "$repo_file"
     else
         debug "Repository list not found, skipping extra repos: ${repo_file}"
     fi
 
     if [[ -f "$package_file" ]]; then
         log "Installing extra packages from ${package_file}"
-        DRY_RUN="$dry_run" "$CONF_SCRIPTS_DIR/install_packages.sh" "$package_file"
+        DRY_RUN="$dry_run" bash "$CONF_SCRIPTS_DIR/install_packages.sh" "$package_file"
     else
         debug "Package list not found, skipping extra packages: ${package_file}"
     fi
@@ -264,15 +264,20 @@ if [[ "$prefix" == "desktop" && "$is_graphical_session" -eq 1 ]]; then
 
     if command -v gsettings >/dev/null 2>&1; then
         log "Applying Nemo preferences"
-        run_cmd gsettings set org.nemo.extensions.nemo-terminal default-visible false || true
+        if gsettings list-schemas | grep -qx 'org.nemo.extensions.nemo-terminal'; then
+            run_cmd gsettings set org.nemo.extensions.nemo-terminal default-visible false || true
+        fi
         run_cmd gsettings set org.nemo.preferences start-with-dual-pane true || true
     fi
 
-    if [[ -f /usr/share/applications/nemo.desktop ]]; then
-        log "Applying user-level Nemo launcher override"
-        run_cmd mkdir -p "${HOME}/.local/share/applications"
-        run_cmd cp /usr/share/applications/nemo.desktop "${HOME}/.local/share/applications/nemo.desktop"
-        run_cmd sed -i 's/^Icon=folder$/Icon=nemo/' "${HOME}/.local/share/applications/nemo.desktop"
+    if command -v nemo >/dev/null 2>&1; then
+        log "Applying Nemo desktop integration"
+        DRY_RUN="$dry_run" bash "$CONF_SCRIPTS_DIR/config.nemo.sh"
+    fi
+
+    if command -v gsettings >/dev/null 2>&1; then
+        log "Installing hybrid Numix Circle + Yaru folder icon theme"
+        DRY_RUN="$dry_run" bash "$CONF_SCRIPTS_DIR/config.icon_theme.sh"
     fi
 fi
 

@@ -33,16 +33,12 @@ require_cmd() {
   fi
 }
 
-require_cmd curl
-require_cmd wget
-require_cmd gpg
-
 DIST_CODENAME=""
 if command -v lsb_release >/dev/null 2>&1; then
   DIST_CODENAME="$(lsb_release -sc)"
 fi
 
-echo "[baseline] Installing apt prerequisites"
+echo "[baseline] Bootstrapping apt prerequisites (curl, wget, gnupg, repo helpers)"
 run_cmd sudo apt-get update -y
 run_cmd sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ca-certificates \
@@ -102,6 +98,13 @@ else
   echo "[baseline] numix-icon-theme package not available in apt repos for this release"
 fi
 
+echo "[baseline] Installing Numix Circle icon theme"
+if apt-cache show numix-icon-theme-circle >/dev/null 2>&1; then
+  run_cmd sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y numix-icon-theme-circle
+else
+  echo "[baseline] numix-icon-theme-circle package not available in apt repos for this release"
+fi
+
 echo "[baseline] Installing Ghostty"
 if apt-cache show ghostty >/dev/null 2>&1; then
   run_cmd sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y ghostty
@@ -113,19 +116,34 @@ fi
 echo "[baseline] Installing DisplayLink driver from Synaptics APT repository"
 displaylink_keyring_deb="/tmp/synaptics-repository-keyring.deb"
 displaylink_keyring_url="https://www.synaptics.com/sites/default/files/Ubuntu/pool/stable/main/all/synaptics-repository-keyring.deb"
-if [[ "$DRY_RUN" == "1" ]]; then
+secure_boot_enabled=0
+if command -v mokutil >/dev/null 2>&1 && mokutil --sb-state 2>/dev/null | grep -qi 'SecureBoot enabled'; then
+  secure_boot_enabled=1
+fi
+
+displaylink_force_install="${DISPLAYLINK_FORCE_INSTALL:-0}"
+if [[ "$secure_boot_enabled" -eq 1 && "$displaylink_force_install" != "1" ]]; then
+  echo "[baseline] Secure Boot is enabled; skipping DisplayLink driver because DKMS enrollment is not fully non-interactive."
+  echo "[baseline] To force it, rerun with DISPLAYLINK_FORCE_INSTALL=1 and complete MOK enrollment on reboot."
+elif [[ "$DRY_RUN" == "1" ]]; then
   echo "[dry-run] curl -fsSL ${displaylink_keyring_url} -o ${displaylink_keyring_deb}"
   echo "[dry-run] sudo apt-get install -y ${displaylink_keyring_deb}"
   echo "[dry-run] sudo apt-get update -y"
   echo "[dry-run] sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y displaylink-driver"
 elif curl -fsSL "${displaylink_keyring_url}" -o "${displaylink_keyring_deb}"; then
-  run_cmd sudo apt-get install -y "${displaylink_keyring_deb}"
-  run_cmd sudo apt-get update -y
-  run_cmd sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y displaylink-driver
+  if ! run_cmd sudo apt-get install -y "${displaylink_keyring_deb}"; then
+    echo "[baseline] WARNING: failed to install Synaptics keyring; skipping DisplayLink driver"
+  elif ! run_cmd sudo apt-get update -y; then
+    echo "[baseline] WARNING: apt metadata refresh failed; skipping DisplayLink driver"
+  elif ! run_cmd sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y displaylink-driver; then
+    echo "[baseline] WARNING: DisplayLink driver installation failed. If Secure Boot is enabled, enroll the MOK key manually and retry."
+  fi
 else
   echo "[baseline] Could not download Synaptics repository keyring; trying existing apt sources"
   if apt-cache show displaylink-driver >/dev/null 2>&1; then
-    run_cmd sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y displaylink-driver
+    if ! run_cmd sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y displaylink-driver; then
+      echo "[baseline] WARNING: DisplayLink driver installation failed. If Secure Boot is enabled, enroll the MOK key manually and retry."
+    fi
   else
     echo "[baseline] displaylink-driver package is unavailable. Use the standalone Synaptics installer manually."
   fi

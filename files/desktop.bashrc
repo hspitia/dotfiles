@@ -131,3 +131,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+export PATH="/home/hspitia/.pixi/bin:$PATH"
+
+if [ -f "$HOME/.customrc.sh" ]; then
+    . "$HOME/.customrc.sh"
+fi
