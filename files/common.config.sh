@@ -37,6 +37,7 @@ alias vu='nmcli con up id gatech'
 alias vd='nmcli con down id gatech'
 alias glu='nmcli con up id glink'
 alias gld='nmcli con down id glink'
+alias ls='ls --color=auto' 
 # ===================================================================
 # Variables
 # ===================================================================
