@@ -236,6 +236,15 @@ if [[ "$install_software" -eq 1 ]]; then
     else
         debug "Package list not found, skipping extra packages: ${package_file}"
     fi
+
+    if [[ "$prefix" == "desktop" ]]; then
+        if [[ -f "$CONF_SCRIPTS_DIR/install_fingerprint_support.sh" ]]; then
+            log "Installing fingerprint support"
+            run_cmd bash "$CONF_SCRIPTS_DIR/install_fingerprint_support.sh"
+        else
+            debug "Fingerprint installer script not found, skipping"
+        fi
+    fi
 else
     debug "Skipping software installation (-i not set)"
 fi
